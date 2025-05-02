@@ -9,27 +9,50 @@ namespace FishNet.Example.Scened
     public class PlayerController : NetworkBehaviour
     {
         [SerializeField]
-        private GameObject _camera;
+        private float speed = 3f;
+        
         [SerializeField]
-        private float _moveRate = 4f;
+        private float jumpForce = 9f;
+        
         [SerializeField]
         private bool _clientAuth = true;
-
+        [SerializeField]
+        private CharacterController _controller;
+        
+        private GameObject _camera;
+        private float _gravity = -13f;
+        private float _yVelocity=0f;
         private void Awake()
         {
             Debug.Log(transform.position);
         }
         public override void OnStartClient()
         {
-            if (base.IsOwner)
-                _camera.SetActive(true);
+            base.OnStartClient();
+            
+            if (!base.IsOwner)
+            {
+                // If not owner then disable this script.
+                this.enabled = false;
+                return;
+            }
+            
         }
 
         private void Update()
         {
-            if (!base.IsOwner)
-                return;
+            if (base.IsOwner)
+            {
+                _camera = Camera.main.gameObject;
+            }
 
+            if (_camera == null)
+            {
+                return;
+            }
+            
+            _camera.transform.position = transform.position + new Vector3(0f, 3f, -6f);
+            
             float hor = Input.GetAxisRaw("Horizontal");
             float ver = Input.GetAxisRaw("Vertical");
 
@@ -42,10 +65,12 @@ namespace FishNet.Example.Scened
                     transform.position += new Vector3(0f, 3f, 0f);
             }
 
-            if (_clientAuth)
+            if (_clientAuth){
                 Move(hor, ver);
-            else
+            }
+            else{
                 ServerMove(hor, ver);
+            }
         }
 
         [ServerRpc]
@@ -56,23 +81,29 @@ namespace FishNet.Example.Scened
 
         private void Move(float hor, float ver)
         {
-            float gravity = -10f * Time.deltaTime;
+            Debug.Log($"IsGrounded: {_controller.isGrounded}");
             //If ray hits floor then cancel gravity.
-            Ray ray = new(transform.position + new Vector3(0f, 0.05f, 0f), -Vector3.up);
-            if (Physics.Raycast(ray, 0.1f + -gravity))
-                gravity = 0f;
+            if (_controller.isGrounded)
+            {
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    _yVelocity = jumpForce;
+                }
+                else
+                {
+                    _yVelocity = 0f;
+                }
+                
+            }
+            else
+            {
+                _yVelocity += _gravity * Time.deltaTime;
+            }
 
-            /* Moving. */
-            Vector3 direction = new(
-                0f,
-                gravity,
-                ver * _moveRate * Time.deltaTime);
+            
+            Vector3 moveVector = new Vector3(hor * speed, _yVelocity, ver * speed) * Time.deltaTime;
+            _controller.Move(moveVector);
 
-            transform.position += transform.TransformDirection(direction);
-            transform.Rotate(new(0f, hor * 100f * Time.deltaTime, 0f));
         }
-
     }
-
-
 }
