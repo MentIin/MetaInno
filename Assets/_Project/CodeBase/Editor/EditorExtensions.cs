@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace _Project.CodeBase.Editor
+namespace CodeBase.Editor
 {
     public static class EditorExtensions
     {

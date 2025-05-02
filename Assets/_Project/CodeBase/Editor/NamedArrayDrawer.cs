@@ -1,8 +1,8 @@
-using Assets.CodeBase.Infrastructure.Data;
+using CodeBase.Infrastructure.Data;
 using UnityEditor;
 using UnityEngine;
 
-namespace _Project.CodeBase.Editor
+namespace CodeBase.Editor
 {
     [CustomPropertyDrawer(typeof(NamedArrayAttribute))]
     public class NamedArrayDrawer : PropertyDrawer {

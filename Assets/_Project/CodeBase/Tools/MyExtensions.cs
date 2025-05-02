@@ -1,4 +1,4 @@
-namespace Assets.CodeBase.Tools
+namespace CodeBase.Tools
 {
     public static class MyExtensions
     {

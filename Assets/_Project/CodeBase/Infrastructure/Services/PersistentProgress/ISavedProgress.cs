@@ -1,6 +1,6 @@
-using CodeBase._Project.CodeBase.Infrastructure.Data;
+using CodeBase.Infrastructure.Data;
 
-namespace Assets.CodeBase.Infrastructure.Services.PersistentProgress
+namespace CodeBase.Infrastructure.Services.PersistentProgress
 {
     public interface ISavedProgressReader
     {

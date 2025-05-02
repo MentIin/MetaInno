@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.CodeBase.Infrastructure.Services.GetUserInfoService
+namespace CodeBase.Infrastructure.Services.GetUserInfoService
 {
     public interface IUserInfoService : IService
     {

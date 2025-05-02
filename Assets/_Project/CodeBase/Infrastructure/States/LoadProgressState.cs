@@ -1,10 +1,7 @@
-using Assets.CodeBase.Infrastructure;
-using Assets.CodeBase.Infrastructure.Services.GetUserInfoService;
-using Assets.CodeBase.Infrastructure.Services.Pause;
-using Assets.CodeBase.Infrastructure.Services.PersistentProgress;
-using Assets.CodeBase.Infrastructure.Services.SaveLoad;
-using CodeBase._Project.CodeBase.Infrastructure.Data;
-using CodeBase._Project.CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.Infrastructure.Data;
+using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.SaveLoad;
+using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States

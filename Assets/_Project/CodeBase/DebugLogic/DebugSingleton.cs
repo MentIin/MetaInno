@@ -2,12 +2,11 @@ using UnityEngine;
 
 namespace CodeBase.DebugLogic
 {
-    public class DebugSinglton : MonoBehaviour
+    public class DebugSingleton : MonoBehaviour
     {
-        public bool LargeFinish = false;
-        public bool InfinityResources = false;
+        public bool InfiniteMoney=false;
         
-        public static DebugSinglton Instance;
+        public static DebugSingleton Instance;
         private void Awake()
         {
             Instance = this;

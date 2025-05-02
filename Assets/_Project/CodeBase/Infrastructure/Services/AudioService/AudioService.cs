@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Assets.CodeBase.Infrastructure.AssetManagement;
-using Assets.CodeBase.Infrastructure.Services.PersistentProgress;
-using CodeBase.Infrastructure.Services.AudioService;
+using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Assets.CodeBase.Infrastructure.Services.AudioService
+namespace CodeBase.Infrastructure.Services.AudioService
 {
     public class AudioService : IAudioService
     {

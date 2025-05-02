@@ -1,7 +1,6 @@
-using Assets.CodeBase.Infrastructure.Services;
-using Assets.CodeBase.StaticData;
+using CodeBase.Infrastructure.StaticData;
 
-namespace CodeBase._Project.CodeBase.Infrastructure.Services.StaticData
+namespace CodeBase.Infrastructure.Services.StaticData
 {
     public interface IStaticDataService : IService
     {

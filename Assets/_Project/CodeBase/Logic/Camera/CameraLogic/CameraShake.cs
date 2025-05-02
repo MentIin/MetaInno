@@ -1,8 +1,7 @@
-using _Project.CodeBase.Logic.Camera.CameraLogic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Assets.CodeBase.Logic.CameraLogic
+namespace CodeBase.Logic.Camera.CameraLogic
 {
     public class CameraShake : MonoBehaviour
     {

@@ -1,8 +1,9 @@
 using CodeBase.Infrastructure.Services.AudioService;
 using UnityEngine;
+
 //using UnityEngine.AddressableAssets;
 
-namespace _Project.CodeBase.Sounds
+namespace CodeBase.Sounds
 {
     public class AmbientMusic : MonoBehaviour
     {

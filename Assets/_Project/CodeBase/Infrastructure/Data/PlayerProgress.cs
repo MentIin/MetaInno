@@ -1,4 +1,4 @@
-﻿namespace CodeBase._Project.CodeBase.Infrastructure.Data
+﻿namespace CodeBase.Infrastructure.Data
 {
     public class PlayerProgress
     {

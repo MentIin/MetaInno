@@ -1,6 +1,6 @@
 using System;
 
-namespace Assets.CodeBase.Infrastructure.Data
+namespace CodeBase.Infrastructure.Data
 {
     [Serializable]
     public class Vector2Data

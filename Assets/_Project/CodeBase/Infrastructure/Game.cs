@@ -1,11 +1,11 @@
-using _Project.CodeBase.Logic.Camera.CameraLogic;
-using Assets.CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.States;
+using CodeBase.Logic.Camera.CameraLogic;
 using CodeBase.UI;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Assets.CodeBase.Infrastructure
+namespace CodeBase.Infrastructure
 {
     public class Game
     {

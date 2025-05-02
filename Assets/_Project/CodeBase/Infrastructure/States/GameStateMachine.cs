@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using _Project.CodeBase.Logic.Camera.CameraLogic;
-using Assets.CodeBase.Infrastructure;
-using Assets.CodeBase.Infrastructure.Services;
-using Assets.CodeBase.Infrastructure.Services.PersistentProgress;
-using Assets.CodeBase.Infrastructure.Services.SaveLoad;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.SaveLoad;
+using CodeBase.Logic.Camera.CameraLogic;
 using CodeBase.UI;
 using UnityEngine;
 using UnityEngine.Audio;

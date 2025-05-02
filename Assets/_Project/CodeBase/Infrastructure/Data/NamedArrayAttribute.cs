@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Assets.CodeBase.Infrastructure.Data
+namespace CodeBase.Infrastructure.Data
 {
     public class NamedArrayAttribute : PropertyAttribute {
         public Type TargetEnum;

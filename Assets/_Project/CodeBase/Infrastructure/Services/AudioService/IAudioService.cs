@@ -1,6 +1,4 @@
 using System.Threading.Tasks;
-using Assets.CodeBase.Infrastructure.Services;
-using Assets.CodeBase.Infrastructure.Services.AudioService;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.AudioService

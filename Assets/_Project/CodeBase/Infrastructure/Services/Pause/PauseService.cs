@@ -1,8 +1,7 @@
-using Assets.CodeBase.Infrastructure.Services.AudioService;
 using CodeBase.Infrastructure.Services.AudioService;
 using UnityEngine;
 
-namespace Assets.CodeBase.Infrastructure.Services.Pause
+namespace CodeBase.Infrastructure.Services.Pause
 {
     public class PauseService : IService
     {

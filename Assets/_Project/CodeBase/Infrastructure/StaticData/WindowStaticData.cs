@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.CodeBase.StaticData
+namespace CodeBase.Infrastructure.StaticData
 {
     [Serializable]
     [CreateAssetMenu(fileName = "WindowsStaticData", menuName = "StaticData/WindowsStaticData", order = 0)]

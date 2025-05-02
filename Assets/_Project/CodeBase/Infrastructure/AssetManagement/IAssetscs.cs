@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using Assets.CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Assets.CodeBase.Infrastructure.AssetManagement
+namespace CodeBase.Infrastructure.AssetManagement
 {
     public interface IAssets : IService
     {

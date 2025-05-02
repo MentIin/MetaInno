@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
-using Assets.CodeBase.Infrastructure;
-using Assets.CodeBase.Infrastructure.Services.Input;
 using UnityEngine;
 
-namespace CodeBase._Project.CodeBase.Infrastructure.Services.Input
+namespace CodeBase.Infrastructure.Services.Input
 {
     public class StandaloneInputService : IInputService
     {

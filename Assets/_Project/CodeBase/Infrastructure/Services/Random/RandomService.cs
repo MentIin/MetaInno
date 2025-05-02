@@ -1,7 +1,7 @@
-using Assets.CodeBase.Infrastructure.Data;
+using CodeBase.Infrastructure.Data;
 using UnityEngine;
 
-namespace Assets.CodeBase.Infrastructure.Services.Random
+namespace CodeBase.Infrastructure.Services.Random
 {
     public class RandomService : IRandomService
     {

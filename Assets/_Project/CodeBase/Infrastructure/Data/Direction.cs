@@ -1,4 +1,4 @@
-namespace Assets.CodeBase.Infrastructure.Data
+namespace CodeBase.Infrastructure.Data
 {
     public enum Direction
     {

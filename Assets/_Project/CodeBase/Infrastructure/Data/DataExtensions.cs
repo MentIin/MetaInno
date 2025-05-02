@@ -1,7 +1,6 @@
-using Assets.CodeBase.Infrastructure.Data;
 using UnityEngine;
 
-namespace _Project.CodeBase.Infrastructure.Data
+namespace CodeBase.Infrastructure.Data
 {
     public static class DataExtensions
     {

@@ -1,7 +1,6 @@
-using _Project.CodeBase.Logic.Camera.CameraLogic;
-using Assets.CodeBase.Infrastructure;
 using CodeBase.DebugLogic;
 using CodeBase.Infrastructure.States;
+using CodeBase.Logic.Camera.CameraLogic;
 using CodeBase.UI;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -14,7 +13,7 @@ namespace CodeBase.Infrastructure
         [SerializeField] private LoadingCurtain _loadingCurtain;
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private CameraController _cameraController;
-        [SerializeField] private DebugSinglton _debugSinglton;
+        [SerializeField] private DebugSingleton _debugSinglton;
         [Space(10)]
         [SerializeField] private AudioMixerGroup soundsMixerGroup;
         [SerializeField] private AudioMixerGroup musicMixerGroup;

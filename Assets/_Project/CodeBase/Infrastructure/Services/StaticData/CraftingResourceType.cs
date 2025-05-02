@@ -1,4 +1,4 @@
-namespace Assets.CodeBase.Infrastructure.Services.StaticData
+namespace CodeBase.Infrastructure.Services.StaticData
 {
     
     public enum CraftingResourceType

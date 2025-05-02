@@ -1,20 +1,15 @@
-using _Project.CodeBase.Infrastructure.Factory;
-using _Project.CodeBase.Infrastructure.Services.StaticData;
-using _Project.CodeBase.Logic.Camera.CameraLogic;
-using Assets.CodeBase.Infrastructure;
-using Assets.CodeBase.Infrastructure.AssetManagement;
-using Assets.CodeBase.Infrastructure.Services;
-using Assets.CodeBase.Infrastructure.Services.AudioService;
-using Assets.CodeBase.Infrastructure.Services.Input;
-using Assets.CodeBase.Infrastructure.Services.Pause;
-using Assets.CodeBase.Infrastructure.Services.PersistentProgress;
-using Assets.CodeBase.Infrastructure.Services.Random;
-using Assets.CodeBase.Infrastructure.Services.SaveLoad;
-using CodeBase._Project.CodeBase.Infrastructure.Services.Input;
-using CodeBase._Project.CodeBase.Infrastructure.Services.StaticData;
-using CodeBase._Project.CodeBase.UI.Services.UIFactory;
+using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.AudioService;
+using CodeBase.Infrastructure.Services.Input;
+using CodeBase.Infrastructure.Services.Pause;
+using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.Random;
+using CodeBase.Infrastructure.Services.SaveLoad;
+using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.Logic.Camera.CameraLogic;
 using CodeBase.UI;
+using CodeBase.UI.Services.UIFactory;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -61,7 +56,7 @@ namespace CodeBase.Infrastructure.States
             _allServices.RegisterSingle<IRandomService>(new RandomService(662));
             
             
-            _allServices.RegisterSingle<IAssets>(new Assets.CodeBase.Infrastructure.AssetManagement.Assets());
+            _allServices.RegisterSingle<IAssets>(new AssetManagement.Assets());
             _allServices.RegisterSingle<IStaticDataService>(new StaticDataService());
             _allServices.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             

@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.CodeBase.Logic.Camera.CameraLogic
+namespace CodeBase.Logic.Camera.CameraLogic
 {
     public class CameraController : MonoBehaviour
     {

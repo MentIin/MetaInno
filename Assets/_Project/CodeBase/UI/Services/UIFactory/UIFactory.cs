@@ -1,20 +1,18 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Assets.CodeBase.Infrastructure.AssetManagement;
-using Assets.CodeBase.Infrastructure.Services;
-using Assets.CodeBase.Infrastructure.Services.Pause;
-using Assets.CodeBase.Infrastructure.Services.PersistentProgress;
-using Assets.CodeBase.Infrastructure.Services.SaveLoad;
-using Assets.CodeBase.Infrastructure.Services.StaticData;
-using Assets.CodeBase.StaticData;
-using CodeBase._Project.CodeBase.Infrastructure.Services.StaticData;
-using CodeBase._Project.CodeBase.UI.Services.Windows;
 using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.AudioService;
+using CodeBase.Infrastructure.Services.Pause;
+using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.SaveLoad;
+using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.Infrastructure.States;
+using CodeBase.Infrastructure.StaticData;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 
-namespace CodeBase._Project.CodeBase.UI.Services.UIFactory
+namespace CodeBase.UI.Services.UIFactory
 {
     class UIFactory : IService
     {

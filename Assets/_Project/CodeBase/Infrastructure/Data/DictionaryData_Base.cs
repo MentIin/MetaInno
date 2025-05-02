@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.CodeBase.Infrastructure.Data
+namespace CodeBase.Infrastructure.Data
 {
   [Serializable]
   public abstract class DictionaryData_Base<TKey, TValue> : ISerializationCallbackReceiver

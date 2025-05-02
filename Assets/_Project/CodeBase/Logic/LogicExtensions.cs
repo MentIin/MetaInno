@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.CodeBase.Logic
+namespace CodeBase.Logic
 {
     public static class LogicExtensions
     {

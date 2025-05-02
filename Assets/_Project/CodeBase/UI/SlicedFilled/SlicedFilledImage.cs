@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-namespace CodeBase.UI
+namespace CodeBase.UI.SlicedFilled
 {
 #if UNITY_EDITOR
 	// Custom Editor to order the variables in the Inspector similar to Image component
 	[CustomEditor( typeof( SlicedFilledImage ) ), CanEditMultipleObjects]
-	public class SlicedFilledImageEditor : Editor
+	public class SlicedFilledImageEditor : UnityEditor.Editor
 	{
 		private SerializedProperty spriteProp, colorProp;
 		private GUIContent spriteLabel;

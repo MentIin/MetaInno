@@ -1,6 +1,6 @@
-using Assets.CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services;
 
-namespace _Project.CodeBase.Infrastructure.Factory
+namespace CodeBase.Infrastructure.Factory
 {
     public class GameFactory : IService
     {

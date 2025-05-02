@@ -1,4 +1,4 @@
-using CodeBase.UI;
+using CodeBase.UI.SlicedFilled;
 using UnityEngine;
 
 namespace CodeBase.UI

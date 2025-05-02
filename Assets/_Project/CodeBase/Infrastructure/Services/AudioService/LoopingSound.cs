@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.CodeBase.Infrastructure.Services.AudioService
+namespace CodeBase.Infrastructure.Services.AudioService
 {
     public class LoopingSound
     {

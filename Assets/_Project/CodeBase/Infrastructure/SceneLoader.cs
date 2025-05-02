@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
-using Assets.CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.CodeBase.Infrastructure
+namespace CodeBase.Infrastructure
 {
     public class SceneLoader : IService
     {

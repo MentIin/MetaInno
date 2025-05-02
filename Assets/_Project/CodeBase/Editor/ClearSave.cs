@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace _Project.CodeBase.Editor
+namespace CodeBase.Editor
 {
     public class ClearSave
     {
