@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-
 namespace CodeBase.Infrastructure.AssetManagement
 {
     public class Assets : IAssets

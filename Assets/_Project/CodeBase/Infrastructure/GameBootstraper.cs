@@ -5,7 +5,6 @@ using CodeBase.UI;
 using UnityEngine;
 using UnityEngine.Audio;
 
-
 namespace CodeBase.Infrastructure
 {
     public class GameBootstrapper : MonoBehaviour, ICoroutineRunner

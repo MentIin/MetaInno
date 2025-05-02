@@ -56,7 +56,7 @@ namespace CodeBase.Infrastructure.States
             _allServices.RegisterSingle<IRandomService>(new RandomService(662));
             
             
-            _allServices.RegisterSingle<IAssets>(new AssetManagement.Assets());
+            _allServices.RegisterSingle<IAssets>(new Assets());
             _allServices.RegisterSingle<IStaticDataService>(new StaticDataService());
             _allServices.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             
