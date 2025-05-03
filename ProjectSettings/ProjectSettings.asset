@@ -828,6 +828,7 @@ PlayerSettings:
     PS5: DOTWEEN
     QNX: DOTWEEN
     ReservedCFE: DOTWEEN
+    Server: FISHNET;FISHNET_V4
     Standalone: FISHNET;FISHNET_V4;DOTWEEN
     VisionOS: DOTWEEN
     WebGL: DOTWEEN
