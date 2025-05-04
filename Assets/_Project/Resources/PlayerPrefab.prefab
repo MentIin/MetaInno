@@ -76,6 +76,8 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 2201511308669189551}
   _networkObjectCache: {fileID: 2201511308669189551}
+  speed: 3
+  jumpForce: 9
   _clientAuth: 1
   _controller: {fileID: 3566863299087407651}
 --- !u!114 &2201511308669189551

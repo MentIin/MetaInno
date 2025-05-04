@@ -5,8 +5,12 @@ namespace CodeBase.Infrastructure.Services.Input
 {
     public interface IInputService : IService
     {
-        event Action<int> ModulePressed;
+
         Vector2 GetAxis();
+        bool ActionKeyDown();
+        bool ActionKeyUp();
+        bool CharacterChangePressed();
+
         void ClearInput();
         void Initialize();
     }
