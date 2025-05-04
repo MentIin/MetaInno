@@ -68,7 +68,7 @@ namespace CodeBase.Infrastructure.States
             _allServices.RegisterSingle<PauseService>(new PauseService(_allServices.Single<IAudioService>()));
             
             
-            _allServices.RegisterSingle<IInputService>(new StandaloneInputService(_coroutineRunner));
+            _allServices.RegisterSingle<IInputService>(new StandaloneInputService());
             
 
             RegisterUIFactory();

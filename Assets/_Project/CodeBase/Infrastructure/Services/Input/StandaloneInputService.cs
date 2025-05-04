@@ -9,18 +9,14 @@ namespace CodeBase.Infrastructure.Services.Input
         private const string Horizontal = "Horizontal";
         private const string Vertical = "Vertical";
 
-        private ICoroutineRunner _coroutineRunner;
-
-        public event Action<int> ModulePressed;
-
-        public StandaloneInputService(ICoroutineRunner coroutineRunner)
+        public StandaloneInputService()
         {
-            _coroutineRunner = coroutineRunner;
+            
         }
 
         public void Initialize()
         {
-            _coroutineRunner.StartCoroutine(Check());
+            
         }
 
         public Vector2 GetAxis()
@@ -36,14 +32,19 @@ namespace CodeBase.Infrastructure.Services.Input
             
         }
 
-        private IEnumerator Check()
+        public bool ActionKeyDown()
         {
-            while (true)
-            {
-                
-                
-                yield return null;
-            }
+            throw new NotImplementedException();
+        }
+
+        public bool ActionKeyUp()
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IInputService.CharacterChangePressed()
+        {
+            throw new NotImplementedException();
         }
     }
 }
