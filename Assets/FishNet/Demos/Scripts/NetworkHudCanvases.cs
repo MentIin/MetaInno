@@ -224,6 +224,7 @@ namespace FishNet.Example
             if (_clientState != LocalConnectionState.Stopped)
                 _networkManager.ClientManager.StopConnection();
             else
+                // port 443 is default for PlayFlow free
                 _networkManager.ClientManager.StartConnection();
 
             DeselectButtons();
