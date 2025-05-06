@@ -1,7 +1,7 @@
 using FishNet.Object;
 using UnityEngine;
 
-public abstract class CharacterBase : MonoBehaviour
+public abstract class CharacterBase : NetworkBehaviour
 {
     protected CharacterController _controller;
     [SerializeField] protected Transform _visuals;
@@ -20,11 +20,17 @@ public abstract class CharacterBase : MonoBehaviour
     public abstract void Move(Vector2 inputAxis);
     public abstract void ActionStart();
     public abstract void ActionStop();
-
+    
+    
     public virtual void OnCharacterEquipped()
     {
         gameObject.SetActive(true);
+        
     }
+    
+
+    
+    
 
     public virtual void OnCharacterUnequipped()
     {

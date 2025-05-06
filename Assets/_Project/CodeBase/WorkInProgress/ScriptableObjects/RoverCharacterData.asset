@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RoverCharacterData
   m_EditorClassIdentifier: 
   slopeLimit: 45
-  stepOffset: 0
+  stepOffset: 0.3
   skinWidth: 0.08
   minMoveDistance: 0.001
   center: {x: 0, y: -0.5, z: 0}

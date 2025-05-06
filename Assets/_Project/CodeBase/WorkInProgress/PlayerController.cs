@@ -93,6 +93,8 @@ public class PlayerController : NetworkBehaviour
 
         _currentCharacter = _characters[nextIndex];
         _currentIndexInList = nextIndex;
+        
+        // I think extension method is unnesasery
         _controller.ImportData(_currentCharacter.Data);
 
         _currentCharacter.OnCharacterEquipped();
@@ -165,9 +167,5 @@ public class PlayerController : NetworkBehaviour
             character.OnCharacterUnequipped();
 
         _currentCharacter.OnCharacterEquipped();
-        
-        ChangeCharacterRPC();
-        ChangeCharacterRPC();
-        ChangeCharacterRPC();
     }
 }

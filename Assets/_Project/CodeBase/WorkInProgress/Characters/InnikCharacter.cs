@@ -3,17 +3,17 @@ using UnityEngine.Serialization;
 
 public class InnikCharacter : CharacterBase
 {
-    private float gravity=-9.81f;
+    private float gravity=-13f;
     private float _yVelocity=0f;
     
     private float _jumpBuffer = 0.0f;
     private float _cayoutTime = 0.0f;
-    
+    private float _speed=4;
 
-    
+
     public override void ActionStart()
     {
-        _jumpBuffer = 0.2f;
+        _jumpBuffer = 0.3f;
         
     }
 
@@ -31,7 +31,8 @@ public class InnikCharacter : CharacterBase
 
 
         Vector3 direction = Vector3.forward * inputAxis.y + Vector3.right * inputAxis.x;
-        _controller.Move(direction * Time.fixedDeltaTime * 3 + Vector3.up * _yVelocity * Time.fixedDeltaTime);
+        
+        _controller.Move(direction * Time.fixedDeltaTime * _speed + Vector3.up * _yVelocity * Time.fixedDeltaTime);
 
         if (inputAxis.sqrMagnitude != 0)
         {
@@ -43,7 +44,7 @@ public class InnikCharacter : CharacterBase
         if (_controller.isGrounded)
         {
             _yVelocity = 0f;
-            _cayoutTime = 0.2f;
+            _cayoutTime = 0.3f;
         }
         else
         {
@@ -59,7 +60,7 @@ public class InnikCharacter : CharacterBase
         {
             if (_cayoutTime > 0)
             {
-                _yVelocity = 5f;
+                _yVelocity = 8f;
                 _jumpBuffer = 0f;
             }
         }

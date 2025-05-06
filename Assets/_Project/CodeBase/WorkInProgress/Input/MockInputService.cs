@@ -22,22 +22,22 @@ public class MockInputService : IInputService
 
     public Vector2 GetAxis()
     {
-        return new Vector2(Input.GetAxisRaw(Horizontal), Input.GetAxisRaw(Vertical)).normalized;
+        return new Vector2(SimpleInput.GetAxisRaw(Horizontal), SimpleInput.GetAxisRaw(Vertical)).normalized;
     }
 
     public bool ActionKeyDown()
     {
-        return Input.GetKeyDown(SpecialActionKey);
+        return SimpleInput.GetKeyDown(SpecialActionKey);
     }
 
     public bool ActionKeyUp()
     {
-        return Input.GetKeyUp(SpecialActionKey);
+        return SimpleInput.GetKeyUp(SpecialActionKey);
     }
 
     bool IInputService.CharacterChangePressed()
     {
-        return Input.GetKeyDown(CharacterChangeKey);
+        return SimpleInput.GetKeyDown(CharacterChangeKey);
     }
 
     public void ClearInput()
