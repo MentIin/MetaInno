@@ -1,20 +1,67 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InnikCharacter : CharacterBase
 {
+    private float gravity=-9.81f;
+    private float _yVelocity=0f;
+    
+    private float _jumpBuffer = 0.0f;
+    private float _cayoutTime = 0.0f;
+    
+
+    
     public override void ActionStart()
     {
-        _controller.Move(Vector3.up);
+        _jumpBuffer = 0.2f;
+        
     }
 
     public override void ActionStop()
     {
-        
+        if (_yVelocity > 0)
+        {
+            _yVelocity *= 0.5f;
+        }
     }
 
     public override void Move(Vector2 inputAxis)
     {
-        Vector3 direction = _parent.forward * inputAxis.y + _parent.right * inputAxis.x;
-        _controller.Move(direction * Time.fixedDeltaTime);
+        JumpUpdate();
+
+
+        Vector3 direction = Vector3.forward * inputAxis.y + Vector3.right * inputAxis.x;
+        _controller.Move(direction * Time.fixedDeltaTime * 3 + Vector3.up * _yVelocity * Time.fixedDeltaTime);
+
+        if (inputAxis.sqrMagnitude != 0)
+        {
+            _controller.transform.rotation = Quaternion.LookRotation(direction);
+        }
+        
+        
+        
+        if (_controller.isGrounded)
+        {
+            _yVelocity = 0f;
+            _cayoutTime = 0.2f;
+        }
+        else
+        {
+            _yVelocity += gravity * Time.fixedDeltaTime;
+        }
+    }
+
+    private void JumpUpdate()
+    {
+        _jumpBuffer -= Time.fixedDeltaTime;
+        _cayoutTime -= Time.fixedDeltaTime;
+        if (_jumpBuffer > 0)
+        {
+            if (_cayoutTime > 0)
+            {
+                _yVelocity = 5f;
+                _jumpBuffer = 0f;
+            }
+        }
     }
 }

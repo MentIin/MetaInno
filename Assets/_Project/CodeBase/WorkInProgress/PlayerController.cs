@@ -15,6 +15,9 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private bool _clientAuth = true;
     private int _currentIndexInList;
 
+
+    private Vector2 cameraRotation;
+
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
@@ -70,6 +73,16 @@ public class PlayerController : NetworkBehaviour
             if (_inputService.CharacterChangePressed())
                 ChangeCharacterRPC();
         }
+        
+        MoveCamera();
+    }
+
+    private void MoveCamera()
+    {
+        Camera.main.transform.position = _currentCharacter.transform.position + new Vector3(0, 3, 0) +
+                                         new Vector3(cameraRotation.x, 0f,  cameraRotation.y) * -5;
+        
+        Camera.main.transform.LookAt(_currentCharacter.transform.position + new Vector3(0, 1.5f, 0));
     }
 
     private void ChangeCharacter()
@@ -85,6 +98,8 @@ public class PlayerController : NetworkBehaviour
         _currentCharacter.OnCharacterEquipped();
     }
 
+    
+    
     [ServerRpc]
     private void ChangeCharacterRPC()
     {
@@ -103,8 +118,29 @@ public class PlayerController : NetworkBehaviour
     }
 
     [ServerRpc]
-    private void MoveCurrentCharacter() =>
-        _currentCharacter.Move(_inputService.GetAxis());
+    private void MoveCurrentCharacter()
+    {
+        Vector2 inputAxis = _inputService.GetAxis();
+        if (inputAxis.sqrMagnitude != 0)
+        {
+            Debug.Log(transform.forward);
+            cameraRotation = Vector2.Lerp(cameraRotation, new Vector2(transform.forward.x, transform.forward.z), 0.05f);
+            cameraRotation = cameraRotation.normalized;
+        }
+        
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+
+        cameraForward.y = 0; // Ignore vertical component
+        cameraRight.y = 0;   // Ignore vertical component
+
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        Vector3 direction = cameraForward * inputAxis.y + cameraRight * inputAxis.x;
+        _currentCharacter.Move(new Vector2(direction.x, direction.z));
+    }
+        
 
     [ServerRpc]
     private void StartActionOnCurrentCharacter() =>
@@ -129,5 +165,9 @@ public class PlayerController : NetworkBehaviour
             character.OnCharacterUnequipped();
 
         _currentCharacter.OnCharacterEquipped();
+        
+        ChangeCharacterRPC();
+        ChangeCharacterRPC();
+        ChangeCharacterRPC();
     }
 }

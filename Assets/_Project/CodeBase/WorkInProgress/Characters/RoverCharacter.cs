@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class RoverCharacter : CharacterBase
 {
+    private float gravity=-9.81f;
+    private float _yVelocity=0f;
+    
+    
     public override void ActionStart()
     {
         throw new System.NotImplementedException();
