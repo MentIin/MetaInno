@@ -1,3 +1,4 @@
+using FishNet.Object;
 using UnityEngine;
 
 public abstract class CharacterBase : MonoBehaviour
@@ -24,6 +25,7 @@ public abstract class CharacterBase : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
+
     public virtual void OnCharacterUnequipped()
     {
         gameObject.SetActive(false);

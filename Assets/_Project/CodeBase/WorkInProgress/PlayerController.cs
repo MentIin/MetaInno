@@ -12,6 +12,7 @@ public class PlayerController : NetworkBehaviour
 
     [SerializeField] private List<CharacterBase> _characters;
     [SerializeField] private CharacterBase _currentCharacter;
+    [SerializeField] private bool _clientAuth = true;
     private int _currentIndexInList;
 
     private void Awake()
@@ -47,17 +48,30 @@ public class PlayerController : NetworkBehaviour
 
     private void Update()
     {
-        if (_inputService.ActionKeyDown())
-            StartActionOnCurrentCharacter();
+        if (_clientAuth)
+        {
+            if (_inputService.ActionKeyDown())
+                _currentCharacter.ActionStart();
 
-        if (_inputService.ActionKeyUp())
-            StopActionOnCurrentCharacter();
+            if (_inputService.ActionKeyUp())
+                _currentCharacter.ActionStop();
 
-        if (_inputService.CharacterChangePressed())
-            ChangeCharacter();
+            if (_inputService.CharacterChangePressed())
+                ChangeCharacter();
+        } 
+        else
+        {
+            if (_inputService.ActionKeyDown())
+                StartActionOnCurrentCharacter();
+
+            if (_inputService.ActionKeyUp())
+                StopActionOnCurrentCharacter();
+
+            if (_inputService.CharacterChangePressed())
+                ChangeCharacterRPC();
+        }
     }
 
-    [ServerRpc]
     private void ChangeCharacter()
     {
         int nextIndex = _currentIndexInList == _characters.Count - 1 ? 0 : _currentIndexInList + 1;
@@ -71,9 +85,20 @@ public class PlayerController : NetworkBehaviour
         _currentCharacter.OnCharacterEquipped();
     }
 
+    [ServerRpc]
+    private void ChangeCharacterRPC()
+    {
+        ChangeCharacter();
+    }
+
     private void FixedUpdate()
     {
-        if (IsClientInitialized && IsOwner)
+        if (!IsClientInitialized)
+            return;
+
+        if (_clientAuth)
+            _currentCharacter.Move(_inputService.GetAxis());
+        else
             MoveCurrentCharacter();
     }
 
