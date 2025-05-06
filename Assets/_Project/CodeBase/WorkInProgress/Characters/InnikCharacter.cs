@@ -15,6 +15,6 @@ public class InnikCharacter : CharacterBase
     public override void Move(Vector2 inputAxis)
     {
         Vector3 direction = _parent.forward * inputAxis.y + _parent.right * inputAxis.x;
-        _controller.Move(direction * Time.deltaTime);
+        _controller.Move(direction * Time.fixedDeltaTime);
     }
 }

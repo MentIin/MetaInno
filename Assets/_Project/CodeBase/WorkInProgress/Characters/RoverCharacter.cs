@@ -18,6 +18,6 @@ public class RoverCharacter : CharacterBase
         _parent.rotation *= rotation;
 
         Vector3 direction = _parent.forward * inputAxis.y;
-        _controller.Move(direction  * Time.deltaTime);
+        _controller.Move(direction  * Time.fixedDeltaTime);
     }
 }

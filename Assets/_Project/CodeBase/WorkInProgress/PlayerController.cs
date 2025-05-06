@@ -1,10 +1,11 @@
 using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Tools;
+using FishNet.Object;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     private IInputService _inputService;
     private CharacterController _controller;
@@ -22,26 +23,41 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("Initial character not in list");
         else
             _currentIndexInList = _characters.IndexOf(_currentCharacter);
+
+        ConstructCharacters();
     }
 
-    private void Start()
+    public override void OnStartClient()
     {
-        ConstructCharacters();
+        base.OnStartClient();
+
+        if (!base.IsOwner)
+        {
+            this.enabled = false;
+            _currentCharacter.enabled = false;
+            foreach (CharacterBase character in _characters)
+            {
+                character.enabled = false;
+            }
+            return;
+        }
+
         HideCharacters();
     }
 
     private void Update()
     {
         if (_inputService.ActionKeyDown())
-            _currentCharacter.ActionStart();
+            StartActionOnCurrentCharacter();
 
         if (_inputService.ActionKeyUp())
-            _currentCharacter.ActionStop();
+            StopActionOnCurrentCharacter();
 
         if (_inputService.CharacterChangePressed())
             ChangeCharacter();
     }
 
+    [ServerRpc]
     private void ChangeCharacter()
     {
         int nextIndex = _currentIndexInList == _characters.Count - 1 ? 0 : _currentIndexInList + 1;
@@ -57,8 +73,21 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _currentCharacter.Move(_inputService.GetAxis());
+        if (IsClientInitialized && IsOwner)
+            MoveCurrentCharacter();
     }
+
+    [ServerRpc]
+    private void MoveCurrentCharacter() =>
+        _currentCharacter.Move(_inputService.GetAxis());
+
+    [ServerRpc]
+    private void StartActionOnCurrentCharacter() =>
+        _currentCharacter.ActionStart();
+
+    [ServerRpc]
+    private void StopActionOnCurrentCharacter() =>
+        _currentCharacter.ActionStop();
 
     private void ConstructCharacters()
     {
@@ -68,6 +97,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    [ServerRpc]
     private void HideCharacters()
     {
         foreach (CharacterBase character in _characters)

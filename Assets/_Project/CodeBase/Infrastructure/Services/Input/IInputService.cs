@@ -10,7 +10,6 @@ namespace CodeBase.Infrastructure.Services.Input
         bool ActionKeyDown();
         bool ActionKeyUp();
         bool CharacterChangePressed();
-
         void ClearInput();
         void Initialize();
     }
