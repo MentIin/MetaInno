@@ -24,8 +24,11 @@ public abstract class CharacterBase : NetworkBehaviour
     
     public virtual void OnCharacterEquipped()
     {
-        gameObject.SetActive(true);
-        
+        //gameObject.SetActive(true);
+        foreach (var VARIABLE in GetComponentsInChildren<MeshRenderer>(true))
+        {
+            VARIABLE.enabled = true;
+        }
     }
     
 
@@ -34,6 +37,9 @@ public abstract class CharacterBase : NetworkBehaviour
 
     public virtual void OnCharacterUnequipped()
     {
-        gameObject.SetActive(false);
+        foreach (var VARIABLE in GetComponentsInChildren<MeshRenderer>(true))
+        {
+            VARIABLE.enabled = false;
+        }
     }
 }

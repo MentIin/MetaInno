@@ -22,12 +22,6 @@ public class PlayerController : NetworkBehaviour
     {
         _controller = GetComponent<CharacterController>();
         _inputService = new MockInputService();
-
-        if (!_characters.Contains(_currentCharacter))
-            Debug.LogWarning("Initial character not in list");
-        else
-            _currentIndexInList = _characters.IndexOf(_currentCharacter);
-
         ConstructCharacters();
     }
 
@@ -35,6 +29,20 @@ public class PlayerController : NetworkBehaviour
     {
         base.OnStartClient();
 
+        
+        
+
+        if (!_characters.Contains(_currentCharacter))
+            Debug.LogWarning("Initial character not in list");
+        else
+            _currentIndexInList = _characters.IndexOf(_currentCharacter);
+
+        
+        
+        
+        
+        
+        
         if (!base.IsOwner)
         {
             this.enabled = false;
@@ -46,7 +54,8 @@ public class PlayerController : NetworkBehaviour
             return;
         }
 
-        HideCharacters();
+        HideCharactersServerRpc();
+        
     }
 
     private void Update()
@@ -114,13 +123,18 @@ public class PlayerController : NetworkBehaviour
             return;
 
         if (_clientAuth)
-            _currentCharacter.Move(_inputService.GetAxis());
+            MoveCurrent();
         else
-            MoveCurrentCharacter();
+            MoveCurrentCharacterRPC();
     }
 
     [ServerRpc]
-    private void MoveCurrentCharacter()
+    private void MoveCurrentCharacterRPC()
+    {
+        MoveCurrent();
+    }
+
+    private void MoveCurrent()
     {
         Vector2 inputAxis = _inputService.GetAxis();
         if (inputAxis.sqrMagnitude != 0)
@@ -142,7 +156,7 @@ public class PlayerController : NetworkBehaviour
         Vector3 direction = cameraForward * inputAxis.y + cameraRight * inputAxis.x;
         _currentCharacter.Move(new Vector2(direction.x, direction.z));
     }
-        
+
 
     [ServerRpc]
     private void StartActionOnCurrentCharacter() =>
@@ -161,7 +175,7 @@ public class PlayerController : NetworkBehaviour
     }
 
     [ServerRpc]
-    private void HideCharacters()
+    private void HideCharactersServerRpc()
     {
         foreach (CharacterBase character in _characters)
             character.OnCharacterUnequipped();

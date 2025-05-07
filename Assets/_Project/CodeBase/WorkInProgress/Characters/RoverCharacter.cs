@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 public class RoverCharacter : CharacterBase
 {
-    private float gravity=-14f;
+    private float gravity=-12f;
     private float _yVelocity=0f;
 
     private bool _drift;
@@ -23,6 +23,7 @@ public class RoverCharacter : CharacterBase
     public override void Move(Vector2 inputAxis)
     {
         _yVelocity += gravity * Time.fixedDeltaTime;
+        if (_controller.isGrounded) _yVelocity = 0;
         
         
         Vector3 targetRotation = new Vector3(inputAxis.x, 0, inputAxis.y);
