@@ -10,4 +10,6 @@ public class CharacterData : ScriptableObject
     public Vector3 center;
     public float radius = 0.5f;
     public float height = 2f;
+    
+    public bool moveAccordingToCamera = true;
 }

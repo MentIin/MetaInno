@@ -33,14 +33,14 @@ public class DroneCharacter : CharacterBase
         // nothing
     }
 
-    public override void Move(Vector2 inputAxis)
+    public override void Move(Vector2 _inputAxis)
     {
         _reload -= Time.fixedDeltaTime;
         
-        Vector3 direction = new Vector3(inputAxis.x, 0f, inputAxis.y);
+        Vector3 direction = new Vector3(_inputAxis.x, 0f, _inputAxis.y);
         Vector3 desiredHorizontalMovement = direction * _speed;
         
-        if (inputAxis.sqrMagnitude != 0)
+        if (_inputAxis.sqrMagnitude != 0)
         {
             _controller.transform.localRotation = Quaternion.LookRotation(direction);
         }

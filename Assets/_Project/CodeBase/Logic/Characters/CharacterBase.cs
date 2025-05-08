@@ -17,7 +17,7 @@ public abstract class CharacterBase : NetworkBehaviour
         _parent = parent;
     }
 
-    public abstract void Move(Vector2 inputAxis);
+    public abstract void Move(Vector2 _inputAxis);
     public abstract void ActionStart();
     public abstract void ActionStop();
     

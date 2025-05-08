@@ -25,16 +25,16 @@ public class InnikCharacter : CharacterBase
         }
     }
 
-    public override void Move(Vector2 inputAxis)
+    public override void Move(Vector2 _inputAxis)
     {
         JumpUpdate();
 
 
-        Vector3 direction = Vector3.forward * inputAxis.y + Vector3.right * inputAxis.x;
+        Vector3 direction = Vector3.forward * _inputAxis.y + Vector3.right * _inputAxis.x;
         
         _controller.Move(direction * Time.fixedDeltaTime * _speed + Vector3.up * _yVelocity * Time.fixedDeltaTime);
 
-        if (inputAxis.sqrMagnitude != 0)
+        if (_inputAxis.sqrMagnitude != 0)
         {
             _controller.transform.rotation = Quaternion.LookRotation(direction);
         }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace FishNet.Example.Scened
 {
-
-
     public class PlayerController : NetworkBehaviour
     {
         [SerializeField]

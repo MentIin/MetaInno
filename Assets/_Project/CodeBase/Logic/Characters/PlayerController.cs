@@ -171,7 +171,7 @@ public class PlayerController : NetworkBehaviour
         if (inputAxis.sqrMagnitude != 0)
         {
             Debug.Log(transform.forward);
-            cameraRotation = Vector2.Lerp(cameraRotation, new Vector2(transform.forward.x, transform.forward.z), 0.05f);
+            cameraRotation = Vector2.Lerp(cameraRotation, new Vector2(transform.forward.x, transform.forward.z), 0.04f);
             cameraRotation = cameraRotation.normalized;
         }
         
@@ -184,8 +184,16 @@ public class PlayerController : NetworkBehaviour
         cameraForward.Normalize();
         cameraRight.Normalize();
 
-        Vector3 direction = cameraForward * inputAxis.y + cameraRight * inputAxis.x;
-        _currentCharacter.Move(new Vector2(direction.x, direction.z));
+        if (_currentCharacter.Data.moveAccordingToCamera)
+        {
+            Vector3 direction = cameraForward * inputAxis.y + cameraRight * inputAxis.x;
+            _currentCharacter.Move(new Vector2(direction.x, direction.z));
+        }
+        else
+        {
+            _currentCharacter.Move(inputAxis);
+        }
+       
     }
 
 

@@ -7,36 +7,96 @@ public class RoverCharacter : CharacterBase
     private float _yVelocity=0f;
 
     private float _currentMoveSpeed = 0f;
-    private float _moveSpeed = 7f;
+    private float _moveSpeed = 11f;
 
+    private bool _tryingDrift;
     private bool _drift;
     
     private Vector3 _driftVelocity;
     private float _rotationSpeed = 60;
     
+    private Vector2 driftAxis;
+    
+    private float _driftBoost=0f;
+    
 
     public override void ActionStart()
     {
-        _drift = true;
+        _tryingDrift = true;
     }
 
     public override void ActionStop()
     {
-        _drift = false;
+        _tryingDrift = false;
     }
 
     public override void Move(Vector2 inputAxis)
     {
+        if (!Mathf.Approximately(Mathf.Sign(inputAxis.x), Mathf.Sign(driftAxis.x)))
+        {
+            _drift = false;
+        }
+        
         if (inputAxis.y < 0)
         {
+            inputAxis.x = -inputAxis.x;
             if (Mathf.Abs(inputAxis.x) < 0.1f)
             {
                 inputAxis.x = 0;
             }
         }
+        
+        ReduceCurrentSpeed(inputAxis);
+        UpdateGravity();
 
+        if (_tryingDrift && !_drift && inputAxis.x != 0)
+        {
+            _drift = true;
+            driftAxis = inputAxis; 
+            _driftBoost = 1f;
+        }
+        else if (!_tryingDrift && _drift)
+        {
+            _drift = false;
+            _driftVelocity = Vector3.zero;
+        }
 
-        float desealerationSpeed = 2f;
+        if (_drift)
+        {
+            _driftBoost += Time.fixedDeltaTime*2;
+            _driftVelocity = -_controller.transform.right * Mathf.Sign(inputAxis.x) * _driftBoost*2;
+        }
+        else
+        {
+            _driftVelocity = Vector3.zero;
+            _driftBoost = 0;
+        }
+        
+        
+
+        Vector3 currentRotationVector = _controller.transform.forward;
+        
+        _currentMoveSpeed = Mathf.Clamp((_currentMoveSpeed + inputAxis.y*Time.fixedDeltaTime * 7) ,-_moveSpeed, _moveSpeed);
+        Vector3 direction = currentRotationVector.normalized * Time.fixedDeltaTime * (_currentMoveSpeed + _driftBoost);
+        direction += Vector3.up * _yVelocity * Time.fixedDeltaTime;
+        
+        
+        float k = _drift ? 1.5f : 1;
+        _controller.transform.Rotate(0f,  inputAxis.x* _rotationSpeed * Time.fixedDeltaTime * k, 0f);
+        _controller.Move(direction + _driftVelocity * Time.fixedDeltaTime);
+        
+        _driftVelocity *= 0.9f;
+    }
+
+    private void UpdateGravity()
+    {
+        _yVelocity += gravity * Time.fixedDeltaTime;
+        if (_controller.isGrounded) _yVelocity = 0;
+    }
+
+    private void ReduceCurrentSpeed(Vector2 inputAxis)
+    {
+        float desealerationSpeed = 3f;
         if (inputAxis.y == 0)
         {
             desealerationSpeed = _moveSpeed;
@@ -49,59 +109,5 @@ public class RoverCharacter : CharacterBase
         {
             _currentMoveSpeed += Time.fixedDeltaTime* desealerationSpeed;
         }
-
-        
-        _yVelocity += gravity * Time.fixedDeltaTime;
-        if (_controller.isGrounded) _yVelocity = 0;
-        
-        Vector3 targetRotation = new Vector3(inputAxis.x, 0, inputAxis.y);
-        Vector3 currentRotation = _controller.transform.forward;
-
-        float mod = 1;
-        if (Vector3.Angle(targetRotation, currentRotation) > 90f)
-        {
-            mod = -1f;
-        }
-
-        
-        _currentMoveSpeed = Mathf.Clamp((_currentMoveSpeed + mod*Time.fixedDeltaTime * 5) ,-_moveSpeed, _moveSpeed);
-        
-        Vector3 direction = new Vector3();
-        if (inputAxis.sqrMagnitude != 0)
-        {
-            direction = CalculateDirectionVector(targetRotation, currentRotation);
-        }
-        
-        _driftVelocity *= 0.9f;
-
-        direction = currentRotation.normalized * Time.fixedDeltaTime * _currentMoveSpeed;
-        direction += Vector3.up * _yVelocity * Time.fixedDeltaTime;
-        
-        _controller.Move(direction + _driftVelocity);
-    }
-
-    private Vector3 CalculateDirectionVector(Vector3 targetRotation, Vector3 currentRotation)
-    {
-        Vector3 direction;
-        
-        if (Mathf.Abs(Vector3.Angle(targetRotation, currentRotation)) < 90f)
-        {
-            direction = currentRotation;
-        }
-        else 
-        {
-            direction = currentRotation;
-        }
-
-        float r = Vector3.SignedAngle(currentRotation, targetRotation, Vector3.up);
-
-        if (Mathf.Abs(r) > 2f && Mathf.Abs(r) < 178f)
-        {
-            r = Mathf.Clamp(r * 1000, -Time.fixedDeltaTime, Time.fixedDeltaTime);
-            _controller.transform.Rotate(0f, r * _rotationSpeed, 0f);
-        }
-        
-        
-        return direction;
     }
 }
