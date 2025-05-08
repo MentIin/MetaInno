@@ -37,15 +37,12 @@ public class DroneCharacter : CharacterBase
     {
         _reload -= Time.fixedDeltaTime;
         
-        
         Vector3 direction = new Vector3(inputAxis.x, 0f, inputAxis.y);
         Vector3 desiredHorizontalMovement = direction * _speed;
-
-        
         
         if (inputAxis.sqrMagnitude != 0)
         {
-            //_controller.transform.localRotation = Quaternion.LookRotation(direction);
+            _controller.transform.localRotation = Quaternion.LookRotation(direction);
         }
         
         
@@ -75,6 +72,6 @@ public class DroneCharacter : CharacterBase
         targetEuler.x = _horizontalVelocity.z * _speed;
 
         Quaternion targetRotation = Quaternion.Euler(targetEuler);
-        _visuals.rotation = Quaternion.Slerp(_visuals.rotation, targetRotation, _visualLeanSpeed * Time.fixedDeltaTime);
+        //_visuals.rotation = Quaternion.Slerp(_visuals.rotation, targetRotation, _visualLeanSpeed * Time.fixedDeltaTime);
     }
 }

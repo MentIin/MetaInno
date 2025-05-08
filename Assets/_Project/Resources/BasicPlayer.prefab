@@ -789,7 +789,7 @@ MonoBehaviour:
   - {fileID: 6916588507138699819}
   - {fileID: 1265243866097921141}
   _currentCharacter: {fileID: 6814726970970441982}
-  _clientAuth: 1
+  _clientAuth: 0
 --- !u!114 &349979480273480244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1114,11 +1114,6 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 1692857504577230519}
   _visuals: {fileID: 3140883996353710553}
   _data: {fileID: 11400000, guid: e3083a60e6c386644ae8ba470832ecec, type: 2}
-  _speed: 3
-  _acceleration: 12
-  _gravity: -6
-  _flyingForce: 12
-  _visualLeanAmount: 6
   _visualLeanSpeed: 12
 --- !u!114 &1692857504577230519
 MonoBehaviour:

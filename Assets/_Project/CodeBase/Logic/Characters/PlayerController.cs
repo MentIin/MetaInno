@@ -12,6 +12,7 @@ public class PlayerController : NetworkBehaviour
 
     [SerializeField] private List<CharacterBase> _characters;
     [SerializeField] private CharacterBase _currentCharacter;
+    
     [SerializeField] private bool _clientAuth = true;
     private int _currentIndexInList;
 
