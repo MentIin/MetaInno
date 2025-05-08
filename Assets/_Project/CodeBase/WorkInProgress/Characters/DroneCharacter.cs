@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class DroneCharacter : CharacterBase
 {
-    [SerializeField] private float _speed = 4f;
-    [SerializeField] private float _acceleration = 4f;
-    [SerializeField] private float _gravity = -6f;
-    [SerializeField] private float _flyingForce = 4f;
-    [SerializeField] private float _visualLeanAmount = 25f;
-    [SerializeField] private float _visualLeanSpeed = 5f;
+    private float _speed = 5f;
+    private float _acceleration = 10f;
+    private float _gravity = -24f;
+    private float _flyingForce = 12f;
+    
+    private float _visualLeanAmount = 2f;
+    [SerializeField] private float _visualLeanSpeed = 12f;
 
 
     private float _verticalVelocity;
@@ -20,8 +21,11 @@ public class DroneCharacter : CharacterBase
     {
         if (_reload > 0) return;
         
-        _reload = 0.2f;
-        _verticalVelocity += 7f;
+        _reload = 0.3f;
+        if (_verticalVelocity < 0) 
+            _verticalVelocity = 0;
+        
+        _verticalVelocity += 12f;
     }
 
     public override void ActionStop()
@@ -41,7 +45,7 @@ public class DroneCharacter : CharacterBase
         
         if (inputAxis.sqrMagnitude != 0)
         {
-            _controller.transform.rotation = Quaternion.LookRotation(direction);
+            //_controller.transform.localRotation = Quaternion.LookRotation(direction);
         }
         
         

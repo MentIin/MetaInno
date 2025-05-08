@@ -29,18 +29,10 @@ public class PlayerController : NetworkBehaviour
     {
         base.OnStartClient();
 
-        
-        
-
         if (!_characters.Contains(_currentCharacter))
             Debug.LogWarning("Initial character not in list");
         else
             _currentIndexInList = _characters.IndexOf(_currentCharacter);
-
-        
-        
-        
-        
         
         
         if (!base.IsOwner)
@@ -53,8 +45,10 @@ public class PlayerController : NetworkBehaviour
             }
             return;
         }
-
-        HideCharactersServerRpc();
+        else
+        {
+            SetCurrentCharacterIndex(0);
+        }
         
     }
 
@@ -101,7 +95,7 @@ public class PlayerController : NetworkBehaviour
         _currentCharacter.OnCharacterUnequipped();
 
         _currentCharacter = _characters[nextIndex];
-        _currentIndexInList = nextIndex;
+        SetCurrentCharacterIndex(nextIndex);
         
         // I think extension method is unnesasery
         _controller.ImportData(_currentCharacter.Data);
@@ -133,6 +127,42 @@ public class PlayerController : NetworkBehaviour
     {
         MoveCurrent();
     }
+    
+    
+    [ServerRpc]
+    private void SetCurrentCharacterIndex(int index)
+    {
+        _currentIndexInList = index;
+        SetCurrentCharacterIndexObserversRpc(index);
+    }
+    
+    [ObserversRpc]
+    private void SetCurrentCharacterIndexObserversRpc(int i)
+    {
+        _currentIndexInList = i;
+        
+        
+        int index = 0;
+        foreach (var VARIABLE in _characters)
+        {
+            foreach (var meshRenderer in VARIABLE.gameObject.GetComponentsInChildren<MeshRenderer>(true))
+            {
+                if (index == _currentIndexInList)
+                {
+                    meshRenderer.enabled = true;
+                }
+                else
+                {
+                    meshRenderer.enabled = false;
+                }
+            }
+
+            index++;
+        }
+        
+    }
+    
+    
 
     private void MoveCurrent()
     {

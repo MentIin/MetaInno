@@ -3,7 +3,7 @@ using UnityEngine.Serialization;
 
 public class InnikCharacter : CharacterBase
 {
-    private float gravity=-13f;
+    private float gravity=-15f;
     private float _yVelocity=0f;
     
     private float _jumpBuffer = 0.0f;
@@ -60,7 +60,7 @@ public class InnikCharacter : CharacterBase
         {
             if (_cayoutTime > 0)
             {
-                _yVelocity = 8f;
+                _yVelocity = 11f;
                 _jumpBuffer = 0f;
             }
         }

@@ -382,10 +382,7 @@ PrefabInstance:
       addedObject: {fileID: 999832580}
     - targetCorrespondingSourceObject: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 999832585}
-    - targetCorrespondingSourceObject: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 999832579}
+      addedObject: {fileID: 999832586}
   m_SourcePrefab: {fileID: 100100000, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
 --- !u!1 &936068046
 GameObject:
@@ -537,28 +534,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
   m_PrefabInstance: {fileID: 520276996}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &999832579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999832574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 362dfd7e6009fb44c90beec3df0ad853, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _useWss: 1
-  _sslConfiguration:
-    Enabled: 0
-    CertificatePath: ./cert.p12
-    CertificatePassword: 1234
-    SslProtocol: 0
-  _mtu: 1023
-  _port: 443
-  _maximumClients: 6080
-  _clientAddress: 6fa75726e993498bb4588f8274632afa-free-eu-north.playflow.dev
 --- !u!114 &999832580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,15 +546,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e4a322dca349547989b14021da4e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Transport: {fileID: 999832585}
+  Transport: {fileID: 0}
   _intermediateLayer: {fileID: 0}
   _latencySimulator:
-    _enabled: 0
+    _enabled: 1
     _simulateHost: 0
-    _latency: 0
+    _latency: 667
     _outOfOrder: 0
     _packetLoss: 0
---- !u!114 &999832585
+--- !u!114 &999832586
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -588,17 +563,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 999832574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f48f002b825cbd45a19bd96d90f9edb, type: 3}
+  m_Script: {fileID: 11500000, guid: 362dfd7e6009fb44c90beec3df0ad853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stopSocketsOnThread: 0
-  _dontRoute: 0
-  _unreliableMtu: 1023
-  _ipv4BindAddress: 
-  _enableIpv6: 1
-  _ipv6BindAddress: 
+  _useWss: 0
+  _sslConfiguration:
+    Enabled: 0
+    CertificatePath: 
+    CertificatePassword: 
+    SslProtocol: 0
+  _mtu: 1023
   _port: 7777
-  _maximumClients: 4095
+  _maximumClients: 2000
   _clientAddress: localhost
 --- !u!1 &1361669243 stripped
 GameObject:

@@ -789,7 +789,7 @@ MonoBehaviour:
   - {fileID: 6916588507138699819}
   - {fileID: 1265243866097921141}
   _currentCharacter: {fileID: 6814726970970441982}
-  _clientAuth: 0
+  _clientAuth: 1
 --- !u!114 &349979480273480244
 MonoBehaviour:
   m_ObjectHideFlags: 0
