@@ -1366,7 +1366,7 @@ MonoBehaviour:
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
   NetworkObserver: {fileID: 0}
-  _enablePrediction: 1
+  _enablePrediction: 0
   _predictionType: 0
   _graphicalObject: {fileID: 0}
   _detachGraphicalObject: 0
@@ -7422,7 +7422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5601886263960891991}
   - component: {fileID: 459780572133222130}
-  - component: {fileID: 7188361815689794179}
+  - component: {fileID: 8524890088889082902}
   m_Layer: 6
   m_Name: Characters
   m_TagString: Untagged
@@ -7463,7 +7463,7 @@ MonoBehaviour:
   _componentIndexCache: 3
   _addedNetworkObject: {fileID: 6202074664125517796}
   _networkObjectCache: {fileID: 6202074664125517796}
---- !u!114 &7188361815689794179
+--- !u!114 &8524890088889082902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
