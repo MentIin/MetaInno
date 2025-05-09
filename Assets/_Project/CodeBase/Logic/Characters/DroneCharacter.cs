@@ -1,7 +1,11 @@
+using CodeBase.Logic.Characters;
 using UnityEngine;
 
 public class DroneCharacter : CharacterBase
 {
+    [SerializeField] private LayerMask _bounceMask;
+    
+    
     private float _speed = 5f;
     private float _acceleration = 10f;
     private float _gravity = -24f;
@@ -17,6 +21,11 @@ public class DroneCharacter : CharacterBase
     
     private float _reload=0f;
 
+    
+    
+    
+    private RaycastHit[] hits = new RaycastHit[4];
+    
     public override void ActionStart()
     {
         if (_reload > 0) return;
@@ -64,7 +73,6 @@ public class DroneCharacter : CharacterBase
         
         _horizontalVelocity = Vector3.Lerp(_horizontalVelocity, desiredHorizontalMovement, _acceleration * Time.fixedDeltaTime);
         
-        _controller.Move((_horizontalVelocity + upVelocity) * Time.fixedDeltaTime + _externalForceController.ExternalForce * Time.fixedDeltaTime);
 
         Vector3 targetEuler = _visuals.eulerAngles;
         float amount = (_horizontalVelocity.magnitude / _speed) * _visualLeanAmount;
@@ -73,5 +81,51 @@ public class DroneCharacter : CharacterBase
 
         Quaternion targetRotation = Quaternion.Euler(targetEuler);
         //_visuals.rotation = Quaternion.Slerp(_visuals.rotation, targetRotation, _visualLeanSpeed * Time.fixedDeltaTime);
+
+
+        Vector3 moveVector = (_horizontalVelocity + upVelocity) * Time.fixedDeltaTime +
+                             _externalForceController.ExternalForce * Time.fixedDeltaTime;
+        _controller.Move(moveVector);
+
+        HandleBounce(moveVector);
+    }
+    private void HandleBounce(Vector3 moveVector)
+    {
+        if (moveVector.sqrMagnitude == 0) return;
+        
+        if (_controller.detectCollisions)
+        {
+            
+            int c = Physics.SphereCastNonAlloc(_controller.center + _controller.transform.position, _controller.radius * 0.8f,
+                moveVector.normalized, hits, .5f, _bounceMask);
+            for (int i = 0; i < c; i++)
+            {
+                if (hits[i].collider == null) continue;
+                if (hits[i].transform == _controller.transform) continue;
+                
+
+                float force = _horizontalVelocity.magnitude;
+
+                if (hits[i].transform.gameObject.CompareTag("Player"))
+                {
+                    
+                    Debug.Log("Bounce player" + hits[i].transform.gameObject.GetComponent<ExternalForceController>().ExternalForce);
+                    if (hits[i].transform.gameObject.GetComponent<PlayerController>().CurrentCharacter is
+                            InnikCharacter ||
+                        hits[i].transform.gameObject.GetComponent<PlayerController>().CurrentCharacter is
+                            RoverCharacter)
+                    {
+
+                        return;
+                    }
+                    hits[i].transform.gameObject.GetComponent<ExternalForceController>().Bounce(-hits[i].normal, force);
+                }
+                else
+                {
+                    _externalForceController.Bounce(hits[i].normal * 2f, _horizontalVelocity.magnitude);
+                    _horizontalVelocity = new Vector3();
+                }
+            }
+        }
     }
 }

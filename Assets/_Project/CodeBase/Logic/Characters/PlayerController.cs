@@ -1,3 +1,4 @@
+using System;
 using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Tools;
 using FishNet.Object;
@@ -22,6 +23,7 @@ public class PlayerController : NetworkBehaviour
 
 
     private Vector2 cameraRotation;
+    public CharacterBase CurrentCharacter { get => _currentCharacter;}
 
     private void Awake()
     {
@@ -39,14 +41,14 @@ public class PlayerController : NetworkBehaviour
             Debug.LogWarning("Initial character not in list");
         else
             _currentIndexInList = _characters.IndexOf(_currentCharacter);
-        
-        
 
-        SetCurrentCharacterIndexServer(_currentIndexInList);
- 
-        HideCharacters();
+        if (base.IsOwner)
+        {
+            SetCurrentCharacterIndexServer(0);
+        }
         
     }
+
 
     private void Update()
     {
@@ -187,7 +189,7 @@ public class PlayerController : NetworkBehaviour
         SetCurrentCharacterIndexObserversRpc(index);
     }
 
-    [ObserversRpc]
+    [ObserversRpc(BufferLast = true)]
     private void SetCurrentCharacterIndexObserversRpc(int i)
     {
         _currentIndexInList = i;

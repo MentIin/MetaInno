@@ -55,7 +55,7 @@ MonoBehaviour:
   _roverDriftVisual: {fileID: 8993005628836992576}
   _bounceMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 103
 --- !u!114 &6917909801959498193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1218,7 +1218,7 @@ GameObject:
   - component: {fileID: 8122636713827463770}
   m_Layer: 6
   m_Name: BasicPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1304,10 +1304,10 @@ MonoBehaviour:
   _componentConfiguration: 0
   _synchronizeParent: 0
   _packing:
-    Position: 0
+    Position: 1
     Rotation: 1
-    Scale: 0
-  _interpolation: 93
+    Scale: 1
+  _interpolation: 5
   _extrapolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
@@ -1352,7 +1352,6 @@ MonoBehaviour:
   - {fileID: 349979480273480244}
   - {fileID: 8122636713827463770}
   - {fileID: 459780572133222130}
-  - {fileID: 0}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects:
   - {fileID: 1288709477385754709}
@@ -1767,6 +1766,9 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 1692857504577230519}
   _visuals: {fileID: 3140883996353710553}
   _data: {fileID: 11400000, guid: e3083a60e6c386644ae8ba470832ecec, type: 2}
+  _bounceMask:
+    serializedVersion: 2
+    m_Bits: 65
   _visualLeanSpeed: 12
 --- !u!114 &1692857504577230519
 MonoBehaviour:
@@ -2200,6 +2202,9 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 1288709477385754709}
   _visuals: {fileID: 4611552754082142642}
   _data: {fileID: 11400000, guid: bf78fe23ad1e9dd4e9a58cbab7f0e2e8, type: 2}
+  _bounceMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &1288709477385754709
 MonoBehaviour:
   m_ObjectHideFlags: 0

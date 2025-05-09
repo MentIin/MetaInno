@@ -12,17 +12,25 @@ namespace CodeBase.Logic.Characters
         
         private List<ExternalForce> _externalForces = new List<ExternalForce>();
         
-        [ServerRpc]
+        [ServerRpc(RequireOwnership = false)]
         public void Bounce(Vector3 hitInfoNormal, float speed)
         {
             
-            Vector3 externalForce = hitInfoNormal * speed + Vector3.up * speed;
+            
+            if (ExternalForce.magnitude > 0)
+            {
+                return;
+            }
+            Vector3 externalForce = hitInfoNormal * speed + Vector3.up * speed * 0.5f;
             _externalForces.Add(new ExternalForce(externalForce, 0.5f));;
         }
 
-
+        
         private void FixedUpdate()
         {
+            if (!base.IsServer) return;
+            
+            
             ExternalForce = Vector3.zero;
             foreach (var force in _externalForces)
             {
@@ -32,7 +40,6 @@ namespace CodeBase.Logic.Characters
             
             //TODO optimize
             _externalForces.RemoveAll(x => x.IsFinished);
-            
             
             SetTotalForceClient(ExternalForce);
         }

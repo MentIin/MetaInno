@@ -1,6 +1,9 @@
+using CodeBase.Logic.Characters;
 using CodeBase.Logic.Characters.Visual;
+using DG.Tweening.Core;
 using FishNet.Object;
 using UnityEngine;
+using Debugger = System.Diagnostics.Debugger;
 
 public class RoverCharacter : CharacterBase
 {
@@ -31,6 +34,9 @@ public class RoverCharacter : CharacterBase
     
     public bool BoostReady => _readyDriftBoost > _minimumBoost;
     public bool BoostActive => _driftBoost > 0;
+    
+    
+    private RaycastHit[] hits = new RaycastHit[4];
 
 
     public override void ActionStart()
@@ -125,7 +131,8 @@ public class RoverCharacter : CharacterBase
         
         
         
-        SendDriftDataToClient(BoostReady, BoostActive, _controller.isGrounded);
+        SendDriftDataToServer(BoostReady, BoostActive, _controller.isGrounded, _drift);
+        _roverDriftVisual.SetParticlesActivity(BoostReady, BoostActive, _controller.isGrounded, _drift);
 
         
 
@@ -138,37 +145,53 @@ public class RoverCharacter : CharacterBase
 
     private void HandleBounce(Vector3 moveVector)
     {
-        if (!_drift && _driftBoost < 1f) return;
+        if (!_drift && _driftBoost + _currentMoveSpeed < _moveSpeed) return;
         
-        if (_controller.collisionFlags == CollisionFlags.Sides)
+        
+        int c = Physics.SphereCastNonAlloc(_controller.center + _controller.transform.position, _controller.radius * 0.8f,
+            moveVector.normalized, hits, .8f, _bounceMask);
+        for (int i = 0; i < c; i++)
         {
-            RaycastHit hit;
-            if (Physics.SphereCast(_controller.center, _controller.radius, moveVector, out hit) )
-            {
+            if (hits[i].collider == null) continue;
+            if (hits[i].transform == _controller.transform) continue;
+            
 
-                if (_drift)
+            float force = Mathf.Max(_minimumBoost, _driftBoost + _currentMoveSpeed);
+
+            if (hits[i].transform.gameObject.CompareTag("Player"))
+            {
+                hits[i].transform.gameObject.GetComponent<ExternalForceController>().Bounce(-hits[i].normal, force);
+                Debug.Log("Bounce player" + hits[i].transform.gameObject.GetComponent<ExternalForceController>().ExternalForce);
+                if (hits[i].transform.gameObject.GetComponent<PlayerController>().CurrentCharacter is
+                        InnikCharacter ||
+                    hits[i].transform.gameObject.GetComponent<PlayerController>().CurrentCharacter is
+                        DroneCharacter)
                 {
-                    _driftBoost = 0f;
-                    _readyDriftBoost = 0f;
-                    _currentMoveSpeed = 0f;
-                    _externalForceController.Bounce(hit.normal * 2f, _minimumBoost);
-                }
-                else
-                {
-                    _currentMoveSpeed = 0f;
-                    _driftBoost = 0f;
-                    _readyDriftBoost = 0f;
-                    _externalForceController.Bounce(hit.normal * 2f, _driftBoost+_moveSpeed);
+
+                    return;
                 }
             }
+            else
+            {
+                _currentMoveSpeed = 0f;
+                _driftBoost = 0f;
+                _readyDriftBoost = 0f;
+                _externalForceController.Bounce(hits[i].normal * 2f, _driftBoost + _moveSpeed);
+            }
 
+                
         }
     }
 
     [ObserversRpc]
-    private void SendDriftDataToClient(bool ready, bool boost, bool grounded)
+    private void SendDriftDataToClient(bool ready, bool boost, bool grounded, bool drift)
     {
-       _roverDriftVisual.SetParticlesActivity(ready, boost, grounded);
+       _roverDriftVisual.SetParticlesActivity(ready, boost, grounded, drift);
+    }
+    [ServerRpc]
+    private void SendDriftDataToServer(bool ready, bool boost, bool grounded, bool drift)
+    {
+       SendDriftDataToClient(ready, boost, grounded, drift);
     }
 
     private void UpdateGravity()

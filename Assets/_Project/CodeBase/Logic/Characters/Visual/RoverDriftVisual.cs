@@ -11,13 +11,11 @@ namespace CodeBase.Logic.Characters.Visual
         public ParticleSystem BoostReadyParticles;
         public ParticleSystem BoostParticles;
 
+        
 
-        private void Update()
+        public void SetParticlesActivity(bool boostReady, bool boostActive, bool grounded, bool drifting)
         {
-            if (RoverCharacter == null)
-                return;
-
-            if (RoverCharacter.IsDrifting)
+            if (drifting)
             {
                 transform.localRotation = Quaternion.Slerp(transform.localRotation,
                     Quaternion.Euler(0, 0, -RoverCharacter.DriftAxis.x * 20), Time.deltaTime * 10);
@@ -28,10 +26,8 @@ namespace CodeBase.Logic.Characters.Visual
                     Quaternion.Euler(0, 0, 0), Time.deltaTime * 10);
             }
             
-        }
-
-        public void SetParticlesActivity(bool boostReady, bool boostActive, bool grounded)
-        {
+            
+            
             HandleTrails(grounded);
             if (boostReady)
             {
