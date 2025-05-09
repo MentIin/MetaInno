@@ -2,16 +2,19 @@ using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Tools;
 using FishNet.Object;
 using System.Collections.Generic;
+using CodeBase.Logic.Characters;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : NetworkBehaviour
 {
-    private IInputService _inputService;
-    private CharacterController _controller;
-
+    [SerializeField] private ExternalForceController _externalForceController;
     [SerializeField] private List<CharacterBase> _characters;
     [SerializeField] private CharacterBase _currentCharacter;
+    
+    
+    private IInputService _inputService;
+    private CharacterController _controller;
     
     [SerializeField] private bool _clientAuth = true;
     private int _currentIndexInList;
@@ -186,6 +189,7 @@ public class PlayerController : NetworkBehaviour
         if (_currentCharacter.Data.moveAccordingToCamera)
         {
             Vector3 direction = cameraForward * inputAxis.y + cameraRight * inputAxis.x;
+            
             _currentCharacter.Move(new Vector2(direction.x, direction.z));
         }
         else
@@ -208,7 +212,7 @@ public class PlayerController : NetworkBehaviour
     {
         foreach (CharacterBase character in _characters)
         {
-            character.Construct(_controller, transform);
+            character.Construct(_controller, transform, _externalForceController);
         }
     }
 

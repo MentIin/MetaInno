@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6916588507138699819}
   - component: {fileID: 6917909801959498193}
   - component: {fileID: 3646412435141021207}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RoverCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,6 +53,9 @@ MonoBehaviour:
   _visuals: {fileID: 8816840319450471556}
   _data: {fileID: 11400000, guid: 40b0530095a08ab4fb1ba60092efa5e4, type: 2}
   _roverDriftVisual: {fileID: 8993005628836992576}
+  _bounceMask:
+    serializedVersion: 2
+    m_Bits: 55
 --- !u!114 &6917909801959498193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8857724199769342344}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +174,7 @@ GameObject:
   - component: {fileID: 2617371722937052413}
   - component: {fileID: 7225381173925773816}
   - component: {fileID: 7811776057424867035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +260,7 @@ GameObject:
   - component: {fileID: 1609701623701626451}
   - component: {fileID: 5443532317180894108}
   - component: {fileID: 640416732317390998}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Propeller4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5208370640381364525}
   - component: {fileID: 246737757782979270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Renderer (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,7 +485,7 @@ GameObject:
   - component: {fileID: 4418296112892854325}
   - component: {fileID: 698384078791153525}
   - component: {fileID: 3409113859734536522}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainPart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +571,7 @@ GameObject:
   - component: {fileID: 2091015550679982352}
   - component: {fileID: 9084059691909307890}
   - component: {fileID: 3833025026008221156}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,7 +657,7 @@ GameObject:
   - component: {fileID: 1617881734507334588}
   - component: {fileID: 2758248865102076556}
   - component: {fileID: 1586738998001170721}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +742,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5716456405223363412}
   - component: {fileID: 5059998249210592167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Renderer (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -877,7 +880,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3140883996353710553}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -915,7 +918,7 @@ GameObject:
   - component: {fileID: 5659176411934146935}
   - component: {fileID: 2709502458516417022}
   - component: {fileID: 6922038585409266023}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,7 +1003,7 @@ GameObject:
   m_Component:
   - component: {fileID: 586518087209812964}
   - component: {fileID: 7382740764269607837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Renderer (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1138,7 +1141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4491708482803796279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LineRenderers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1175,7 +1178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4611552754082142642}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1212,7 +1215,8 @@ GameObject:
   - component: {fileID: 4703985027393698982}
   - component: {fileID: 349979480273480244}
   - component: {fileID: 6202074664125517796}
-  m_Layer: 0
+  - component: {fileID: 8122636713827463770}
+  m_Layer: 6
   m_Name: BasicPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1277,6 +1281,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 6202074664125517796}
   _networkObjectCache: {fileID: 6202074664125517796}
+  _externalForceController: {fileID: 8122636713827463770}
   _characters:
   - {fileID: 6814726970970441982}
   - {fileID: 6916588507138699819}
@@ -1383,6 +1388,21 @@ MonoBehaviour:
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
     IsValid: 1
+--- !u!114 &8122636713827463770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047539034845683087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a335d8485ea42c3b44338b5e0c97d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 6202074664125517796}
+  _networkObjectCache: {fileID: 0}
 --- !u!1 &4657746788558244440
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,7 +1414,7 @@ GameObject:
   - component: {fileID: 1328809260441173806}
   - component: {fileID: 4253197292228984981}
   - component: {fileID: 4004838100077388763}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Antenna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1480,7 +1500,7 @@ GameObject:
   - component: {fileID: 6750872639843135275}
   - component: {fileID: 5463353345654925819}
   - component: {fileID: 6408073176074754331}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1565,7 +1585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2137331890189781330}
   - component: {fileID: 183771940727313340}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1706,7 +1726,7 @@ GameObject:
   - component: {fileID: 1265243866097921141}
   - component: {fileID: 1692857504577230519}
   - component: {fileID: 492659996476034110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DroneCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1826,7 +1846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2236075226337406892}
   - component: {fileID: 2002166918446948644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Renderer (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1966,7 +1986,7 @@ GameObject:
   - component: {fileID: 1443960176211266893}
   - component: {fileID: 5099332232560894809}
   - component: {fileID: 3674608153772306386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2052,7 +2072,7 @@ GameObject:
   - component: {fileID: 6921355732297350325}
   - component: {fileID: 7719458625256034229}
   - component: {fileID: 7815333692064803450}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Propeller3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2139,7 +2159,7 @@ GameObject:
   - component: {fileID: 6814726970970441982}
   - component: {fileID: 1288709477385754709}
   - component: {fileID: -149017938001829612}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: InnikCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2258,7 +2278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5273132798378289508}
   - component: {fileID: 3115806889288944476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Renderer (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2398,7 +2418,7 @@ GameObject:
   - component: {fileID: 2298858286931808328}
   - component: {fileID: 6839961195693978501}
   - component: {fileID: 7273710243469770475}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2484,7 +2504,7 @@ GameObject:
   - component: {fileID: 1906418654691284185}
   - component: {fileID: 6490883408485721790}
   - component: {fileID: 6674553011485010504}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BoostReadyParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7317,7 +7337,7 @@ GameObject:
   - component: {fileID: 608232386078466423}
   - component: {fileID: 1628326731914970105}
   - component: {fileID: 2120659353237180785}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainPart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7403,7 +7423,7 @@ GameObject:
   - component: {fileID: 5502970015041878190}
   - component: {fileID: 9149100204025938030}
   - component: {fileID: 7267384811828944070}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Propeller2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7489,7 +7509,7 @@ GameObject:
   - component: {fileID: 4123310462472518990}
   - component: {fileID: 4398310831891553980}
   - component: {fileID: 317609592760354035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7574,7 +7594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8816840319450471556}
   - component: {fileID: 8993005628836992576}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7628,7 +7648,7 @@ GameObject:
   - component: {fileID: 363482295553676465}
   - component: {fileID: 4284888843989057727}
   - component: {fileID: 6277395687785408272}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Propeller1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7714,7 +7734,7 @@ GameObject:
   - component: {fileID: 8514966169281867058}
   - component: {fileID: 7456819591122607628}
   - component: {fileID: 2710575901551506808}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BoostParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

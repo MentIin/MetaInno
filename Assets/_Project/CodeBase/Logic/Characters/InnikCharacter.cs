@@ -32,7 +32,9 @@ public class InnikCharacter : CharacterBase
 
         Vector3 direction = Vector3.forward * _inputAxis.y + Vector3.right * _inputAxis.x;
         
-        _controller.Move(direction * Time.fixedDeltaTime * _speed + Vector3.up * _yVelocity * Time.fixedDeltaTime);
+        _controller.Move(direction * Time.fixedDeltaTime * _speed + 
+                         Vector3.up * _yVelocity * Time.fixedDeltaTime + 
+                         _externalForceController.ExternalForce * Time.fixedDeltaTime);
 
         if (_inputAxis.sqrMagnitude != 0)
         {

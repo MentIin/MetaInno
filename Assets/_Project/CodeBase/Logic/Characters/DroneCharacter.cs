@@ -64,7 +64,7 @@ public class DroneCharacter : CharacterBase
         
         _horizontalVelocity = Vector3.Lerp(_horizontalVelocity, desiredHorizontalMovement, _acceleration * Time.fixedDeltaTime);
         
-        _controller.Move((_horizontalVelocity + upVelocity) * Time.fixedDeltaTime);
+        _controller.Move((_horizontalVelocity + upVelocity) * Time.fixedDeltaTime + _externalForceController.ExternalForce * Time.fixedDeltaTime);
 
         Vector3 targetEuler = _visuals.eulerAngles;
         float amount = (_horizontalVelocity.magnitude / _speed) * _visualLeanAmount;

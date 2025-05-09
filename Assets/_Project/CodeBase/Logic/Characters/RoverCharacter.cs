@@ -6,6 +6,8 @@ public class RoverCharacter : CharacterBase
 {
     [SerializeField] private RoverDriftVisual _roverDriftVisual;
     
+    [Tooltip("Which layer the rover can bounce off (walls, etc)")]
+    [SerializeField] private LayerMask _bounceMask;
     
     private float gravity=-12f;
     private float _yVelocity=0f;
@@ -106,7 +108,7 @@ public class RoverCharacter : CharacterBase
         direction += Vector3.up * _yVelocity * Time.fixedDeltaTime;
         
         
-        float k = _drift ? 1.7f : 1;
+        float k = _drift ? 1.4f : 1;
         _controller.transform.Rotate(0f,  inputAxis.x* _rotationSpeed * Time.fixedDeltaTime * k, 0f);
 
         float mod = 1f;
@@ -114,13 +116,50 @@ public class RoverCharacter : CharacterBase
         {
             mod = 0.8f;
         }
-        _controller.Move(direction * mod + _driftVelocity * Time.fixedDeltaTime);
+        
         
         _driftVelocity *= 0.9f;
         
         
         
         SendDriftDataToClient(BoostReady, BoostActive);
+
+        
+
+        Vector3 finalMoveVector = direction * mod + _driftVelocity * Time.fixedDeltaTime +
+                             _externalForceController.ExternalForce * Time.fixedDeltaTime;
+
+        HandleBounce(finalMoveVector);
+        _controller.Move(finalMoveVector);
+    }
+
+    private void HandleBounce(Vector3 moveVector)
+    {
+        if (!_drift && _driftBoost < 1f) return;
+        
+        if (_controller.collisionFlags == CollisionFlags.Sides)
+        {
+            RaycastHit hit;
+            if (Physics.SphereCast(_controller.center, _controller.radius, moveVector, out hit) )
+            {
+
+                if (_drift)
+                {
+                    _driftBoost = 0f;
+                    _readyDriftBoost = 0f;
+                    _currentMoveSpeed = 0f;
+                    _externalForceController.Bounce(hit.normal * 2f, _minimumBoost);
+                }
+                else
+                {
+                    _currentMoveSpeed = 0f;
+                    _driftBoost = 0f;
+                    _readyDriftBoost = 0f;
+                    _externalForceController.Bounce(hit.normal * 2f, _driftBoost+_moveSpeed);
+                }
+            }
+
+        }
     }
 
     [ObserversRpc]

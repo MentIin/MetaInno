@@ -1,3 +1,4 @@
+using CodeBase.Logic.Characters;
 using FishNet.Object;
 using UnityEngine;
 
@@ -8,13 +9,15 @@ public abstract class CharacterBase : NetworkBehaviour
     protected Transform _parent;
 
     [SerializeField] private CharacterData _data;
+    protected ExternalForceController _externalForceController;
 
     public CharacterData Data => _data;
     
-    public void Construct(CharacterController controller, Transform parent)
+    public void Construct(CharacterController controller, Transform parent, ExternalForceController externalForceController)
     {
         _controller = controller;
         _parent = parent;
+        _externalForceController = externalForceController;
     }
 
     public abstract void Move(Vector2 _inputAxis);
