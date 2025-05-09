@@ -41,15 +41,10 @@ public class PlayerController : NetworkBehaviour
             _currentIndexInList = _characters.IndexOf(_currentCharacter);
         
         
-        if (!base.IsOwner)
-        {
-            //this.enabled = false;
-            return;
-        }
-        else
-        {
-            SetCurrentCharacterIndexServer(0);
-        }
+
+        SetCurrentCharacterIndexServer(_currentIndexInList);
+ 
+        HideCharacters();
         
     }
 
@@ -59,14 +54,14 @@ public class PlayerController : NetworkBehaviour
         
         if (_clientAuth)
         {
-            /*if (_inputService.ActionKeyDown())
+            if (_inputService.ActionKeyDown())
                 _currentCharacter.ActionStart();
 
             if (_inputService.ActionKeyUp())
                 _currentCharacter.ActionStop();
 
             if (_inputService.CharacterChangePressed())
-                ChangeCharacter();*/
+                ChangeCharacterRPC();
         } 
         else
         {
@@ -88,10 +83,7 @@ public class PlayerController : NetworkBehaviour
             return;
         if (!base.IsOwner) return;
 
-        if (_clientAuth)
-            MoveCurrent(_inputService.GetAxis());
-        else
-        {
+
             Vector3 cameraForward = Camera.main.transform.forward;
             Vector3 cameraRight = Camera.main.transform.right;
 
@@ -106,19 +98,31 @@ public class PlayerController : NetworkBehaviour
                 Vector3 direction = cameraForward * _inputService.GetAxis().y + cameraRight * _inputService.GetAxis().x;
             
                 //MoveCurrent(new Vector2(direction.x, direction.z));
-                MoveCurrentCharacterRPC(new Vector2(direction.x, direction.z));
+
+                if (_clientAuth)
+                {
+                    MoveCurrent(new Vector2(direction.x, direction.z));
+                }
+                else
+                {
+                    MoveCurrentCharacterRPC(new Vector2(direction.x, direction.z));
+                }
+                
                 
             }
             else
             {
-                //MoveCurrent(_inputService.GetAxis());
-                MoveCurrentCharacterRPC(_inputService.GetAxis());
+                if (_clientAuth)
+                {
+                    MoveCurrent(_inputService.GetAxis());
+                }
+                else
+                {
+                    MoveCurrentCharacterRPC(_inputService.GetAxis());
+                }
             }
             
             
-        }
-            
-        
         MoveCamera(_inputService.GetAxis());
     }
 
@@ -233,6 +237,11 @@ public class PlayerController : NetworkBehaviour
 
     [ServerRpc]
     private void HideCharactersServerRpc()
+    {
+        HideCharacters();
+    }
+
+    private void HideCharacters()
     {
         foreach (CharacterBase character in _characters)
             character.OnCharacterUnequipped();
