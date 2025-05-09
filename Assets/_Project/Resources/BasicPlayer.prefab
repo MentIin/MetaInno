@@ -1264,7 +1264,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4703985027393698982
 MonoBehaviour:
@@ -1352,6 +1352,7 @@ MonoBehaviour:
   NetworkBehaviours:
   - {fileID: 4703985027393698982}
   - {fileID: 349979480273480244}
+  - {fileID: 8122636713827463770}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects:
   - {fileID: 1288709477385754709}
@@ -1400,9 +1401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a335d8485ea42c3b44338b5e0c97d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 6202074664125517796}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 6202074664125517796}
 --- !u!1 &4657746788558244440
 GameObject:
   m_ObjectHideFlags: 0

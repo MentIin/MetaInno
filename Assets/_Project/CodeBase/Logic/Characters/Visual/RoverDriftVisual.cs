@@ -29,13 +29,13 @@ namespace CodeBase.Logic.Characters.Visual
             }
             
             
-            HandleTrails();
-
+            
 
         }
 
-        public void SetParticlesActivity(bool boostReady, bool boostActive)
+        public void SetParticlesActivity(bool boostReady, bool boostActive, bool grounded)
         {
+            HandleTrails(grounded);
             if (boostReady)
             {
                 if (!BoostReadyParticles.isPlaying) BoostReadyParticles.Play();
@@ -44,7 +44,7 @@ namespace CodeBase.Logic.Characters.Visual
                 BoostReadyParticles.Stop();
             }
 
-            if (boostActive)
+            if (boostActive && grounded)
             {
                 if (!BoostParticles.isPlaying)BoostParticles.Play();
             }
@@ -54,11 +54,12 @@ namespace CodeBase.Logic.Characters.Visual
             }
         }
 
-        private void HandleTrails()
+        private void HandleTrails(bool grounded)
         {
+            
             foreach (var trailRenderer in LineRenderersContainer.GetComponentsInChildren<TrailRenderer>())
             {
-                trailRenderer.emitting = RoverCharacter.IsDrifting;
+                trailRenderer.emitting = RoverCharacter.IsDrifting && grounded;
             }
         }
     }

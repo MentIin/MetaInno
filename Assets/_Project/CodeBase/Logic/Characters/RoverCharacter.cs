@@ -51,7 +51,9 @@ public class RoverCharacter : CharacterBase
             {
                 inputAxis = driftAxis;
             }
-            
+        }else
+        {
+            driftAxis = inputAxis;
         }
         
         if (inputAxis.y < 0)
@@ -71,7 +73,7 @@ public class RoverCharacter : CharacterBase
             _drift = true;
             driftAxis = inputAxis; 
         }
-        else if (!_tryingDrift && _drift)
+        else if ((!_tryingDrift && _drift))
         {
             _drift = false;
             if (_readyDriftBoost < _minimumBoost)
@@ -108,13 +110,14 @@ public class RoverCharacter : CharacterBase
         direction += Vector3.up * _yVelocity * Time.fixedDeltaTime;
         
         
-        float k = _drift ? 1.4f : 1;
-        _controller.transform.Rotate(0f,  inputAxis.x* _rotationSpeed * Time.fixedDeltaTime * k, 0f);
+        float rotationFactor = inputAxis.x;
+        if (_drift) rotationFactor += 0.4f * Mathf.Sign(inputAxis.x);
+        _controller.transform.Rotate(0f,  rotationFactor* _rotationSpeed * Time.fixedDeltaTime, 0f);
 
         float mod = 1f;
         if (_drift)
         {
-            mod = 0.8f;
+            mod = 0.7f;
         }
         
         
@@ -122,7 +125,7 @@ public class RoverCharacter : CharacterBase
         
         
         
-        SendDriftDataToClient(BoostReady, BoostActive);
+        SendDriftDataToClient(BoostReady, BoostActive, _controller.isGrounded);
 
         
 
@@ -163,9 +166,9 @@ public class RoverCharacter : CharacterBase
     }
 
     [ObserversRpc]
-    private void SendDriftDataToClient(bool ready, bool boost)
+    private void SendDriftDataToClient(bool ready, bool boost, bool grounded)
     {
-       _roverDriftVisual.SetParticlesActivity(ready, boost);
+       _roverDriftVisual.SetParticlesActivity(ready, boost, grounded);
     }
 
     private void UpdateGravity()
