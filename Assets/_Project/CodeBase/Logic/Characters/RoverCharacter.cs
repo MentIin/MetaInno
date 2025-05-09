@@ -1,8 +1,12 @@
+using CodeBase.Logic.Characters.Visual;
+using FishNet.Object;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class RoverCharacter : CharacterBase
 {
+    [SerializeField] private RoverDriftVisual _roverDriftVisual;
+    
+    
     private float gravity=-12f;
     private float _yVelocity=0f;
 
@@ -17,8 +21,15 @@ public class RoverCharacter : CharacterBase
     
     private Vector2 driftAxis;
     
+    private float _readyDriftBoost=0f;
     private float _driftBoost=0f;
+    private float _minimumBoost = 3f;
+    public bool IsDrifting => _drift;
+    public Vector2 DriftAxis => driftAxis;
     
+    public bool BoostReady => _readyDriftBoost > _minimumBoost;
+    public bool BoostActive => _driftBoost > 0;
+
 
     public override void ActionStart()
     {
@@ -32,9 +43,13 @@ public class RoverCharacter : CharacterBase
 
     public override void Move(Vector2 inputAxis)
     {
-        if (!Mathf.Approximately(Mathf.Sign(inputAxis.x), Mathf.Sign(driftAxis.x)))
+        if (!Mathf.Approximately(Mathf.Sign(inputAxis.x), Mathf.Sign(driftAxis.x)) || inputAxis.y <= 0)
         {
-            _drift = false;
+            if (_drift)
+            {
+                inputAxis = driftAxis;
+            }
+            
         }
         
         if (inputAxis.y < 0)
@@ -49,27 +64,36 @@ public class RoverCharacter : CharacterBase
         ReduceCurrentSpeed(inputAxis);
         UpdateGravity();
 
-        if (_tryingDrift && !_drift && inputAxis.x != 0)
+        if (_tryingDrift && !_drift && inputAxis.x != 0 && inputAxis.y > 0)
         {
             _drift = true;
             driftAxis = inputAxis; 
-            _driftBoost = 1f;
         }
         else if (!_tryingDrift && _drift)
         {
             _drift = false;
-            _driftVelocity = Vector3.zero;
+            if (_readyDriftBoost < _minimumBoost)
+            {
+                _readyDriftBoost = 0f;
+            }
+
+            _driftBoost += _readyDriftBoost;
         }
 
         if (_drift)
         {
-            _driftBoost += Time.fixedDeltaTime*2;
-            _driftVelocity = -_controller.transform.right * Mathf.Sign(inputAxis.x) * _driftBoost*2;
+            _readyDriftBoost += Time.fixedDeltaTime*2;
+            _driftVelocity = -_controller.transform.right * Mathf.Sign(inputAxis.x) * 2;
         }
         else
         {
-            _driftVelocity = Vector3.zero;
-            _driftBoost = 0;
+            _readyDriftBoost = 0f;
+            _driftVelocity = _controller.transform.forward * _readyDriftBoost;
+            _driftBoost -= Time.fixedDeltaTime * 3;
+            if (_driftBoost < 0)
+            {
+                _driftBoost = 0;
+            }
         }
         
         
@@ -77,15 +101,32 @@ public class RoverCharacter : CharacterBase
         Vector3 currentRotationVector = _controller.transform.forward;
         
         _currentMoveSpeed = Mathf.Clamp((_currentMoveSpeed + inputAxis.y*Time.fixedDeltaTime * 7) ,-_moveSpeed, _moveSpeed);
+        
         Vector3 direction = currentRotationVector.normalized * Time.fixedDeltaTime * (_currentMoveSpeed + _driftBoost);
         direction += Vector3.up * _yVelocity * Time.fixedDeltaTime;
         
         
-        float k = _drift ? 1.5f : 1;
+        float k = _drift ? 1.7f : 1;
         _controller.transform.Rotate(0f,  inputAxis.x* _rotationSpeed * Time.fixedDeltaTime * k, 0f);
-        _controller.Move(direction + _driftVelocity * Time.fixedDeltaTime);
+
+        float mod = 1f;
+        if (_drift)
+        {
+            mod = 0.8f;
+        }
+        _controller.Move(direction * mod + _driftVelocity * Time.fixedDeltaTime);
         
         _driftVelocity *= 0.9f;
+        
+        
+        
+        SendDriftDataToClient(BoostReady, BoostActive);
+    }
+
+    [ObserversRpc]
+    private void SendDriftDataToClient(bool ready, bool boost)
+    {
+       _roverDriftVisual.SetParticlesActivity(ready, boost);
     }
 
     private void UpdateGravity()

@@ -170,7 +170,6 @@ public class PlayerController : NetworkBehaviour
         Vector2 inputAxis = _inputService.GetAxis();
         if (inputAxis.sqrMagnitude != 0)
         {
-            Debug.Log(transform.forward);
             cameraRotation = Vector2.Lerp(cameraRotation, new Vector2(transform.forward.x, transform.forward.z), 0.04f);
             cameraRotation = cameraRotation.normalized;
         }
