@@ -193,4 +193,6 @@ public class RoverCharacter : CharacterBase
             _currentMoveSpeed += Time.fixedDeltaTime* desealerationSpeed;
         }
     }
+    
+    
 }

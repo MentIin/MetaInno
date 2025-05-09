@@ -2,6 +2,7 @@ using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Tools;
 using FishNet.Object;
 using System.Collections.Generic;
+using CodeBase.Logic.Camera.CameraLogic;
 using CodeBase.Logic.Characters;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ public class PlayerController : NetworkBehaviour
     {
         _controller = GetComponent<CharacterController>();
         _inputService = new MockInputService();
+
         ConstructCharacters();
     }
 
@@ -41,33 +43,30 @@ public class PlayerController : NetworkBehaviour
         
         if (!base.IsOwner)
         {
-            this.enabled = false;
-            _currentCharacter.enabled = false;
-            foreach (CharacterBase character in _characters)
-            {
-                character.enabled = false;
-            }
+            //this.enabled = false;
             return;
         }
         else
         {
-            SetCurrentCharacterIndex(0);
+            SetCurrentCharacterIndexServer(0);
         }
         
     }
 
     private void Update()
     {
+        if (!base.IsOwner) return;
+        
         if (_clientAuth)
         {
-            if (_inputService.ActionKeyDown())
+            /*if (_inputService.ActionKeyDown())
                 _currentCharacter.ActionStart();
 
             if (_inputService.ActionKeyUp())
                 _currentCharacter.ActionStop();
 
             if (_inputService.CharacterChangePressed())
-                ChangeCharacter();
+                ChangeCharacter();*/
         } 
         else
         {
@@ -81,15 +80,59 @@ public class PlayerController : NetworkBehaviour
                 ChangeCharacterRPC();
         }
         
-        MoveCamera();
+        
+    }
+    private void FixedUpdate()
+    {
+        if (!IsClientInitialized)
+            return;
+        if (!base.IsOwner) return;
+
+        if (_clientAuth)
+            MoveCurrent(_inputService.GetAxis());
+        else
+        {
+            Vector3 cameraForward = Camera.main.transform.forward;
+            Vector3 cameraRight = Camera.main.transform.right;
+
+            cameraForward.y = 0; // Ignore vertical component
+            cameraRight.y = 0;   // Ignore vertical component
+
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+
+            if (_currentCharacter.Data.moveAccordingToCamera)
+            {
+                Vector3 direction = cameraForward * _inputService.GetAxis().y + cameraRight * _inputService.GetAxis().x;
+            
+                //MoveCurrent(new Vector2(direction.x, direction.z));
+                MoveCurrentCharacterRPC(new Vector2(direction.x, direction.z));
+                
+            }
+            else
+            {
+                //MoveCurrent(_inputService.GetAxis());
+                MoveCurrentCharacterRPC(_inputService.GetAxis());
+            }
+            
+            
+        }
+            
+        
+        MoveCamera(_inputService.GetAxis());
     }
 
-    private void MoveCamera()
+    private void MoveCamera(Vector2 inputAxis)
     {
-        Camera.main.transform.position = _currentCharacter.transform.position + new Vector3(0, 3, 0) +
-                                         new Vector3(cameraRotation.x, 0f,  cameraRotation.y) * -5;
+        if (inputAxis.sqrMagnitude != 0)
+        {
+            cameraRotation = Vector2.Lerp(cameraRotation, new Vector2(transform.forward.x, transform.forward.z), 0.04f);
+            cameraRotation = cameraRotation.normalized;
+        }
+        Camera.main.GetComponent<CameraController>().SetTargetPosition(_currentCharacter.transform.position + new Vector3(0, 3, 0) +
+                                         new Vector3(cameraRotation.x, 0f,  cameraRotation.y) * -5);
         
-        Camera.main.transform.LookAt(_currentCharacter.transform.position + new Vector3(0, 1.5f, 0));
+        Camera.main.GetComponent<CameraController>().SetTargetLookAt(_currentCharacter.transform.position + new Vector3(0, 1.5f, 0));
     }
 
     private void ChangeCharacter()
@@ -99,12 +142,16 @@ public class PlayerController : NetworkBehaviour
         _currentCharacter.OnCharacterUnequipped();
 
         _currentCharacter = _characters[nextIndex];
-        SetCurrentCharacterIndex(nextIndex);
         
         // I think extension method is unnesasery
         _controller.ImportData(_currentCharacter.Data);
 
         _currentCharacter.OnCharacterEquipped();
+        
+        
+        
+        _currentIndexInList = nextIndex;
+        SetCurrentCharacterIndexObserversRpc(_currentIndexInList);
     }
 
     
@@ -115,52 +162,46 @@ public class PlayerController : NetworkBehaviour
         ChangeCharacter();
     }
 
-    private void FixedUpdate()
-    {
-        if (!IsClientInitialized)
-            return;
+    
 
-        if (_clientAuth)
-            MoveCurrent();
-        else
-            MoveCurrentCharacterRPC();
-    }
-
-    [ServerRpc]
-    private void MoveCurrentCharacterRPC()
+    [ServerRpc(RequireOwnership = true)]
+    private void MoveCurrentCharacterRPC(Vector2 inputAxis)
     {
-        MoveCurrent();
+        MoveCurrent(inputAxis);
     }
     
     
     [ServerRpc]
+    private void SetCurrentCharacterIndexServer(int index)
+    {
+        SetCurrentCharacterIndex(index);
+    }
+
     private void SetCurrentCharacterIndex(int index)
     {
         _currentIndexInList = index;
         SetCurrentCharacterIndexObserversRpc(index);
     }
-    
+
     [ObserversRpc]
     private void SetCurrentCharacterIndexObserversRpc(int i)
     {
         _currentIndexInList = i;
+        _currentCharacter = _characters[i];
         
         
         int index = 0;
         foreach (var VARIABLE in _characters)
         {
-            foreach (var meshRenderer in VARIABLE.gameObject.GetComponentsInChildren<MeshRenderer>(true))
+            if (index == _currentIndexInList)
             {
-                if (index == _currentIndexInList)
-                {
-                    meshRenderer.enabled = true;
-                }
-                else
-                {
-                    meshRenderer.enabled = false;
-                }
+                VARIABLE.OnCharacterEquipped();
             }
-
+            else
+            {
+                VARIABLE.OnCharacterUnequipped();
+            }
+            
             index++;
         }
         
@@ -168,35 +209,9 @@ public class PlayerController : NetworkBehaviour
     
     
 
-    private void MoveCurrent()
+    private void MoveCurrent(Vector2 inputAxis)
     {
-        Vector2 inputAxis = _inputService.GetAxis();
-        if (inputAxis.sqrMagnitude != 0)
-        {
-            cameraRotation = Vector2.Lerp(cameraRotation, new Vector2(transform.forward.x, transform.forward.z), 0.04f);
-            cameraRotation = cameraRotation.normalized;
-        }
-        
-        Vector3 cameraForward = Camera.main.transform.forward;
-        Vector3 cameraRight = Camera.main.transform.right;
-
-        cameraForward.y = 0; // Ignore vertical component
-        cameraRight.y = 0;   // Ignore vertical component
-
-        cameraForward.Normalize();
-        cameraRight.Normalize();
-
-        if (_currentCharacter.Data.moveAccordingToCamera)
-        {
-            Vector3 direction = cameraForward * inputAxis.y + cameraRight * inputAxis.x;
-            
-            _currentCharacter.Move(new Vector2(direction.x, direction.z));
-        }
-        else
-        {
-            _currentCharacter.Move(inputAxis);
-        }
-       
+        _currentCharacter.Move(inputAxis);
     }
 
 

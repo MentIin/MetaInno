@@ -28,9 +28,6 @@ namespace CodeBase.Logic.Characters.Visual
                     Quaternion.Euler(0, 0, 0), Time.deltaTime * 10);
             }
             
-            
-            
-
         }
 
         public void SetParticlesActivity(bool boostReady, bool boostActive, bool grounded)
