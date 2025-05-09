@@ -12,6 +12,7 @@ namespace CodeBase.Logic.Characters
         
         private List<ExternalForce> _externalForces = new List<ExternalForce>();
         
+        [ServerRpc]
         public void Bounce(Vector3 hitInfoNormal, float speed)
         {
             
@@ -31,6 +32,16 @@ namespace CodeBase.Logic.Characters
             
             //TODO optimize
             _externalForces.RemoveAll(x => x.IsFinished);
+            
+            
+            SetTotalForceClient(ExternalForce);
+        }
+        
+        
+        [ObserversRpc]
+        private void SetTotalForceClient(Vector3 force)
+        {
+            ExternalForce = force;
         }
     }
     
