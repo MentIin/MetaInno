@@ -28,7 +28,7 @@ namespace CodeBase.Logic.Characters.Visual
             
             
             
-            HandleTrails(grounded);
+            HandleTrails(grounded, drifting);
             if (boostReady)
             {
                 if (!BoostReadyParticles.isPlaying) BoostReadyParticles.Play();
@@ -47,12 +47,12 @@ namespace CodeBase.Logic.Characters.Visual
             }
         }
 
-        private void HandleTrails(bool grounded)
+        private void HandleTrails(bool grounded, bool drifting)
         {
             
             foreach (var trailRenderer in LineRenderersContainer.GetComponentsInChildren<TrailRenderer>())
             {
-                trailRenderer.emitting = RoverCharacter.IsDrifting && grounded;
+                trailRenderer.emitting = drifting && grounded;
             }
         }
     }
