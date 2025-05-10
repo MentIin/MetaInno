@@ -45,10 +45,13 @@ public class PlayerController : NetworkBehaviour
         if (base.IsOwner)
         {
             SetCurrentCharacterIndexServer(0);
+
+            Camera.main.gameObject.GetComponent<CameraController>().Construct(transform, _inputService);
         }
         
     }
 
+    
 
     private void Update()
     {
@@ -125,8 +128,14 @@ public class PlayerController : NetworkBehaviour
             }
             
             
-        MoveCamera(_inputService.GetAxis());
+        
     }
+
+    private void LateUpdate()
+    {
+        if (IsOwner) MoveCamera(_inputService.GetAxis());
+    }
+
 
     private void MoveCamera(Vector2 inputAxis)
     {
@@ -135,12 +144,12 @@ public class PlayerController : NetworkBehaviour
             cameraRotation = Vector2.Lerp(cameraRotation, new Vector2(transform.forward.x, transform.forward.z), 0.04f);
             cameraRotation = cameraRotation.normalized;
         }
-        Camera.main.GetComponent<CameraController>().SetTargetPosition(_currentCharacter.transform.position + new Vector3(0, 3, 0) +
-                                         new Vector3(cameraRotation.x, 0f,  cameraRotation.y) * -5);
+        Camera.main.transform.position = (_currentCharacter.transform.position + new Vector3(0, 3, 0) +
+                                                                       new Vector3(cameraRotation.x, 0f,  cameraRotation.y) * -5);
         
-        Camera.main.GetComponent<CameraController>().SetTargetLookAt(_currentCharacter.transform.position + new Vector3(0, 1.5f, 0));
+        Camera.main.transform.LookAt(_currentCharacter.transform.position + new Vector3(0, 1.5f, 0));
     }
-
+    
     private void ChangeCharacter()
     {
         int nextIndex = _currentIndexInList == _characters.Count - 1 ? 0 : _currentIndexInList + 1;

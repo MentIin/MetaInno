@@ -22,10 +22,15 @@ namespace CodeBase.Logic.Characters.Visual
         }
 
 
-        private void LateUpdate()
+        private void Update()
         {
-            transform.position = Vector3.Lerp(transform.position, _parent.position, 0.9f);
-            transform.rotation = Quaternion.Slerp(transform.rotation, _parent.rotation, 0.9f);
+            if (transform == null)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+            transform.position = Vector3.Lerp(transform.position, _parent.position, 0.3f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, _parent.rotation, 0.3f);
         }
     }
 }
