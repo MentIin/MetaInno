@@ -11,6 +11,9 @@ namespace CodeBase.Logic.Characters
 
         
         private List<ExternalForce> _externalForces = new List<ExternalForce>();
+
+
+        private bool _zero = false;
         
         [ServerRpc(RequireOwnership = false)]
         public void Bounce(Vector3 hitInfoNormal, float speed)
@@ -40,8 +43,26 @@ namespace CodeBase.Logic.Characters
             
             //TODO optimize
             _externalForces.RemoveAll(x => x.IsFinished);
+
+            if (ExternalForce.sqrMagnitude == 0 && !_zero)
+            {
+                _zero = true;
+                SetTotalForceClient(ExternalForce);
+            }
+            else
+            {
+                if (ExternalForce.sqrMagnitude == 0)
+                {
+                    // nothing
+                }
+                else
+                {
+                    _zero = false;
+                    SetTotalForceClient(ExternalForce);
+                }
+                
+            }
             
-            SetTotalForceClient(ExternalForce);
         }
         
         

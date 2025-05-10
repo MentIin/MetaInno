@@ -1366,7 +1366,7 @@ MonoBehaviour:
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
   NetworkObserver: {fileID: 0}
-  _enablePrediction: 0
+  _enablePrediction: 1
   _predictionType: 0
   _graphicalObject: {fileID: 0}
   _detachGraphicalObject: 0
@@ -7428,6 +7428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5601886263960891991}
   - component: {fileID: 459780572133222130}
+  - component: {fileID: 3955061672500140002}
   m_Layer: 6
   m_Name: Characters
   m_TagString: Untagged
@@ -7468,6 +7469,18 @@ MonoBehaviour:
   _componentIndexCache: 3
   _addedNetworkObject: {fileID: 6202074664125517796}
   _networkObjectCache: {fileID: 6202074664125517796}
+--- !u!114 &3955061672500140002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449940873208497941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693b25efc56b4eb091a05ed0db99183d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8728927569692984195
 GameObject:
   m_ObjectHideFlags: 0

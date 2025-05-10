@@ -145,7 +145,7 @@ public class RoverCharacter : CharacterBase
 
     private void HandleBounce(Vector3 moveVector)
     {
-        if (!_drift && _driftBoost + _currentMoveSpeed < _moveSpeed) return;
+        if (!_drift && _driftBoost + _currentMoveSpeed < _moveSpeed / 2) return;
         
         
         int c = Physics.SphereCastNonAlloc(_controller.center + _controller.transform.position, _controller.radius * 0.8f,
