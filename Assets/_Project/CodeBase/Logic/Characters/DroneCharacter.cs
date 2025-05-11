@@ -109,7 +109,7 @@ public class DroneCharacter : CharacterBase
                 if (hits[i].transform.gameObject.CompareTag("Player"))
                 {
                     
-                    Debug.Log("Bounce player" + hits[i].transform.gameObject.GetComponent<ExternalForceController>().ExternalForce);
+                    Debug.Log("BounceRPC player" + hits[i].transform.gameObject.GetComponent<ExternalForceController>().ExternalForce);
                     if (hits[i].transform.gameObject.GetComponent<PlayerController>().CurrentCharacter is
                             InnikCharacter ||
                         hits[i].transform.gameObject.GetComponent<PlayerController>().CurrentCharacter is
@@ -118,11 +118,11 @@ public class DroneCharacter : CharacterBase
 
                         return;
                     }
-                    hits[i].transform.gameObject.GetComponent<ExternalForceController>().Bounce(-hits[i].normal, force);
+                    hits[i].transform.gameObject.GetComponent<ExternalForceController>().BounceRPC(-hits[i].normal, force);
                 }
                 else
                 {
-                    _externalForceController.Bounce(hits[i].normal * 2f, _horizontalVelocity.magnitude);
+                    _externalForceController.BounceRPC(hits[i].normal * 2f, _horizontalVelocity.magnitude);
                     _horizontalVelocity = new Vector3();
                 }
             }

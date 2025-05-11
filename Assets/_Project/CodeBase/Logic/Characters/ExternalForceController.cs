@@ -16,10 +16,20 @@ namespace CodeBase.Logic.Characters
         private bool _zero = false;
         
         [ServerRpc(RequireOwnership = false)]
-        public void Bounce(Vector3 hitInfoNormal, float speed)
+        public void BounceRPC(Vector3 hitInfoNormal, float speed)
         {
-            
-            
+            BounceClients(hitInfoNormal, speed);
+        }
+        
+        [ObserversRpc]
+        private void BounceClients(Vector3 hitInfoNormal, float speed)
+        {
+            BounceLocal(hitInfoNormal, speed);
+        }
+        
+        
+        public void BounceLocal(Vector3 hitInfoNormal, float speed)
+        {
             if (ExternalForce.magnitude > 0)
             {
                 return;
@@ -75,22 +85,22 @@ namespace CodeBase.Logic.Characters
     
     internal class ExternalForce
     {
-        public Vector3 Force;
+        public Vector3 Force => _force * (_timeLeft / Duration);
         public float Duration;
-        
+
+        public Vector3 _force;
         public bool IsFinished => _timeLeft <= 0;
         private float _timeLeft;
         
         public ExternalForce(Vector3 force, float duration)
         {
-            Force = force;
+            _force = force;
             Duration = duration;
             _timeLeft = duration;
         }
 
         public void Tick(float delta)
         {
-            Force *= 0.96f;
             _timeLeft -= delta;
         }
     }

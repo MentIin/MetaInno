@@ -145,7 +145,7 @@ public class RoverCharacter : CharacterBase
 
     private void HandleBounce(Vector3 moveVector)
     {
-        if (!_drift && _driftBoost + _currentMoveSpeed < _moveSpeed / 2) return;
+        if (!_drift && _driftBoost + _currentMoveSpeed < _moveSpeed ) return;
         
         
         int c = Physics.SphereCastNonAlloc(_controller.center + _controller.transform.position, _controller.radius * 0.8f,
@@ -156,12 +156,12 @@ public class RoverCharacter : CharacterBase
             if (hits[i].transform == _controller.transform) continue;
             
 
-            float force = Mathf.Max(_minimumBoost, _driftBoost + _currentMoveSpeed);
+            float force = Mathf.Max(_minimumBoost / 2f, _driftBoost + _currentMoveSpeed);
 
             if (hits[i].transform.gameObject.CompareTag("Player"))
             {
-                hits[i].transform.gameObject.GetComponent<ExternalForceController>().Bounce(-hits[i].normal, force);
-                Debug.Log("Bounce player" + hits[i].transform.gameObject.GetComponent<ExternalForceController>().ExternalForce);
+                hits[i].transform.gameObject.GetComponent<ExternalForceController>().BounceRPC(-hits[i].normal, force);
+                Debug.Log("BounceRPC player" + hits[i].transform.gameObject.GetComponent<ExternalForceController>().ExternalForce);
                 if (hits[i].transform.gameObject.GetComponent<PlayerController>().CurrentCharacter is
                         InnikCharacter ||
                     hits[i].transform.gameObject.GetComponent<PlayerController>().CurrentCharacter is
@@ -171,13 +171,12 @@ public class RoverCharacter : CharacterBase
                     return;
                 }
             }
-            else
-            {
-                _currentMoveSpeed = 0f;
-                _driftBoost = 0f;
-                _readyDriftBoost = 0f;
-                _externalForceController.Bounce(hits[i].normal * 2f, _driftBoost + _moveSpeed);
-            }
+
+            _currentMoveSpeed = 0f;
+            _driftBoost = 0f;
+            _readyDriftBoost = 0f;
+            _externalForceController.BounceRPC(hits[i].normal * 2f, _driftBoost + _moveSpeed);
+
 
                 
         }
