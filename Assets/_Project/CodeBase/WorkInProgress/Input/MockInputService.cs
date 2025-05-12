@@ -8,7 +8,7 @@ public class MockInputService : IInputService
     private const string Horizontal = "Horizontal";
     private const string Vertical = "Vertical";
     private const KeyCode SpecialActionKey = KeyCode.Space;
-    private const KeyCode CharacterChangeKey = KeyCode.E;
+    private const KeyCode CharacterChangeKey = KeyCode.R;
 
     public MockInputService()
     {
