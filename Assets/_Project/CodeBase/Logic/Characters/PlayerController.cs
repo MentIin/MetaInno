@@ -24,6 +24,10 @@ public class PlayerController : NetworkBehaviour
 
     private Vector2 cameraRotation;
     public CharacterBase CurrentCharacter { get => _currentCharacter;}
+    
+    public Action CurrentCharacterChanged;
+    
+    
 
     private void Awake()
     {
@@ -201,6 +205,9 @@ public class PlayerController : NetworkBehaviour
     [ObserversRpc(BufferLast = true)]
     private void SetCurrentCharacterIndexObserversRpc(int i)
     {
+        
+        CurrentCharacterChanged?.Invoke();
+        
         _currentIndexInList = i;
         _currentCharacter = _characters[i];
         
