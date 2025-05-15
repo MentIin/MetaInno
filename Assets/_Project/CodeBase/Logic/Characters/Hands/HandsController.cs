@@ -9,8 +9,8 @@ namespace CodeBase.Logic.Characters.Hands
         private Transform _hand2;
         
         private Vector3 _hand1TargetPosition;
-        
         private Vector3 _hand2TargetPosition;
+
         
         private LayerMask _mask;
         
@@ -52,6 +52,11 @@ namespace CodeBase.Logic.Characters.Hands
 
         public void DeactivateHands()
         {
+            if (_currentGrabbable != null)
+            {
+                _currentGrabbable.Ungrab();
+                _currentGrabbable = null;
+            }
             _handsState = HandsState.Deactivated;
             foreach (var keyValuePair in _grabbables)
             {
@@ -77,9 +82,29 @@ namespace CodeBase.Logic.Characters.Hands
                 if (_hits[0].TryGetComponent<Grabbable>(out _currentGrabbable))
                 {
                     Debug.Log("DETECTED GRABBABLE");
+                    if (_handsState != HandsState.Grabbing)
+                    {
+                        _hand1TargetPosition = _currentGrabbable.GetGrabPoint(_hand1);
+                        _hand2TargetPosition = _currentGrabbable.GetGrabPoint(_hand2);
+                    }
                     _handsState = HandsState.Grabbing;
-                    _hand1TargetPosition = _currentGrabbable.GetGrabPoint(_hand1);
-                    _hand2TargetPosition = _currentGrabbable.GetGrabPoint(_hand2);
+                    
+                    
+                    if ((_hand1.position - _hand1TargetPosition).sqrMagnitude < 0.05f)
+                    {
+                        //_handsState = HandsState.Grabbed;
+                        _currentGrabbable.Grab(_hand1);
+
+                        // y ok
+                        _hand1TargetPosition.y = -_currentGrabbable.transform.position.y + _innikTransform.position.y + 1.7f;
+                        _hand2TargetPosition.y = -_currentGrabbable.transform.position.y + _innikTransform.position.y + 1.7f;
+                        
+                        
+                        Vector3 targetMidpoint = Vector3.Lerp(_hand1TargetPosition, _hand2TargetPosition, 0.5f);
+                        
+                        HandleX(targetMidpoint);
+                        HandleZ(targetMidpoint);
+                    }
                 }else
                 {
                     _handsState = HandsState.Activated;
@@ -96,9 +121,53 @@ namespace CodeBase.Logic.Characters.Hands
                 {
                     SetActivePosition();
                 }
+                if (_handsState != HandsState.Grabbing)
+                {
+                    _currentGrabbable.Ungrab();
+                }
             }
-            
+        }
 
+        private void HandleZ(Vector3 targetMidpoint)
+        {
+            float currentDistance = (targetMidpoint - _innikTransform.position).magnitude; // Текущая дистанция цели от игрока
+            float desiredDistance = 1.1f; // *** Ваше желаемое расстояние удержания! Убедитесь, что оно совпадает с тем, что вы используете для расчета базовой цели в состоянии Grabbing! ***
+            float forwardBackwardSpeed = 5f; // Скорость приближения/отдаления целей (можете настроить)
+            float distanceThreshold = 0.05f; // Порог для дистанции, чтобы избежать дрожания у цели (можете настроить)
+
+            if (currentDistance > desiredDistance + distanceThreshold)
+            {
+                Vector3 moveVector = _innikTransform.forward * forwardBackwardSpeed * Time.fixedDeltaTime; // Используем Time.fixedDeltaTime
+                _hand1TargetPosition -= moveVector;
+                _hand2TargetPosition -= moveVector;
+            }
+            else if (currentDistance < desiredDistance - distanceThreshold)
+            {
+                Vector3 moveVector = _innikTransform.forward * forwardBackwardSpeed * Time.fixedDeltaTime;
+                _hand1TargetPosition += moveVector;
+                _hand2TargetPosition += moveVector;
+            }
+        }
+
+        private void HandleX(Vector3 targetMidpoint)
+        {
+            Vector3 directionToTarget = targetMidpoint - _innikTransform.position;
+            float dotRight = Vector3.Dot(directionToTarget, _innikTransform.right);
+            float moveSpeed = 5f; 
+            float threshold = 0.1f;
+                        
+            if (dotRight < threshold)
+            {
+                Vector3 moveVector = _innikTransform.right * moveSpeed * Time.fixedDeltaTime;
+                _hand1TargetPosition += moveVector;
+                _hand2TargetPosition += moveVector;
+            }
+            else if (dotRight > -threshold)
+            {
+                Vector3 moveVector = _innikTransform.right * moveSpeed * Time.fixedDeltaTime;
+                _hand1TargetPosition -= moveVector;
+                _hand2TargetPosition -= moveVector;
+            }
         }
 
         private void CheckHand(Transform hand)
@@ -122,8 +191,8 @@ namespace CodeBase.Logic.Characters.Hands
         {
             
 
-            _hand1.position = Vector3.Lerp(_hand1.position, _hand1TargetPosition, 0.1f);
-            _hand2.position = Vector3.Lerp(_hand2.position, _hand2TargetPosition, 0.1f);
+            _hand1.position = Vector3.Lerp(_hand1.position, _hand1TargetPosition, 0.2f);
+            _hand2.position = Vector3.Lerp(_hand2.position, _hand2TargetPosition, 0.2f);
 
             if (_handsState == HandsState.Deactivated)
             {
@@ -138,6 +207,13 @@ namespace CodeBase.Logic.Characters.Hands
             if (_handsState == HandsState.Activated || _handsState == HandsState.Grabbing)
             {
                 Check();
+            }
+
+
+            if (_handsState == HandsState.Grabbing)
+            {
+                _currentGrabbable.transform.rotation = Quaternion.Slerp(_currentGrabbable.transform.rotation,
+                    _hand1.rotation, 0.1f);
             }
         }
     }

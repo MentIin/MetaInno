@@ -32,7 +32,14 @@ namespace CodeBase.Logic.Characters.Visual
                 return;
             }
 
-            gameObject.SetActive(transform.gameObject.activeInHierarchy);
+            if (!_parent.gameObject.activeInHierarchy)
+            {
+                transform.parent = _parent;
+            }
+            else
+            {
+                transform.parent = null;
+            }
             
             
             if (SyncPosition) transform.position = Vector3.Lerp(transform.position, _parent.position, 0.3f);

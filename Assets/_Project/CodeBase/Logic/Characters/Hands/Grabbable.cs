@@ -15,13 +15,18 @@ namespace CodeBase.Logic.Characters.Hands
             Vector3 pos;
 
             pos = hand1.position - transform.position;
-            pos = pos.normalized * 0.7f;
+            pos = pos.normalized * 0.6f;
             pos = transform.position + pos;
 
             pos.y = transform.position.y - 0.1f;
 
 
             return pos;
+        }
+
+        public void Ungrab()
+        {
+            transform.parent = null;
         }
     }
 }
