@@ -10,12 +10,13 @@ namespace CodeBase.Logic.Characters.Hands
         
         private Vector3 _hand1TargetPosition;
         private Vector3 _hand2TargetPosition;
-
+        
+        private Quaternion _hand1TargetRotation;
+        private Quaternion _hand2TargetRotation;
+        
         
         private LayerMask _mask;
-        
         private Dictionary<Transform, Grabbable> _grabbables = new Dictionary<Transform, Grabbable>();
-        
         private Collider[] _hits = new Collider[3];
         
         
@@ -32,7 +33,6 @@ namespace CodeBase.Logic.Characters.Hands
             _hand1 = hand1;
             _hand2 = hand2;
 
-
             DeactivateHands();
         }
 
@@ -43,10 +43,22 @@ namespace CodeBase.Logic.Characters.Hands
             _handsState = HandsState.Activated;
             //_hand1.localPosition = new Vector3(0.5f, 0.2f, .9f);
             //_hand2.localPosition = new Vector3(-0.5f, 0.2f, .9f);
-            _hand1TargetPosition = _innikTransform.position + new Vector3(0f, 0.2f, 0f) +
-                                   _innikTransform.forward * 0.9f + _innikTransform.right * 0.5f;
-            _hand2TargetPosition = _innikTransform.position + new Vector3(0f, 0.2f, 0f) +
-                                   _innikTransform.forward * 0.9f + _innikTransform.right * -0.5f;
+            
+            
+            /*_hand1TargetPosition = _innikTransform.position + new Vector3(0f, 0.2f, 0f) +
+                                   _innikTransform.forward * 0.9f + _innikTransform.right * 0.5f;*/
+            
+            
+            
+            _hand1TargetPosition = new Vector3(-0.5f, 0.2f, 0.9f);
+            
+            
+            _hand2TargetPosition = new Vector3(0.5f, 0.2f, 0.9f);
+        }
+
+        private Vector3 FromLocalToWorld(Vector3 vector3)
+        {
+            return _innikTransform.TransformPoint(vector3);
         }
 
 
@@ -65,9 +77,9 @@ namespace CodeBase.Logic.Characters.Hands
             _grabbables.Clear();
             
             // since there are only 1 character we can hardcode the hands positions
-            
-            _hand1TargetPosition = _innikTransform.position + new Vector3(0f, -0.3f, 0f) + _innikTransform.right * 0.5f;
-            _hand2TargetPosition = _innikTransform.position + new Vector3(0f, -0.3f, 0f) + _innikTransform.right * -0.5f;
+
+            _hand1TargetPosition = new Vector3(-0.5f, -.7f, 0.5f);
+            _hand2TargetPosition = new Vector3(0.5f, -.7f, 0.5f);
         }
 
 
@@ -75,35 +87,41 @@ namespace CodeBase.Logic.Characters.Hands
         {
             //CheckHand(_hand1);
             //CheckHand(_hand2);
-
             Vector3 pos = Vector3.Lerp(_hand1.position, _hand2.position, 0.5f);
             if (Physics.OverlapSphereNonAlloc(pos, 1f, _hits, _mask) != 0)
             {
                 if (_hits[0].TryGetComponent<Grabbable>(out _currentGrabbable))
                 {
-                    Debug.Log("DETECTED GRABBABLE");
+                    
                     if (_handsState != HandsState.Grabbing)
                     {
                         _hand1TargetPosition = _currentGrabbable.GetGrabPoint(_hand1);
+                        _hand1TargetPosition = _innikTransform.InverseTransformPoint(_hand1TargetPosition);
                         _hand2TargetPosition = _currentGrabbable.GetGrabPoint(_hand2);
+                        _hand2TargetPosition = _innikTransform.InverseTransformPoint(_hand2TargetPosition);
                     }
                     _handsState = HandsState.Grabbing;
                     
                     
-                    if ((_hand1.position - _hand1TargetPosition).sqrMagnitude < 0.05f)
+                    
+                    Debug.Log((_hand1.localPosition - _hand1TargetPosition).sqrMagnitude);
+                    
+                    Debug.Log(_hand1TargetPosition+"  " + _innikTransform.InverseTransformPoint(_hand1.position));
+                    if ((_innikTransform.InverseTransformPoint(_hand1.position) - _hand1TargetPosition).sqrMagnitude < 0.05f)
                     {
+                        Debug.Log("DETECTED GRABBABLE");
                         //_handsState = HandsState.Grabbed;
                         _currentGrabbable.Grab(_hand1);
 
                         // y ok
-                        _hand1TargetPosition.y = -_currentGrabbable.transform.position.y + _innikTransform.position.y + 1.7f;
-                        _hand2TargetPosition.y = -_currentGrabbable.transform.position.y + _innikTransform.position.y + 1.7f;
+                        //_hand1TargetPosition.y = -_currentGrabbable.transform.position.y + _innikTransform.position.y + 1.7f;
+                        //_hand2TargetPosition.y = -_currentGrabbable.transform.position.y + _innikTransform.position.y + 1.7f;
                         
                         
                         Vector3 targetMidpoint = Vector3.Lerp(_hand1TargetPosition, _hand2TargetPosition, 0.5f);
                         
-                        HandleX(targetMidpoint);
-                        HandleZ(targetMidpoint);
+                        //HandleX(targetMidpoint);
+                        //HandleZ(targetMidpoint);
                     }
                 }else
                 {
@@ -191,8 +209,11 @@ namespace CodeBase.Logic.Characters.Hands
         {
             
 
-            _hand1.position = Vector3.Lerp(_hand1.position, _hand1TargetPosition, 0.2f);
-            _hand2.position = Vector3.Lerp(_hand2.position, _hand2TargetPosition, 0.2f);
+            _hand1.position = Vector3.Lerp(_hand1.position, FromLocalToWorld(_hand1TargetPosition), 0.4f);
+            _hand2.position = Vector3.Lerp(_hand2.position, FromLocalToWorld(_hand2TargetPosition), 0.4f);
+
+            _hand1.rotation = _innikTransform.rotation;
+            _hand2.rotation = _innikTransform.rotation;
 
             if (_handsState == HandsState.Deactivated)
             {
@@ -212,8 +233,8 @@ namespace CodeBase.Logic.Characters.Hands
 
             if (_handsState == HandsState.Grabbing)
             {
-                _currentGrabbable.transform.rotation = Quaternion.Slerp(_currentGrabbable.transform.rotation,
-                    _hand1.rotation, 0.1f);
+                //_currentGrabbable.transform.rotation = Quaternion.Slerp(_currentGrabbable.transform.rotation,
+                //    _hand1.rotation, 0.1f);
             }
         }
     }
