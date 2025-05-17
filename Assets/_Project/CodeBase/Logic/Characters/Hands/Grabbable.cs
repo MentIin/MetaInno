@@ -5,9 +5,12 @@ namespace CodeBase.Logic.Characters.Hands
 {
     public class Grabbable : NetworkBehaviour
     {
+        
+        protected bool isGrabbed;
         public void Grab(Transform hand)
         {
             transform.SetParent(hand);
+            isGrabbed = true;
         }
 
         public Vector3 GetGrabPoint(Transform hand1)
@@ -23,6 +26,7 @@ namespace CodeBase.Logic.Characters.Hands
 
         public void Ungrab()
         {
+            isGrabbed = false;
             transform.parent = null;
         }
     }

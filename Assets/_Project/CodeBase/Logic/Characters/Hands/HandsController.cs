@@ -88,9 +88,11 @@ namespace CodeBase.Logic.Characters.Hands
             //CheckHand(_hand1);
             //CheckHand(_hand2);
             Vector3 pos = Vector3.Lerp(_hand1.position, _hand2.position, 0.5f);
-            if (Physics.OverlapSphereNonAlloc(pos, 1f, _hits, _mask) != 0)
+            
+            
+            if (_handsState == HandsState.Grabbing || Physics.OverlapSphereNonAlloc(pos, 1f, _hits, _mask) != 0)
             {
-                if (_hits[0].TryGetComponent<Grabbable>(out _currentGrabbable))
+                if (_handsState == HandsState.Grabbing || _hits[0].TryGetComponent<Grabbable>(out _currentGrabbable))
                 {
                     
                     if (_handsState != HandsState.Grabbing)
@@ -103,10 +105,6 @@ namespace CodeBase.Logic.Characters.Hands
                     _handsState = HandsState.Grabbing;
                     
                     
-                    
-                    Debug.Log((_hand1.localPosition - _hand1TargetPosition).sqrMagnitude);
-                    
-                    Debug.Log(_hand1TargetPosition+"  " + _innikTransform.InverseTransformPoint(_hand1.position));
                     if ((_innikTransform.InverseTransformPoint(_hand1.position) - _hand1TargetPosition).sqrMagnitude < 0.05f)
                     {
                         Debug.Log("DETECTED GRABBABLE");
@@ -118,8 +116,14 @@ namespace CodeBase.Logic.Characters.Hands
                         //_hand2TargetPosition.y = -_currentGrabbable.transform.position.y + _innikTransform.position.y + 1.7f;
                         
                         
-                        Vector3 targetMidpoint = Vector3.Lerp(_hand1TargetPosition, _hand2TargetPosition, 0.5f);
                         
+                        Vector3 targetMidpoint = Vector3.Lerp(_hand1TargetPosition, _hand2TargetPosition, 0.5f);
+
+                        if (_innikTransform.position.y +0.2f > _currentGrabbable.transform.position.y)
+                        {
+                            _hand1TargetPosition += Vector3.up * Time.fixedDeltaTime * 3;
+                            _hand2TargetPosition += Vector3.up * Time.fixedDeltaTime * 3;
+                        }
                         //HandleX(targetMidpoint);
                         //HandleZ(targetMidpoint);
                     }
@@ -135,7 +139,7 @@ namespace CodeBase.Logic.Characters.Hands
 
             if (_currentGrabbable != null)
             {
-                if ((_currentGrabbable.transform.position - _innikTransform.position).sqrMagnitude > _maxGrabDistance * _maxGrabDistance)
+                if ((_currentGrabbable.transform.position - _hand1.transform.position).sqrMagnitude > _maxGrabDistance * _maxGrabDistance)
                 {
                     SetActivePosition();
                 }
