@@ -13,7 +13,6 @@ namespace CodeBase.Logic.Characters.Hands.Objects
 
        private void FixedUpdate()
         {
-            Debug.Log(isGrabbed);
             if (isGrabbed)
             {
                 _boxCollider.enabled = false;

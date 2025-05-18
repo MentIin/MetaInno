@@ -200,7 +200,7 @@ namespace CodeBase.Logic.Characters.Hands
                 {
                     // TODO
                     
-                    grabbable.Grab(hand);
+                    //grabbable.GrabServerRpc(hand);
                     if (!_grabbables.ContainsKey(hand))
                     {
                         _grabbables.Add(hand, grabbable);
