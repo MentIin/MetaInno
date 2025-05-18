@@ -90,26 +90,31 @@ namespace CodeBase.Logic.Characters.Hands
             Vector3 pos = Vector3.Lerp(_hand1.position, _hand2.position, 0.5f);
             
             
-            if (_handsState == HandsState.Grabbing || Physics.OverlapSphereNonAlloc(pos, 1f, _hits, _mask) != 0)
+            if (_handsState == HandsState.Grabbed || _handsState == HandsState.Grabbing || Physics.OverlapSphereNonAlloc(pos, 1f, _hits, _mask) != 0)
             {
-                if (_handsState == HandsState.Grabbing || _hits[0].TryGetComponent<Grabbable>(out _currentGrabbable))
+                if (_handsState == HandsState.Grabbed || _handsState == HandsState.Grabbing || _hits[0].TryGetComponent<Grabbable>(out _currentGrabbable))
                 {
                     
-                    if (_handsState != HandsState.Grabbing)
+                    if (_handsState != HandsState.Grabbing && _handsState != HandsState.Grabbed)
                     {
-                        _hand1TargetPosition = _currentGrabbable.GetGrabPoint(_hand1);
-                        _hand1TargetPosition = _innikTransform.InverseTransformPoint(_hand1TargetPosition);
-                        _hand2TargetPosition = _currentGrabbable.GetGrabPoint(_hand2);
-                        _hand2TargetPosition = _innikTransform.InverseTransformPoint(_hand2TargetPosition);
+                        UpdateGrabblePoints();
+                        _handsState = HandsState.Grabbing;
                     }
-                    _handsState = HandsState.Grabbing;
+                    
                     
                     
                     if ((_innikTransform.InverseTransformPoint(_hand1.position) - _hand1TargetPosition).sqrMagnitude < 0.05f)
                     {
-                        Debug.Log("DETECTED GRABBABLE");
-                        //_handsState = HandsState.Grabbed;
-                        _currentGrabbable.Grab(_hand1);
+                        
+                        if (_handsState == HandsState.Grabbing)
+                        {
+                            UpdateGrabblePoints();
+                            _handsState = HandsState.Grabbed;
+                            _currentGrabbable.Grab(_hand1);
+                        }
+                        
+                        _handsState = HandsState.Grabbed;
+                        
 
                         // y ok
                         //_hand1TargetPosition.y = -_currentGrabbable.transform.position.y + _innikTransform.position.y + 1.7f;
@@ -143,11 +148,20 @@ namespace CodeBase.Logic.Characters.Hands
                 {
                     SetActivePosition();
                 }
-                if (_handsState != HandsState.Grabbing)
+                if (_handsState != HandsState.Grabbing && _handsState != HandsState.Grabbed)
                 {
+                    _handsState = HandsState.Activated;
                     _currentGrabbable.Ungrab();
                 }
             }
+        }
+
+        private void UpdateGrabblePoints()
+        {
+            _hand1TargetPosition = _currentGrabbable.GetGrabPoint(_hand1);
+            _hand1TargetPosition = _innikTransform.InverseTransformPoint(_hand1TargetPosition);
+            _hand2TargetPosition = _currentGrabbable.GetGrabPoint(_hand2);
+            _hand2TargetPosition = _innikTransform.InverseTransformPoint(_hand2TargetPosition);
         }
 
         private void HandleZ(Vector3 targetMidpoint)
@@ -229,16 +243,9 @@ namespace CodeBase.Logic.Characters.Hands
                 SetActivePosition();
             }
             
-            if (_handsState == HandsState.Activated || _handsState == HandsState.Grabbing)
+            if (_handsState == HandsState.Activated || _handsState == HandsState.Grabbing || _handsState == HandsState.Grabbed)
             {
                 Check();
-            }
-
-
-            if (_handsState == HandsState.Grabbing)
-            {
-                //_currentGrabbable.transform.rotation = Quaternion.Slerp(_currentGrabbable.transform.rotation,
-                //    _hand1.rotation, 0.1f);
             }
         }
     }
