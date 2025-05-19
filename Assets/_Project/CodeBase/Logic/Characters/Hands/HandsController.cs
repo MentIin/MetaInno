@@ -90,37 +90,33 @@ namespace CodeBase.Logic.Characters.Hands
             Vector3 pos = Vector3.Lerp(_hand1.position, _hand2.position, 0.5f);
             
             
-            if (_handsState == HandsState.Grabbed || _handsState == HandsState.Grabbing || Physics.OverlapSphereNonAlloc(pos, 1f, _hits, _mask) != 0)
+            if (_handsState == HandsState.Grabbed || _handsState == HandsState.Grabbing || Physics.OverlapSphereNonAlloc(pos, 0.7f, _hits, _mask) != 0)
             {
                 if (_handsState == HandsState.Grabbed || _handsState == HandsState.Grabbing || _hits[0].TryGetComponent<Grabbable>(out _currentGrabbable))
                 {
                     
                     if (_handsState != HandsState.Grabbing && _handsState != HandsState.Grabbed)
                     {
-                        UpdateGrabblePoints();
+                        UpdateGrabbablePoints();
                         _handsState = HandsState.Grabbing;
                     }
-                    
-                    
+
+                    if (_handsState == HandsState.Grabbing)
+                    {
+                        UpdateGrabbablePoints();
+                    }
                     
                     if ((_innikTransform.InverseTransformPoint(_hand1.position) - _hand1TargetPosition).sqrMagnitude < 0.05f)
                     {
                         
                         if (_handsState == HandsState.Grabbing)
                         {
-                            UpdateGrabblePoints();
+                            UpdateGrabbablePoints();
                             _handsState = HandsState.Grabbed;
                             _currentGrabbable.Grab(_hand1);
                         }
                         
                         _handsState = HandsState.Grabbed;
-                        
-
-                        // y ok
-                        //_hand1TargetPosition.y = -_currentGrabbable.transform.position.y + _innikTransform.position.y + 1.7f;
-                        //_hand2TargetPosition.y = -_currentGrabbable.transform.position.y + _innikTransform.position.y + 1.7f;
-                        
-                        
                         
                         Vector3 targetMidpoint = Vector3.Lerp(_hand1TargetPosition, _hand2TargetPosition, 0.5f);
 
@@ -129,7 +125,21 @@ namespace CodeBase.Logic.Characters.Hands
                             _hand1TargetPosition += Vector3.up * Time.fixedDeltaTime * 3;
                             _hand2TargetPosition += Vector3.up * Time.fixedDeltaTime * 3;
                         }
-                        //HandleX(targetMidpoint);
+                        
+                        // z
+                        float zDist = (_innikTransform.position - _currentGrabbable.transform.position).sqrMagnitude;
+                        if (zDist < 1.2f)
+                        {
+                            _hand1TargetPosition.z += Time.fixedDeltaTime * 3;
+                            _hand2TargetPosition.z += Time.fixedDeltaTime * 3;
+                        }
+                        else if (zDist > 1.3f) 
+                        {
+                            _hand1TargetPosition.z -= Time.fixedDeltaTime * 3;
+                            _hand2TargetPosition.z -= Time.fixedDeltaTime * 3;
+                        }
+                        
+                        HandleX(targetMidpoint);
                         //HandleZ(targetMidpoint);
                     }
                 }else
@@ -156,7 +166,7 @@ namespace CodeBase.Logic.Characters.Hands
             }
         }
 
-        private void UpdateGrabblePoints()
+        private void UpdateGrabbablePoints()
         {
             _hand1TargetPosition = _currentGrabbable.GetGrabPoint(_hand1);
             _hand1TargetPosition = _innikTransform.InverseTransformPoint(_hand1TargetPosition);
@@ -187,22 +197,15 @@ namespace CodeBase.Logic.Characters.Hands
 
         private void HandleX(Vector3 targetMidpoint)
         {
-            Vector3 directionToTarget = targetMidpoint - _innikTransform.position;
-            float dotRight = Vector3.Dot(directionToTarget, _innikTransform.right);
-            float moveSpeed = 5f; 
-            float threshold = 0.1f;
-                        
-            if (dotRight < threshold)
+            if (targetMidpoint.x > .2f)
             {
-                Vector3 moveVector = _innikTransform.right * moveSpeed * Time.fixedDeltaTime;
-                _hand1TargetPosition += moveVector;
-                _hand2TargetPosition += moveVector;
+                _hand1TargetPosition.x -= Time.fixedDeltaTime * 3;
+                _hand2TargetPosition.x -= Time.fixedDeltaTime * 3;
             }
-            else if (dotRight > -threshold)
+            else if (targetMidpoint.x < -.2f)
             {
-                Vector3 moveVector = _innikTransform.right * moveSpeed * Time.fixedDeltaTime;
-                _hand1TargetPosition -= moveVector;
-                _hand2TargetPosition -= moveVector;
+                _hand1TargetPosition.x += Time.fixedDeltaTime * 3;
+                _hand2TargetPosition.x += Time.fixedDeltaTime * 3;
             }
         }
 
