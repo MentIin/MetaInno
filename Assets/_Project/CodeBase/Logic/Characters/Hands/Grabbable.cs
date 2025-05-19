@@ -7,7 +7,7 @@ namespace CodeBase.Logic.Characters.Hands
     {
         protected bool isGrabbed;
         
-        
+        public bool IsGrabbed => isGrabbed;
         
         
         [ServerRpc(RequireOwnership = false)]
