@@ -6,7 +6,6 @@ public class MockInputService : IInputService
     private const string Horizontal = "Horizontal";
     private const string Vertical = "Vertical";
     private const KeyCode SpecialActionKey = KeyCode.Space;
-    private const KeyCode SecondaryActionKey = KeyCode.E;
     private const KeyCode CharacterChangeKey = KeyCode.R;
 
     public MockInputService()
@@ -32,16 +31,6 @@ public class MockInputService : IInputService
     public bool ActionKeyUp()
     {
         return SimpleInput.GetKeyUp(SpecialActionKey);
-    }
-
-    public bool SecondaryActionKeyDown()
-    {
-        return SimpleInput.GetKeyDown(SecondaryActionKey);
-    }
-
-    public bool SecondaryActionKeyUp()
-    {
-        return SimpleInput.GetKeyUp(SecondaryActionKey);
     }
 
     bool IInputService.CharacterChangePressed()

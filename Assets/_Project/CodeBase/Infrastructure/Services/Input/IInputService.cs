@@ -9,8 +9,6 @@ namespace CodeBase.Infrastructure.Services.Input
         Vector2 GetAxis();
         bool ActionKeyDown();
         bool ActionKeyUp();
-        bool SecondaryActionKeyDown();
-        bool SecondaryActionKeyUp();
         bool CharacterChangePressed();
         void ClearInput();
         void Initialize();

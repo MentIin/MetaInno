@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: New LevelLoggingConfiguration
   m_EditorClassIdentifier: 
   LoggingEnabled: 1
-  _developmentLogging: 0
-  _guiLogging: 0
-  _headlessLogging: 2
+  _developmentLogging: 3
+  _guiLogging: 2
+  _headlessLogging: 1

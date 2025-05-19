@@ -18,11 +18,7 @@ public abstract class CharacterBase : NetworkBehaviour
         _controller = controller;
         _parent = parent;
         _externalForceController = externalForceController;
-        
-        Initialize();
     }
-
-    public virtual void Initialize(){}
 
     public abstract void Move(Vector2 _inputAxis);
     public abstract void ActionStart();
@@ -52,7 +48,4 @@ public abstract class CharacterBase : NetworkBehaviour
             VARIABLE.enabled = false;
         }
     }
-
-    public abstract void SecondaryActionStart();
-    public abstract void SecondaryActionStop();
 }

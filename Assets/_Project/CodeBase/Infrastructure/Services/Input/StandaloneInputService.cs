@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.Input
@@ -37,16 +38,6 @@ namespace CodeBase.Infrastructure.Services.Input
         }
 
         public bool ActionKeyUp()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool SecondaryActionKeyDown()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool SecondaryActionKeyUp()
         {
             throw new NotImplementedException();
         }

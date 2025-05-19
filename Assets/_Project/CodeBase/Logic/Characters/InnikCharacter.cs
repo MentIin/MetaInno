@@ -1,15 +1,11 @@
 using CodeBase.Logic.Characters;
-using CodeBase.Logic.Characters.Hands;
 using UnityEngine;
 
 public class InnikCharacter : CharacterBase
 {
     
     [SerializeField] private LayerMask _bounceMask;
-    [SerializeField] private LayerMask _grabbableMask;
     
-    [SerializeField] private Transform _hand1;
-    [SerializeField] private Transform _hand2;
     
     private float gravity=-15f;
     private float _yVelocity=0f;
@@ -17,17 +13,10 @@ public class InnikCharacter : CharacterBase
     private float _jumpBuffer = 0.0f;
     private float _cayoutTime = 0.0f;
     private float _speed=4;
-
-    private HandsController _handsController;
+    
     
     private RaycastHit[] hits = new RaycastHit[4];
 
-
-    public override void Initialize()
-    {
-        _handsController = new HandsController(_hand1, _hand2, _grabbableMask, transform);
-        
-    }
 
     public override void ActionStart()
     {
@@ -43,20 +32,8 @@ public class InnikCharacter : CharacterBase
         }
     }
 
-    public override void SecondaryActionStart()
-    {
-        _handsController.SetActivePosition();
-    }
-
-    public override void SecondaryActionStop()
-    {
-        _handsController.DeactivateHands();
-    }
-    
-
     public override void Move(Vector2 _inputAxis)
     {
-        _handsController.Tick();
         JumpUpdate();
 
 

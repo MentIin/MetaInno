@@ -89,7 +89,6 @@ public class DroneCharacter : CharacterBase
 
         HandleBounce(moveVector);
     }
-
     private void HandleBounce(Vector3 moveVector)
     {
         if (moveVector.sqrMagnitude == 0) return;
@@ -128,14 +127,5 @@ public class DroneCharacter : CharacterBase
                 }
             }
         }
-    }
-
-    public override void SecondaryActionStart()
-    {
-        Debug.LogWarning("not implemented");
-    }
-    public override void SecondaryActionStop()
-    {
-        Debug.LogWarning("not implemented");
     }
 }
