@@ -92,7 +92,26 @@ namespace CodeBase.Logic.Characters.Hands
             
             if (_handsState == HandsState.Grabbed || _handsState == HandsState.Grabbing || Physics.OverlapSphereNonAlloc(pos, 0.7f, _hits, _mask) != 0)
             {
-                if (_handsState == HandsState.Grabbed || _handsState == HandsState.Grabbing || _hits[0].TryGetComponent<Grabbable>(out _currentGrabbable))
+                Collider collider = null;
+                foreach (var VARIABLE in _hits)
+                {
+                    if (VARIABLE == null) continue;
+                    
+                    
+                    if (VARIABLE.transform != _innikTransform.parent.parent)
+                    {
+                        Debug.Log(VARIABLE.transform.gameObject.name + "    " + _innikTransform.parent.parent.gameObject.name);
+                        collider = VARIABLE;
+                    }
+                }
+
+                bool isGrabbable = false;
+                if (collider)
+                {
+                    isGrabbable = collider.TryGetComponent<Grabbable>(out _currentGrabbable);
+                }
+                
+                if (_handsState == HandsState.Grabbed || _handsState == HandsState.Grabbing || isGrabbable)
                 {
                     
                     if (_handsState != HandsState.Grabbing && _handsState != HandsState.Grabbed)
@@ -142,7 +161,8 @@ namespace CodeBase.Logic.Characters.Hands
                         HandleX(targetMidpoint);
                         //HandleZ(targetMidpoint);
                     }
-                }else
+                }
+                else
                 {
                     _handsState = HandsState.Activated;
                 }

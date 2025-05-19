@@ -1,3 +1,4 @@
+using System;
 using CodeBase.Logic.Characters;
 using CodeBase.Logic.Characters.Hands;
 using UnityEngine;
@@ -52,11 +53,16 @@ public class InnikCharacter : CharacterBase
     {
         _handsController.DeactivateHands();
     }
-    
+
+    private void FixedUpdate()
+    {
+        _handsController.Tick();
+    }
+
 
     public override void Move(Vector2 _inputAxis)
     {
-        _handsController.Tick();
+        //_handsController.Tick();
         JumpUpdate();
 
 

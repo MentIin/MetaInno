@@ -103,48 +103,46 @@ public class PlayerController : NetworkBehaviour
         if (!IsClientInitialized)
             return;
         if (!base.IsOwner) return;
+        
+        
+        
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
 
+        cameraForward.y = 0; // Ignore vertical component
+        cameraRight.y = 0;   // Ignore vertical component
 
-            Vector3 cameraForward = Camera.main.transform.forward;
-            Vector3 cameraRight = Camera.main.transform.right;
+        cameraForward.Normalize();
+        cameraRight.Normalize();
 
-            cameraForward.y = 0; // Ignore vertical component
-            cameraRight.y = 0;   // Ignore vertical component
+        if (_currentCharacter.Data.moveAccordingToCamera)
+        {
+            Vector3 direction = cameraForward * _inputService.GetAxis().y + cameraRight * _inputService.GetAxis().x;
+        
+            //MoveCurrent(new Vector2(direction.x, direction.z));
 
-            cameraForward.Normalize();
-            cameraRight.Normalize();
-
-            if (_currentCharacter.Data.moveAccordingToCamera)
+            if (_clientAuth)
             {
-                Vector3 direction = cameraForward * _inputService.GetAxis().y + cameraRight * _inputService.GetAxis().x;
-            
-                //MoveCurrent(new Vector2(direction.x, direction.z));
-
-                if (_clientAuth)
-                {
-                    MoveCurrent(new Vector2(direction.x, direction.z));
-                }
-                else
-                {
-                    MoveCurrentCharacterRPC(new Vector2(direction.x, direction.z));
-                }
-                
-                
+                MoveCurrent(new Vector2(direction.x, direction.z));
             }
             else
             {
-                if (_clientAuth)
-                {
-                    MoveCurrent(_inputService.GetAxis());
-                }
-                else
-                {
-                    MoveCurrentCharacterRPC(_inputService.GetAxis());
-                }
+                MoveCurrentCharacterRPC(new Vector2(direction.x, direction.z));
             }
             
             
-        
+        }
+        else
+        {
+            if (_clientAuth)
+            {
+                MoveCurrent(_inputService.GetAxis());
+            }
+            else
+            {
+                MoveCurrentCharacterRPC(_inputService.GetAxis());
+            }
+        }
     }
 
     private void LateUpdate()

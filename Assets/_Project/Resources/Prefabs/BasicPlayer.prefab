@@ -1485,6 +1485,7 @@ GameObject:
   - component: {fileID: 4703985027393698982}
   - component: {fileID: 6202074664125517796}
   - component: {fileID: 8122636713827463770}
+  - component: {fileID: 1763033529563241304}
   m_Layer: 6
   m_Name: BasicPlayer
   m_TagString: Player
@@ -1673,6 +1674,22 @@ MonoBehaviour:
   _componentIndexCache: 2
   _addedNetworkObject: {fileID: 6202074664125517796}
   _networkObjectCache: {fileID: 6202074664125517796}
+--- !u!114 &1763033529563241304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047539034845683087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e074b873c384a12960ffe92474b9547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 6202074664125517796}
+  _networkObjectCache: {fileID: 0}
+  _playerController: {fileID: 4703985027393698982}
 --- !u!1 &4657746788558244440
 GameObject:
   m_ObjectHideFlags: 0
@@ -2608,7 +2625,7 @@ MonoBehaviour:
     m_Bits: 64
   _grabbableMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1088
   _hand1: {fileID: 2406347701228003240}
   _hand2: {fileID: 4126980981472676698}
 --- !u!114 &1288709477385754709
@@ -8197,6 +8214,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8816840319450471556}
     m_Modifications:
+    - target: {fileID: -8719454951683086028, guid: de8a8c0dd63507b4b8e74ead03d95c9f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8717607871958985145, guid: de8a8c0dd63507b4b8e74ead03d95c9f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de8a8c0dd63507b4b8e74ead03d95c9f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -8241,9 +8266,37 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5673196593940336776, guid: de8a8c0dd63507b4b8e74ead03d95c9f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4462337843298199271, guid: de8a8c0dd63507b4b8e74ead03d95c9f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4002239815115787907, guid: de8a8c0dd63507b4b8e74ead03d95c9f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2002868518202131178, guid: de8a8c0dd63507b4b8e74ead03d95c9f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -692781193793962523, guid: de8a8c0dd63507b4b8e74ead03d95c9f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: de8a8c0dd63507b4b8e74ead03d95c9f, type: 3}
       propertyPath: m_Name
       value: Rover_bsdf
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418098771544918504, guid: de8a8c0dd63507b4b8e74ead03d95c9f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8198999868943737385, guid: de8a8c0dd63507b4b8e74ead03d95c9f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
