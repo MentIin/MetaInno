@@ -5,6 +5,7 @@ using FishNet.Object;
 using System.Collections.Generic;
 using CodeBase.Logic.Camera.CameraLogic;
 using CodeBase.Logic.Characters;
+using CodeBase.Logic.Characters.Hands;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -15,14 +16,17 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private CharacterBase _currentCharacter;
     
     
+    
+    
     private IInputService _inputService;
     private CharacterController _controller;
     
     [SerializeField] private bool _clientAuth = true;
     private int _currentIndexInList;
-
-
     private Vector2 cameraRotation;
+
+    
+    
     public CharacterBase CurrentCharacter { get => _currentCharacter;}
     
     public Action CurrentCharacterChanged;
@@ -68,9 +72,6 @@ public class PlayerController : NetworkBehaviour
 
             if (_inputService.ActionKeyUp())
                 _currentCharacter.ActionStop();
-
-            if (_inputService.CharacterChangePressed())
-                ChangeCharacterRPC();
         } 
         else
         {
@@ -79,10 +80,21 @@ public class PlayerController : NetworkBehaviour
 
             if (_inputService.ActionKeyUp())
                 StopActionOnCurrentCharacter();
-
-            if (_inputService.CharacterChangePressed())
-                ChangeCharacterRPC();
         }
+        
+        if (_inputService.SecondaryActionKeyDown())
+        {
+            if (_clientAuth)
+                _currentCharacter.SecondaryActionStart();
+        }else if (_inputService.SecondaryActionKeyUp())
+        {
+            if (_clientAuth)
+                _currentCharacter.SecondaryActionStop();
+        }
+        
+        
+        if (_inputService.CharacterChangePressed())
+            ChangeCharacterRPC();
         
         
     }

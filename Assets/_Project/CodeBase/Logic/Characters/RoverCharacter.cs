@@ -49,6 +49,15 @@ public class RoverCharacter : CharacterBase
         _tryingDrift = false;
     }
 
+    public override void SecondaryActionStart()
+    {
+        Debug.LogWarning("not implemented");
+    }
+    public override void SecondaryActionStop()
+    {
+        Debug.LogWarning("not implemented");
+    }
+
     public override void Move(Vector2 inputAxis)
     {
         if (!Mathf.Approximately(Mathf.Sign(inputAxis.x), Mathf.Sign(driftAxis.x)) || inputAxis.y <= 0)
