@@ -1,13 +1,12 @@
-﻿using FishNet.Component.Transforming;
-using FishNet.Connection;
-using FishNet.Object;
+﻿using FishNet.Object;
+using FishNet.Component.Transforming;
 using UnityEngine;
 
 namespace CodeBase.Logic.Characters.Hands
 {
     public class Grabbable : NetworkBehaviour
     {
-        private NetworkTransform _networkTransform;
+        [SerializeField] private NetworkTransform _networkTransform;
         protected bool isGrabbed;
         
         public bool IsGrabbed => isGrabbed;
@@ -18,33 +17,40 @@ namespace CodeBase.Logic.Characters.Hands
                 _networkTransform = GetComponent<NetworkTransform>();
         }
 
-        public void Grab(NetworkObject networkObject)
+        public void Grab(NetworkObject handNetObject)
         {
-            
-            transform.SetParent(networkObject.transform);
+            if (handNetObject == null) return;
+
+            // Локальное предсказание
+            transform.SetParent(handNetObject.transform);
             isGrabbed = true;
-            GrabServerRpc(networkObject);
+            
+            GrabServerRpc(handNetObject);
         }
 
         [ServerRpc(RequireOwnership = false)]
         private void GrabServerRpc(NetworkObject handNetObject)
         {
+            // Только сервер меняет родителя
             transform.SetParent(handNetObject.transform);
             isGrabbed = true;
+            
+            // Форсированная синхронизация
+            _networkTransform.ForceSend();
             GrabObserverRpc(handNetObject);
         }
 
         [ObserversRpc]
         private void GrabObserverRpc(NetworkObject handNetObject)
         {
-            if (IsOwner) return;
+            // Все клиенты получают обновление
             transform.SetParent(handNetObject?.transform);
             isGrabbed = true;
         }
 
         public void Ungrab()
         {
-            transform.parent = null;
+            transform.SetParent(null);
             isGrabbed = false;
             UngrabServerRpc();
         }
@@ -52,19 +58,19 @@ namespace CodeBase.Logic.Characters.Hands
         [ServerRpc(RequireOwnership = false)]
         private void UngrabServerRpc()
         {
-            transform.parent = null;
+            transform.SetParent(null);
             isGrabbed = false;
+            _networkTransform.ForceSend();
             UngrabObserverRpc();
         }
 
         [ObserversRpc]
         private void UngrabObserverRpc()
         {
-            if (IsOwner) return;
-            transform.parent = null;
+            transform.SetParent(null);
             isGrabbed = false;
         }
-
+        
         public Vector3 GetGrabPoint(Transform hand1)
         {
             Vector3 pos;

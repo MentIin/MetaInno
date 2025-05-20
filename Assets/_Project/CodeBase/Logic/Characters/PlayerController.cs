@@ -5,7 +5,6 @@ using FishNet.Object;
 using System.Collections.Generic;
 using CodeBase.Logic.Camera.CameraLogic;
 using CodeBase.Logic.Characters;
-using CodeBase.Logic.Characters.Hands;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]

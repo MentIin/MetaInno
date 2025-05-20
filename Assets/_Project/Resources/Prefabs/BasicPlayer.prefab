@@ -1743,6 +1743,7 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 6202074664125517796}
   _networkObjectCache: {fileID: 0}
   _playerController: {fileID: 4703985027393698982}
+  _characterController: {fileID: 8965050845624091993}
 --- !u!1 &4657746788558244440
 GameObject:
   m_ObjectHideFlags: 0
