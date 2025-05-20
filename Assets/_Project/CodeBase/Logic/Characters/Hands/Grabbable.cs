@@ -1,65 +1,69 @@
-﻿using FishNet.Object;
+﻿using FishNet.Component.Transforming;
+using FishNet.Connection;
+using FishNet.Object;
 using UnityEngine;
 
 namespace CodeBase.Logic.Characters.Hands
 {
     public class Grabbable : NetworkBehaviour
     {
+        private NetworkTransform _networkTransform;
         protected bool isGrabbed;
         
         public bool IsGrabbed => isGrabbed;
-        
-        
+
+        private void Awake()
+        {
+            if (!_networkTransform)
+                _networkTransform = GetComponent<NetworkTransform>();
+        }
+
+        public void Grab(NetworkObject networkObject)
+        {
+            
+            transform.SetParent(networkObject.transform);
+            isGrabbed = true;
+            GrabServerRpc(networkObject);
+        }
+
         [ServerRpc(RequireOwnership = false)]
-        private void GrabServerRpc(Transform hand)
+        private void GrabServerRpc(NetworkObject handNetObject)
         {
-            //transform.SetParent(hand);
+            transform.SetParent(handNetObject.transform);
             isGrabbed = true;
-            GrabObserverRpc(hand);
+            GrabObserverRpc(handNetObject);
         }
-        [ObserversRpc(ExcludeOwner = true)]
-        private void GrabObserverRpc(Transform hand)
+
+        [ObserversRpc]
+        private void GrabObserverRpc(NetworkObject handNetObject)
         {
-            //transform.SetParent(hand);
+            if (IsOwner) return;
+            transform.SetParent(handNetObject?.transform);
             isGrabbed = true;
         }
-        public void Grab(Transform hand//, NetworkConnection owNetworkConnection
-        )
-        {
-            //base.GiveOwnership(owNetworkConnection);
-            
-            transform.SetParent(hand);
-            isGrabbed = true;
-            
-            GrabServerRpc(hand);
-        }
-        
-        
-        
-        
+
         public void Ungrab()
         {
-            isGrabbed = false;
             transform.parent = null;
+            isGrabbed = false;
             UngrabServerRpc();
         }
+
         [ServerRpc(RequireOwnership = false)]
         private void UngrabServerRpc()
         {
+            transform.parent = null;
             isGrabbed = false;
-            //transform.parent = null;
             UngrabObserverRpc();
         }
-        [ObserversRpc(ExcludeOwner = true)]
+
+        [ObserversRpc]
         private void UngrabObserverRpc()
         {
+            if (IsOwner) return;
+            transform.parent = null;
             isGrabbed = false;
-            //transform.parent = null;
         }
-        
-        
-        
-        
 
         public Vector3 GetGrabPoint(Transform hand1)
         {
@@ -68,10 +72,7 @@ namespace CodeBase.Logic.Characters.Hands
             pos = pos.normalized * 0.6f;
             pos = transform.position + pos;
             pos.y = transform.position.y - 0.1f;
-            
             return pos;
         }
-
-        
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using FishNet.Component.Transforming;
+using FishNet.Object;
 using UnityEngine;
 
 namespace CodeBase.Logic.Characters.Hands
@@ -132,7 +134,7 @@ namespace CodeBase.Logic.Characters.Hands
                         {
                             UpdateGrabbablePoints();
                             _handsState = HandsState.Grabbed;
-                            _currentGrabbable.Grab(_hand1);
+                            _currentGrabbable.Grab(_hand1.GetComponent<NetworkObject>());
                         }
                         
                         _handsState = HandsState.Grabbed;

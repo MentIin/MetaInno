@@ -56,7 +56,7 @@ public class InnikCharacter : CharacterBase
 
     private void FixedUpdate()
     {
-        _handsController.Tick();
+        if (IsOwner) _handsController.Tick();
     }
 
 
