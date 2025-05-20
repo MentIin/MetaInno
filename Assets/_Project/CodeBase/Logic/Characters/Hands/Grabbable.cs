@@ -10,6 +10,11 @@ namespace CodeBase.Logic.Characters.Hands
         protected bool isGrabbed;
         
         public bool IsGrabbed => isGrabbed;
+        
+        
+        private Vector3 _grabLocalPosition = Vector3.zero;
+        private Vector3 _grabLocalRotation = Vector3.zero;
+        
 
         private void Awake()
         {
@@ -23,28 +28,38 @@ namespace CodeBase.Logic.Characters.Hands
 
             // Локальное предсказание
             transform.SetParent(handNetObject.transform);
-            isGrabbed = true;
+            //isGrabbed = true;
             
-            GrabServerRpc(handNetObject);
+            //_grabLocalPosition = handNetObject.transform.InverseTransformPoint(transform.position);
+            _grabLocalPosition = transform.localPosition;
+            
+            GrabServerRpc(handNetObject, _grabLocalPosition);
         }
 
         [ServerRpc(RequireOwnership = false)]
-        private void GrabServerRpc(NetworkObject handNetObject)
+        private void GrabServerRpc(NetworkObject handNetObject, Vector3 grabLocalPosition)
         {
             // Только сервер меняет родителя
+            _grabLocalPosition = grabLocalPosition;
+            
+            
+            
             transform.SetParent(handNetObject.transform);
+            
+            transform.localPosition = grabLocalPosition;
             isGrabbed = true;
             
             // Форсированная синхронизация
             _networkTransform.ForceSend();
-            GrabObserverRpc(handNetObject);
+            GrabObserverRpc(handNetObject, _grabLocalPosition);
         }
 
         [ObserversRpc]
-        private void GrabObserverRpc(NetworkObject handNetObject)
+        private void GrabObserverRpc(NetworkObject handNetObject, Vector3 grabLocalPosition)
         {
             // Все клиенты получают обновление
             transform.SetParent(handNetObject?.transform);
+            transform.localPosition = grabLocalPosition;
             isGrabbed = true;
         }
 

@@ -105,6 +105,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 8036852873743380562}
   _networkObjectCache: {fileID: 8036852873743380562}
+  _networkTransform: {fileID: 0}
   _boxCollider: {fileID: 2847821085169730866}
   _groundMask:
     serializedVersion: 2

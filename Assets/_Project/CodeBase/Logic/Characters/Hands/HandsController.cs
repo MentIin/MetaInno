@@ -129,39 +129,42 @@ namespace CodeBase.Logic.Characters.Hands
                     
                     if ((_innikTransform.InverseTransformPoint(_hand1.position) - _hand1TargetPosition).sqrMagnitude < 0.05f)
                     {
-                        
                         if (_handsState == HandsState.Grabbing)
                         {
-                            UpdateGrabbablePoints();
-                            _handsState = HandsState.Grabbed;
+                            //UpdateGrabbablePoints();
                             _currentGrabbable.Grab(_hand1.GetComponent<NetworkObject>());
+                            _handsState = HandsState.Grabbed;
                         }
-                        
-                        _handsState = HandsState.Grabbed;
-                        
-                        Vector3 targetMidpoint = Vector3.Lerp(_hand1TargetPosition, _hand2TargetPosition, 0.5f);
+                        if (_currentGrabbable.transform.parent != null)
+                        {
+                            _handsState = HandsState.Grabbed;
+                            
+                           
+                            Vector3 targetMidpoint = Vector3.Lerp(_hand1TargetPosition, _hand2TargetPosition, 0.5f);
 
-                        if (_innikTransform.position.y +0.2f > _currentGrabbable.transform.position.y)
-                        {
-                            _hand1TargetPosition += Vector3.up * Time.fixedDeltaTime * 3;
-                            _hand2TargetPosition += Vector3.up * Time.fixedDeltaTime * 3;
+                            if (_innikTransform.position.y +0.2f > _currentGrabbable.transform.position.y)
+                            {
+                                _hand1TargetPosition += Vector3.up * Time.fixedDeltaTime * 3;
+                                _hand2TargetPosition += Vector3.up * Time.fixedDeltaTime * 3;
+                            }
+                        
+                            // z
+                            float zDist = targetMidpoint.z;
+                            if (zDist < .5f)
+                            {
+                                _hand1TargetPosition.z += Time.fixedDeltaTime * 3;
+                                _hand2TargetPosition.z += Time.fixedDeltaTime * 3;
+                            }
+                            else if (zDist > .7f) 
+                            {
+                                _hand1TargetPosition.z -= Time.fixedDeltaTime * 3;
+                                _hand2TargetPosition.z -= Time.fixedDeltaTime * 3;
+                            }
+                        
+                            HandleX(targetMidpoint);
+                            //HandleZ(targetMidpoint);
                         }
                         
-                        // z
-                        float zDist = (_innikTransform.position - _currentGrabbable.transform.position).sqrMagnitude;
-                        if (zDist < 1.2f)
-                        {
-                            _hand1TargetPosition.z += Time.fixedDeltaTime * 3;
-                            _hand2TargetPosition.z += Time.fixedDeltaTime * 3;
-                        }
-                        else if (zDist > 1.3f) 
-                        {
-                            _hand1TargetPosition.z -= Time.fixedDeltaTime * 3;
-                            _hand2TargetPosition.z -= Time.fixedDeltaTime * 3;
-                        }
-                        
-                        HandleX(targetMidpoint);
-                        //HandleZ(targetMidpoint);
                     }
                 }
                 else
