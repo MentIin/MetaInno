@@ -683,7 +683,7 @@ PrefabInstance:
       addedObject: {fileID: 999832591}
     - targetCorrespondingSourceObject: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 999832598}
+      addedObject: {fileID: 999832613}
   m_SourcePrefab: {fileID: 100100000, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
 --- !u!1 &723652808
 GameObject:
@@ -987,7 +987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e4a322dca349547989b14021da4e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Transport: {fileID: 999832598}
+  Transport: {fileID: 999832613}
   _intermediateLayer: {fileID: 0}
   _latencySimulator:
     _enabled: 0
@@ -1037,7 +1037,7 @@ MonoBehaviour:
   _frameRate: 30
   _shareIds: 1
   _startOnHeadless: 1
---- !u!114 &999832598
+--- !u!114 &999832613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1046,18 +1046,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 999832574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f48f002b825cbd45a19bd96d90f9edb, type: 3}
+  m_Script: {fileID: 11500000, guid: 362dfd7e6009fb44c90beec3df0ad853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stopSocketsOnThread: 0
-  _dontRoute: 0
-  _unreliableMtu: 1023
-  _ipv4BindAddress: 
-  _enableIpv6: 1
-  _ipv6BindAddress: 
-  _port: 7777
-  _maximumClients: 2554
-  _clientAddress: localhost
+  _useWss: 1
+  _sslConfiguration:
+    Enabled: 0
+    CertificatePath: 
+    CertificatePassword: 
+    SslProtocol: 0
+  _mtu: 1023
+  _port: 443
+  _maximumClients: 2000
+  _clientAddress: 87386ea261bb4e58bc18bb782dcf9957-free-eu-north.playflow.dev
 --- !u!1 &1012941330
 GameObject:
   m_ObjectHideFlags: 0

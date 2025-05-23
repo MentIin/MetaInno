@@ -184,7 +184,7 @@ public class RoverCharacter : CharacterBase
             _currentMoveSpeed = 0f;
             _driftBoost = 0f;
             _readyDriftBoost = 0f;
-            _externalForceController.BounceRPC(hits[i].normal * 2f, _driftBoost + _moveSpeed);
+            _externalForceController.BounceLocal(hits[i].normal * 2f, _driftBoost + _moveSpeed);
 
 
                 

@@ -18,13 +18,14 @@ namespace CodeBase.Logic.Characters
         [ServerRpc(RequireOwnership = false)]
         public void BounceRPC(Vector3 hitInfoNormal, float speed)
         {
+            //BounceLocal(hitInfoNormal, speed);
             BounceClients(hitInfoNormal, speed);
         }
         
         [ObserversRpc]
         private void BounceClients(Vector3 hitInfoNormal, float speed)
         {
-            BounceLocal(hitInfoNormal, speed);
+            if (IsOwner) BounceLocal(hitInfoNormal, speed);
         }
         
         
@@ -41,7 +42,7 @@ namespace CodeBase.Logic.Characters
         
         private void FixedUpdate()
         {
-            if (!base.IsServer) return;
+            if (!base.IsOwner) return;
             
             
             ExternalForce = Vector3.zero;
@@ -68,11 +69,17 @@ namespace CodeBase.Logic.Characters
                 else
                 {
                     _zero = false;
-                    SetTotalForceClient(ExternalForce);
+                    //SetTotalForceServer(ExternalForce);
                 }
                 
             }
             
+        }
+        [ServerRpc(RequireOwnership = false)]
+        private void SetTotalForceServer(Vector3 force)
+        {
+            ExternalForce = force;
+            SetTotalForceClient(force);
         }
         
         

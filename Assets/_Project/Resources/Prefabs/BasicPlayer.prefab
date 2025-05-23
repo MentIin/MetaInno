@@ -55,7 +55,7 @@ MonoBehaviour:
   _roverDriftVisual: {fileID: 8993005628836992576}
   _bounceMask:
     serializedVersion: 2
-    m_Bits: 1127
+    m_Bits: 1089
 --- !u!114 &6917909801959498193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1742,6 +1742,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 6202074664125517796}
   _networkObjectCache: {fileID: 0}
+  _networkTransform: {fileID: 349979480273480244}
   _playerController: {fileID: 4703985027393698982}
   _characterController: {fileID: 8965050845624091993}
 --- !u!1 &4657746788558244440
