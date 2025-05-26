@@ -7,7 +7,13 @@ namespace CodeBase.UI.Services.Windows
     public class MinigameUISinglton : MonoBehaviour
     {
         [SerializeField] private GameObject QuestDialogContainer;
+        [SerializeField] private TextMeshPro QuestTitleText;
+        [SerializeField] private TextMeshPro QuestDescriptionText;
+        
+        
         [SerializeField] private TextMeshPro TimerText;
+        
+        private QuestStaticData _currentQuestStaticData;
         
         private static MinigameUISinglton _instance;
         public static MinigameUISinglton Instance
@@ -41,14 +47,13 @@ namespace CodeBase.UI.Services.Windows
         }
         
         
-        // Add methods and properties to manage the Minigame UI here.
         public void ShowQuestDialog(QuestStaticData questStaticData)
         {
             QuestDialogContainer.SetActive(true);
-        }
-        public void HideQuestDialog()
-        {
-            QuestDialogContainer.SetActive(false);
+            QuestTitleText.text = questStaticData.Title;
+            QuestDescriptionText.text = questStaticData.Description;
+            _currentQuestStaticData = questStaticData;
+            
         }
         public void StartTimer(float duration)
         {
@@ -58,7 +63,5 @@ namespace CodeBase.UI.Services.Windows
         {
             TimerText.text = "";
         }
-        
-        
     }
 }
