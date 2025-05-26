@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af251054683436381181ac5cd286a77, type: 3}
   m_Name: FromSCToMC
   m_EditorClassIdentifier: 
-  Id: 
+  Id: 1
   Title: 
   Description: 
   Time: 30
