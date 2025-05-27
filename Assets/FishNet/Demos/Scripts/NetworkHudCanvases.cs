@@ -99,8 +99,9 @@ namespace FishNet.Example
                 else
                     return "Invalid";
             }
-
-            GUILayout.BeginArea(new Rect(4, 110, 256, 9000));
+            
+            
+            GUILayout.BeginArea(new Rect(4, 20, 2560, 500)); // Поднимаем на 60 пикселей
             Vector2 defaultResolution = new Vector2(1920f, 1080f);
             GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(Screen.width / defaultResolution.x, Screen.height / defaultResolution.y, 1));
 
@@ -110,6 +111,7 @@ namespace FishNet.Example
             Vector2 buttonSize = new Vector2(165f, 42f);
             style.fontSize = 26;
             //Server button.
+            GUILayout.BeginHorizontal(); 
             if (Application.platform != RuntimePlatform.WebGLPlayer)
             {
                 if (GUILayout.Button($"{GetNextStateText(_serverState)} Server", GUILayout.Width(buttonSize.x), GUILayout.Height(buttonSize.y)))
@@ -122,7 +124,7 @@ namespace FishNet.Example
                 OnClick_Client();
 
             style.fontSize = originalFontSize;
-
+            GUILayout.EndHorizontal();
             GUILayout.EndArea();
 #endif
         }

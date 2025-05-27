@@ -6,12 +6,9 @@ namespace CodeBase.UI.Services.Windows
 {
     public class MinigameUISinglton : MonoBehaviour
     {
-        [SerializeField] private GameObject QuestDialogContainer;
-        [SerializeField] private TextMeshPro QuestTitleText;
-        [SerializeField] private TextMeshPro QuestDescriptionText;
-        
-        
-        [SerializeField] private TextMeshPro TimerText;
+        [SerializeField] private Animator _questDialogAnimator;
+        [SerializeField] private TextMeshProUGUI QuestTitleText;
+        [SerializeField] private TextMeshProUGUI TimerText;
         
         private QuestStaticData _currentQuestStaticData;
         
@@ -49,12 +46,19 @@ namespace CodeBase.UI.Services.Windows
         
         public void ShowQuestDialog(QuestStaticData questStaticData)
         {
-            QuestDialogContainer.SetActive(true);
+            _questDialogAnimator.SetBool("active", true);
             QuestTitleText.text = questStaticData.Title;
-            QuestDescriptionText.text = questStaticData.Description;
+            //QuestDescriptionText.text = questStaticData.Description;
             _currentQuestStaticData = questStaticData;
-            
         }
+        
+        
+        public void CloseWindow()
+        {
+            _questDialogAnimator.SetBool("active", false);
+        }
+        
+        
         public void StartTimer(float duration)
         {
             TimerText.text = duration.ToString();
@@ -63,5 +67,7 @@ namespace CodeBase.UI.Services.Windows
         {
             TimerText.text = "";
         }
+
+        
     }
 }
