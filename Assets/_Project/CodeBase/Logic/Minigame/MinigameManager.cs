@@ -1,27 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Infrastructure.Data;
+using CodeBase.Infrastructure.StaticData;
+using FishNet;
+using FishNet.Connection;
+using FishNet.Managing.Logging;
 using FishNet.Object;
+using UnityEngine;
 
 namespace CodeBase.Logic.Minigame
 {
     public class MinigameManagerSinglton : NetworkBehaviour
     {
         public static MinigameManagerSinglton Instance { get; private set; }
+        
+        [HideInInspector]
+        public NetworkConnection LocalOwner;
+        
+        private Dictionary<int, QuestData> _questDataMap = new Dictionary<int, QuestData>();
 
 
-        private Dictionary<int, QuestData> _questDataMap;
+        public event Action<int> QuestStarted;
 
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
 
         public override void OnStartServer()
         {
@@ -32,15 +32,30 @@ namespace CodeBase.Logic.Minigame
         public override void OnStartClient()
         {
             base.OnStartClient();
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            
             // Initialize client-side logic here
         }
-        
+        public void StartMinigame(QuestStaticData questStaticData)
+        {
+            Debug.Log(1);
+            if (LocalOwner == null)
+            {
+                LocalOwner = InstanceFinder.ClientManager.Connection;
+            }
+            
+            Debug.Log(LocalOwner);
+            
+            StartMinigameServerRPC(questStaticData.Id, LocalOwner);
+        }
         
         [ServerRpc(RequireOwnership = false)]
-        public void StartMinigame(int questId, int playerId)
+        public void StartMinigameServerRPC(int questId, NetworkConnection playerId)
         {
             // Logic to start the minigame
-
             if (_questDataMap.ContainsKey(questId))
             {
                 if (_questDataMap[questId].CurrentPlayers.Contains(playerId))
@@ -63,16 +78,29 @@ namespace CodeBase.Logic.Minigame
                 _questDataMap[questId].CurrentPlayers.Add(playerId);
             }
             
-            
+            // TODO targetRpc
+            Debug.Log(222222);
+            Debug.Log(playerId);
+            StartMinigameClientRPC(playerId, questId);
         }
+
+        [TargetRpc(Logging = LoggingType.Common)]
+        private void StartMinigameClientRPC(NetworkConnection networkConnection, int questId)
+        {
+            Debug.Log(3);
+            QuestStarted?.Invoke(questId);
+        }
+        
+        
+        
         [ServerRpc(RequireOwnership = false)]
-        public void EndMinigame(int questId, int playerId)
+        public void EndMinigame(int questId, NetworkConnection playerConnection)
         {
             if (_questDataMap.ContainsKey(questId))
             {
-                if (_questDataMap[questId].CurrentPlayers.Contains(playerId))
+                if (_questDataMap[questId].CurrentPlayers.Contains(playerConnection))
                 {
-                    _questDataMap[questId].CurrentPlayers.Remove(playerId);
+                    _questDataMap[questId].CurrentPlayers.Remove(playerConnection);
                 }
                 
                 // Optionally, check if the quest is complete and handle accordingly
@@ -82,5 +110,6 @@ namespace CodeBase.Logic.Minigame
                 }
             }
         }
+        
     }
 }

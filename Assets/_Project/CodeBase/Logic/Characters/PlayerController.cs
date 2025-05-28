@@ -64,6 +64,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (!base.IsOwner) return;
         
+       
         if (_clientAuth)
         {
             if (_inputService.ActionKeyDown())

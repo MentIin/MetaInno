@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FishNet.Connection;
 
 namespace CodeBase.Infrastructure.Data
 {
@@ -6,6 +7,6 @@ namespace CodeBase.Infrastructure.Data
     {
         public int Id;
         public int Record;
-        public List<int> CurrentPlayers = new List<int>();
+        public List<NetworkConnection> CurrentPlayers = new List<NetworkConnection>();
     }
 }

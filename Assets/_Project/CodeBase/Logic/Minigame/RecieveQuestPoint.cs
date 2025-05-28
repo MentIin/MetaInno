@@ -14,12 +14,13 @@ namespace CodeBase.Logic.Minigame
 
         private void OnTriggerEnter(Collider other)
         {
-            if (IsServer)
+            if (IsClientInitialized)
             {
                 if (other.CompareTag("Player"))
                 {
                     NetworkObject player = other.GetComponent<NetworkObject>();
-                    ShowWindowClientRpc(player.Owner);
+                    //ShowWindowClientRpc(player.Owner);
+                    MinigameUISinglton.Instance.ShowQuestDialog(QuestStaticData);
                 }
             }
         }
@@ -28,6 +29,7 @@ namespace CodeBase.Logic.Minigame
         private void ShowWindowClientRpc(NetworkConnection target)
         {
             MinigameUISinglton.Instance.ShowQuestDialog(QuestStaticData);
+            MinigameManagerSinglton.Instance.LocalOwner = target;
         }
     }
 }

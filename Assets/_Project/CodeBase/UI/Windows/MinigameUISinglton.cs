@@ -1,14 +1,21 @@
 ﻿using CodeBase.Infrastructure.StaticData;
+using CodeBase.UI.Elements;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace CodeBase.UI.Services.Windows
 {
     public class MinigameUISinglton : MonoBehaviour
     {
         [SerializeField] private Animator _questDialogAnimator;
-        [SerializeField] private TextMeshProUGUI QuestTitleText;
-        [SerializeField] private TextMeshProUGUI TimerText;
+        
+        [SerializeField] private TextMeshProUGUI _questTitleText;
+        [SerializeField] private TextMeshProUGUI _timeForQuestText;
+        [SerializeField] private TextMeshProUGUI _timerText;
+
+        [SerializeField] private AcceptQuestButton _acceptQuestButton;
         
         private QuestStaticData _currentQuestStaticData;
         
@@ -41,15 +48,20 @@ namespace CodeBase.UI.Services.Windows
             {
                 Destroy(gameObject);
             }
+
+            _timerText.text = "";
         }
         
         
         public void ShowQuestDialog(QuestStaticData questStaticData)
         {
             _questDialogAnimator.SetBool("active", true);
-            QuestTitleText.text = questStaticData.Title;
+            _questTitleText.text = questStaticData.Title;
             //QuestDescriptionText.text = questStaticData.Description;
             _currentQuestStaticData = questStaticData;
+            _timeForQuestText.text = questStaticData.Time.ToString() + "c.";
+            
+            _acceptQuestButton.SetQuestData(questStaticData);
         }
         
         
@@ -61,11 +73,11 @@ namespace CodeBase.UI.Services.Windows
         
         public void StartTimer(float duration)
         {
-            TimerText.text = duration.ToString();
+            _timerText.text = duration.ToString();
         }
         public void StopTimer()
         {
-            TimerText.text = "";
+            _timerText.text = "";
         }
 
         

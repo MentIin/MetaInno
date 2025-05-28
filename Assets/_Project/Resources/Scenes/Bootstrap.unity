@@ -905,6 +905,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 936068047}
+  - component: {fileID: 936068049}
+  - component: {fileID: 936068048}
   m_Layer: 0
   m_Name: GameBootstrapper
   m_TagString: Untagged
@@ -927,6 +929,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &936068048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936068046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsNested>k__BackingField: 0
+  WasActiveDuringEdit: 1
+  WasActiveDuringEdit_Set: 1
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  <PredictedOwner>k__BackingField: {fileID: 0}
+  NetworkBehaviours: []
+  InitializedParentNetworkBehaviour: {fileID: 0}
+  InitializedNestedNetworkObjects: []
+  RuntimeParentNetworkBehaviour: {fileID: 0}
+  RuntimeChildNetworkBehaviours: []
+  _isNetworked: 1
+  _isSpawnable: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _preventDespawnOnDisconnect: 0
+  _defaultDespawnType: 0
+  NetworkObserver: {fileID: 0}
+  _enablePrediction: 0
+  _predictionType: 0
+  _graphicalObject: {fileID: 0}
+  _detachGraphicalObject: 0
+  _enableStateForwarding: 1
+  _networkTransform: {fileID: 0}
+  _ownerInterpolation: 1
+  _ownerSmoothedProperties: 255
+  _adaptiveInterpolation: 3
+  _spectatorSmoothedProperties: 255
+  _spectatorInterpolation: 2
+  _enableTeleport: 0
+  _teleportThreshold: 1
+  <PrefabId>k__BackingField: 65535
+  <SpawnableCollectionId>k__BackingField: 0
+  <AssetPathHash>k__BackingField: 0
+  <SceneId>k__BackingField: 4023631355
+  SerializedTransformProperties:
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    Scale: {x: 0, y: 0, z: 0}
+    IsValid: 0
+--- !u!114 &936068049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936068046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e0668d4b6f44e3fa71c2d67d1bcc7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
 --- !u!1001 &983843258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1655,6 +1724,7 @@ GameObject:
   - component: {fileID: 1966695976}
   - component: {fileID: 1966695975}
   - component: {fileID: 1966695974}
+  - component: {fileID: 1966695978}
   m_Layer: 0
   m_Name: RecieveQuestPoint
   m_TagString: Untagged
@@ -1767,6 +1837,23 @@ Transform:
   - {fileID: 730633397}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1966695978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966695973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa8c9a475784c3f8494b5bde7a5eb92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 1966695974}
+  _networkObjectCache: {fileID: 0}
+  QuestStaticData: {fileID: 11400000, guid: 3db6c53625c0a8d499669611ab939e6d, type: 2}
+  Mode: 1
 --- !u!1 &2029611983
 GameObject:
   m_ObjectHideFlags: 0
@@ -3569,6 +3656,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2074215380619397554, guid: a18a8e4e71dd82a499555b67159845ce, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 275.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074215380619397554, guid: a18a8e4e71dd82a499555b67159845ce, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 249
+      objectReference: {fileID: 0}
     - target: {fileID: 4560656046305815869, guid: a18a8e4e71dd82a499555b67159845ce, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3648,10 +3743,6 @@ PrefabInstance:
     - target: {fileID: 4560656046305815869, guid: a18a8e4e71dd82a499555b67159845ce, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5113270149531883802, guid: a18a8e4e71dd82a499555b67159845ce, type: 3}
-      propertyPath: m_SortingOrder
-      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 8521304142411318709, guid: a18a8e4e71dd82a499555b67159845ce, type: 3}
       propertyPath: m_Name
