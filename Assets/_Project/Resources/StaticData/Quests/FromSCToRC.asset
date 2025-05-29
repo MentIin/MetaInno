@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 10
   Title: "\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0434\u043E \u0416\u041A"
-  Description: 
-  Time: 31
+  Destination: "\u0416\u041A"
+  Time: 35

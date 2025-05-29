@@ -6,9 +6,11 @@ namespace CodeBase.Infrastructure.StaticData
     public class QuestStaticData : ScriptableObject
     {
         public int Id;
+        
         public string Title;
-        public string Description;
+        public string Destination;
 
         public float Time = 30f;
+        
     }
 }

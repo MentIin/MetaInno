@@ -19,9 +19,9 @@ namespace CodeBase.Logic.Minigame
                 {
                     NetworkObject player = other.GetComponent<NetworkObject>();
                     //ShowWindowClientRpc(player.Owner);
-                    //MinigameUISinglton.Instance.ShowQuestDialog(QuestStaticData);
-
-                    MinigameManagerSinglton.Instance.FinishMinigame(QuestStaticData);
+                    //MinigameUISinglton.Instance.ShowQuestDialog
+                    //(QuestStaticData);
+                    MinigameManagerSinglton.Instance.FinishMinigame(QuestStaticData, MinigameUISinglton.Instance.TimeLeft);
                 }
             }
         }

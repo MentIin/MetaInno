@@ -20,7 +20,11 @@ namespace CodeBase.Logic.Minigame
                 {
                     NetworkObject player = other.GetComponent<NetworkObject>();
                     //ShowWindowClientRpc(player.Owner);
-                    MinigameUISinglton.Instance.ShowQuestDialog(QuestStaticData);
+                    if (player.IsOwner)
+                    {
+                        
+                        MinigameUISinglton.Instance.ShowQuestDialog(QuestStaticData);
+                    }
                 }
             }
         }

@@ -27,6 +27,11 @@ namespace CodeBase.UI.Services.Windows
         private QuestStaticData _currentQuestStaticData;
         
         private static MinigameUISinglton _instance;
+
+
+        private float _timerLeft;
+        public float TimeLeft => _timerLeft;
+
         public static MinigameUISinglton Instance
         {
             get
@@ -43,7 +48,7 @@ namespace CodeBase.UI.Services.Windows
                 return _instance;
             }
         }
-        
+
         private void Awake()
         {
             if (_instance == null)
@@ -58,11 +63,7 @@ namespace CodeBase.UI.Services.Windows
 
             StopTimer();
         }
-
-        private void Start()
-        {
-            
-        }
+        
 
 
         public void ShowQuestDialog(QuestStaticData questStaticData)
@@ -92,12 +93,13 @@ namespace CodeBase.UI.Services.Windows
 
         private IEnumerator Timer(float duration, NetworkConnection networkConnection, int questId)
         {
+            _timerLeft = duration;
             while (true)
             {
-                _timerText.text = Mathf.RoundToInt(duration).ToString();
-                duration -= Time.deltaTime;
+                _timerText.text = Mathf.RoundToInt(_timerLeft).ToString();
+                _timerLeft -= Time.deltaTime;
 
-                if (duration < 0)
+                if (_timerLeft < 0)
                 {
                     MinigameManagerSinglton.Instance.FailMinigame(networkConnection, questId);
                     StopTimer();

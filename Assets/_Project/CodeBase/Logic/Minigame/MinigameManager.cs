@@ -25,6 +25,8 @@ namespace CodeBase.Logic.Minigame
         public event Action<int> QuestFinished;
         public event Action<int> QuestFail;
 
+        public event Action<int, float> QuestRecordUpdated;
+
 
         public override void OnStartServer()
         {
@@ -40,8 +42,17 @@ namespace CodeBase.Logic.Minigame
                 Instance = this;
             }
             
-            // Initialize client-side logic here
         }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void RequestRecordsUpdateServerRPC()
+        {
+            foreach (var pair in _questDataMap)
+            {
+                UpdateRecordObserverRPC(pair.Key, pair.Value.Record);
+            }
+        }
+
         public void StartMinigame(QuestStaticData questStaticData)
         {
             Debug.Log(1);
@@ -98,13 +109,13 @@ namespace CodeBase.Logic.Minigame
         
         
         
-        public void FinishMinigame(QuestStaticData questStaticData)
+        public void FinishMinigame(QuestStaticData questStaticData, float timeLeft)
         {
-            FinishMinigameServerRPC(questStaticData.Id, LocalOwner);
+            FinishMinigameServerRPC(questStaticData.Id, LocalOwner, timeLeft);
         }
         
         [ServerRpc(RequireOwnership = false)]
-        public void FinishMinigameServerRPC(int questId, NetworkConnection playerConnection)
+        public void FinishMinigameServerRPC(int questId, NetworkConnection playerConnection, float timeLeft)
         {
             if (_questDataMap.ContainsKey(questId))
             {
@@ -112,16 +123,25 @@ namespace CodeBase.Logic.Minigame
                 {
                     _questDataMap[questId].CurrentPlayers.Remove(playerConnection);
                 }
-                
-                // Optionally, check if the quest is complete and handle accordingly
-                if (_questDataMap[questId].CurrentPlayers.Count == 0)
+
+
+                if (_questDataMap[questId].Record < timeLeft || _questDataMap[questId].Record == -1)
                 {
-                    _questDataMap.Remove(questId);
+                    _questDataMap[questId].Record = timeLeft;
                 }
+                
                 FinishMinigameClientRPC(playerConnection, questId);
+
+                UpdateRecordObserverRPC(questId, _questDataMap[questId].Record);
             }
         }
-        
+
+        [ObserversRpc]
+        private void UpdateRecordObserverRPC(int id, float record)
+        {
+            QuestRecordUpdated?.Invoke(id, record);
+        }
+
         [TargetRpc(Logging = LoggingType.Common)]
         private void FinishMinigameClientRPC(NetworkConnection networkConnection, int questId)
         {
@@ -147,11 +167,6 @@ namespace CodeBase.Logic.Minigame
                     _questDataMap[questId].CurrentPlayers.Remove(playerConnection);
                 }
                 
-                // Optionally, check if the quest is complete and handle accordingly
-                if (_questDataMap[questId].CurrentPlayers.Count == 0)
-                {
-                    _questDataMap.Remove(questId);
-                }
 
                 FailMinigameTargetRPC(playerConnection, questId);
             }
