@@ -10,11 +10,35 @@ namespace CodeBase.Logic.Minigame
         public QuestStaticData QuestStaticData;
 
         public Mode Mode;
+        
         public override void OnStartClient()
         {
             base.OnStartClient();
             MinigameManagerSinglton.Instance.QuestStarted += OnQuestStarted;
+            MinigameManagerSinglton.Instance.QuestFinished += OnQuestFinished;
+            
+            
+            
+            if (Mode == Mode.ActivateWhenQuestStarted)
+            {
+                gameObject.SetActive(false);
+            }
         }
+
+        private void OnQuestFinished(int id)
+        {
+            if (id != QuestStaticData.Id) return;
+            
+            
+            if (Mode == Mode.ActivateWhenQuestStarted)
+            {
+                gameObject.SetActive(false);
+            }else if (Mode == Mode.DeactivateWhenQuestStarted)
+            {
+                gameObject.SetActive(true);
+            }
+        }
+
         private void OnQuestStarted(int id)
         {
             Debug.Log(id);

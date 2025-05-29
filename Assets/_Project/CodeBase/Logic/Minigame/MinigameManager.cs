@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Infrastructure.Data;
 using CodeBase.Infrastructure.StaticData;
+using CodeBase.UI.Services.Windows;
 using FishNet;
 using FishNet.Connection;
 using FishNet.Managing.Logging;
@@ -21,6 +22,7 @@ namespace CodeBase.Logic.Minigame
 
 
         public event Action<int> QuestStarted;
+        public event Action<int> QuestFinished;
 
 
         public override void OnStartServer()
@@ -49,11 +51,11 @@ namespace CodeBase.Logic.Minigame
             
             Debug.Log(LocalOwner);
             
-            StartMinigameServerRPC(questStaticData.Id, LocalOwner);
+            StartMinigameServerRPC(questStaticData.Id, LocalOwner, questStaticData.Time);
         }
         
         [ServerRpc(RequireOwnership = false)]
-        public void StartMinigameServerRPC(int questId, NetworkConnection playerId)
+        public void StartMinigameServerRPC(int questId, NetworkConnection playerId, float dur)
         {
             // Logic to start the minigame
             if (_questDataMap.ContainsKey(questId))
@@ -81,20 +83,27 @@ namespace CodeBase.Logic.Minigame
             // TODO targetRpc
             Debug.Log(222222);
             Debug.Log(playerId);
-            StartMinigameClientRPC(playerId, questId);
+            StartMinigameClientRPC(playerId, questId, dur);
         }
 
         [TargetRpc(Logging = LoggingType.Common)]
-        private void StartMinigameClientRPC(NetworkConnection networkConnection, int questId)
+        private void StartMinigameClientRPC(NetworkConnection networkConnection, int questId, float duration)
         {
             Debug.Log(3);
             QuestStarted?.Invoke(questId);
+            
+            MinigameUISinglton.Instance.StartTimer(duration);
         }
         
         
         
+        public void FinishMinigame(QuestStaticData questStaticData)
+        {
+            FinishMinigameServerRPC(questStaticData.Id, LocalOwner);
+        }
+        
         [ServerRpc(RequireOwnership = false)]
-        public void EndMinigame(int questId, NetworkConnection playerConnection)
+        public void FinishMinigameServerRPC(int questId, NetworkConnection playerConnection)
         {
             if (_questDataMap.ContainsKey(questId))
             {
@@ -108,8 +117,18 @@ namespace CodeBase.Logic.Minigame
                 {
                     _questDataMap.Remove(questId);
                 }
+                FinishMinigameClientRPC(playerConnection, questId);
             }
         }
+        
+        [TargetRpc(Logging = LoggingType.Common)]
+        private void FinishMinigameClientRPC(NetworkConnection networkConnection, int questId)
+        {
+            QuestFinished?.Invoke(questId);
+            
+        }
+
+
         
     }
 }

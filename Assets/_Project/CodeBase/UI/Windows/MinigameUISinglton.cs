@@ -1,4 +1,6 @@
-﻿using CodeBase.Infrastructure.StaticData;
+﻿using System.Collections;
+using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.StaticData;
 using CodeBase.UI.Elements;
 using TMPro;
 using UnityEngine;
@@ -13,7 +15,9 @@ namespace CodeBase.UI.Services.Windows
         
         [SerializeField] private TextMeshProUGUI _questTitleText;
         [SerializeField] private TextMeshProUGUI _timeForQuestText;
+        
         [SerializeField] private TextMeshProUGUI _timerText;
+        [SerializeField] private GameObject _timerContainer;
 
         [SerializeField] private AcceptQuestButton _acceptQuestButton;
         
@@ -49,7 +53,7 @@ namespace CodeBase.UI.Services.Windows
                 Destroy(gameObject);
             }
 
-            _timerText.text = "";
+            StopTimer();
         }
         
         
@@ -73,11 +77,31 @@ namespace CodeBase.UI.Services.Windows
         
         public void StartTimer(float duration)
         {
-            _timerText.text = duration.ToString();
+            _timerContainer.SetActive(true);
+            StartCoroutine(Timer(duration));
+        }
+
+        private IEnumerator Timer(float duration)
+        {
+            while (true)
+            {
+                _timerText.text = Mathf.RoundToInt(duration).ToString();
+                duration -= Time.deltaTime;
+
+                if (duration < 0)
+                {
+                    StopTimer();
+                    break;
+                }
+                yield return null;
+            }
+            
+            
         }
         public void StopTimer()
         {
             _timerText.text = "";
+            _timerContainer.SetActive(false);
         }
 
         
