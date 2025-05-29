@@ -108,9 +108,9 @@ RectTransform:
   m_Father: {fileID: 1556079900483563395}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 169.6, y: -45}
-  m_SizeDelta: {x: 255.9, y: 50}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -294.565, y: -49.6}
+  m_SizeDelta: {x: -727.77, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &231290836715012966
 CanvasRenderer:
@@ -764,8 +764,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 234, y: -15}
-  m_SizeDelta: {x: 228, y: 163}
+  m_AnchoredPosition: {x: 249, y: -15}
+  m_SizeDelta: {x: 275.8, y: 163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &239997024525434598
 CanvasRenderer:
@@ -1249,7 +1249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 755, y: -217}
+  m_AnchoredPosition: {x: 734, y: -217}
   m_SizeDelta: {x: 216, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4026275701619880049
@@ -1602,7 +1602,7 @@ MonoBehaviour:
   _questTitleText: {fileID: 3200302037776922441}
   _timeForQuestText: {fileID: 7340719061691222280}
   _timerText: {fileID: 2183331462322352571}
-  _timerContainer: {fileID: 0}
+  _timerContainer: {fileID: 4613212592193782278}
   _acceptQuestButton: {fileID: 7851663777331776877}
 --- !u!95 &7403974718792866819
 Animator:

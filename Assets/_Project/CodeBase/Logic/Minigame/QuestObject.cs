@@ -28,30 +28,33 @@ namespace CodeBase.Logic.Minigame
 
         private void OnQuestFinished(int id)
         {
+            if (Mode == Mode.DeactivateWhenQuestStarted)
+            {
+                gameObject.SetActive(true);
+            }
+            
             if (id != QuestStaticData.Id) return;
             
             
             if (Mode == Mode.ActivateWhenQuestStarted)
             {
                 gameObject.SetActive(false);
-            }else if (Mode == Mode.DeactivateWhenQuestStarted)
-            {
-                gameObject.SetActive(true);
             }
         }
 
         private void OnQuestStarted(int id)
         {
             Debug.Log(id);
+            if (Mode == Mode.DeactivateWhenQuestStarted)
+            {
+                gameObject.SetActive(false);
+            }
             if (id != QuestStaticData.Id) return;
-            
-            
+
+
             if (Mode == Mode.ActivateWhenQuestStarted)
             {
                 gameObject.SetActive(true);
-            }else if (Mode == Mode.DeactivateWhenQuestStarted)
-            {
-                gameObject.SetActive(false);
             }
         }
     }
