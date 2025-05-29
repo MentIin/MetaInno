@@ -16,6 +16,7 @@ namespace CodeBase.Logic.Minigame
             base.OnStartClient();
             MinigameManagerSinglton.Instance.QuestStarted += OnQuestStarted;
             MinigameManagerSinglton.Instance.QuestFinished += OnQuestFinished;
+            MinigameManagerSinglton.Instance.QuestFail += OnQuestFinished;
             
             
             

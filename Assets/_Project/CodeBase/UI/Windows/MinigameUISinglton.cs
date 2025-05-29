@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.StaticData;
+using CodeBase.Logic.Minigame;
 using CodeBase.UI.Elements;
+using FishNet.Connection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -55,8 +58,13 @@ namespace CodeBase.UI.Services.Windows
 
             StopTimer();
         }
-        
-        
+
+        private void Start()
+        {
+            
+        }
+
+
         public void ShowQuestDialog(QuestStaticData questStaticData)
         {
             _questDialogAnimator.SetBool("active", true);
@@ -75,13 +83,14 @@ namespace CodeBase.UI.Services.Windows
         }
         
         
-        public void StartTimer(float duration)
+        
+        public void StartTimer(float duration, NetworkConnection networkConnection, int questId)
         {
             _timerContainer.SetActive(true);
-            StartCoroutine(Timer(duration));
+            StartCoroutine(Timer(duration, networkConnection, questId));
         }
 
-        private IEnumerator Timer(float duration)
+        private IEnumerator Timer(float duration, NetworkConnection networkConnection, int questId)
         {
             while (true)
             {
@@ -90,6 +99,7 @@ namespace CodeBase.UI.Services.Windows
 
                 if (duration < 0)
                 {
+                    MinigameManagerSinglton.Instance.FailMinigame(networkConnection, questId);
                     StopTimer();
                     break;
                 }
@@ -97,13 +107,15 @@ namespace CodeBase.UI.Services.Windows
             }
             
             
+            
+            
         }
         public void StopTimer()
         {
             _timerText.text = "";
             _timerContainer.SetActive(false);
+            StopAllCoroutines();
         }
-
         
     }
 }

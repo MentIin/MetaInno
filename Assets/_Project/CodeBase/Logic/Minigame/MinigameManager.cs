@@ -23,6 +23,7 @@ namespace CodeBase.Logic.Minigame
 
         public event Action<int> QuestStarted;
         public event Action<int> QuestFinished;
+        public event Action<int> QuestFail;
 
 
         public override void OnStartServer()
@@ -92,7 +93,7 @@ namespace CodeBase.Logic.Minigame
             Debug.Log(3);
             QuestStarted?.Invoke(questId);
             
-            MinigameUISinglton.Instance.StartTimer(duration);
+            MinigameUISinglton.Instance.StartTimer(duration, networkConnection, questId);
         }
         
         
@@ -126,9 +127,40 @@ namespace CodeBase.Logic.Minigame
         {
             QuestFinished?.Invoke(questId);
             
+            MinigameUISinglton.Instance.StopTimer();
         }
 
-
         
+
+        public void FailMinigame(NetworkConnection networkConnection, int questId)
+        {
+            
+            FailMinigameServerRPC(networkConnection, questId);
+        }
+
+        private void FailMinigameServerRPC(NetworkConnection playerConnection, int questId)
+        {
+            if (_questDataMap.ContainsKey(questId))
+            {
+                if (_questDataMap[questId].CurrentPlayers.Contains(playerConnection))
+                {
+                    _questDataMap[questId].CurrentPlayers.Remove(playerConnection);
+                }
+                
+                // Optionally, check if the quest is complete and handle accordingly
+                if (_questDataMap[questId].CurrentPlayers.Count == 0)
+                {
+                    _questDataMap.Remove(questId);
+                }
+
+                FailMinigameTargetRPC(playerConnection, questId);
+            }
+        }
+
+        [TargetRpc]
+        private void FailMinigameTargetRPC(NetworkConnection playerConnection, int questId)
+        {
+            QuestFail?.Invoke(questId);
+        }
     }
 }
