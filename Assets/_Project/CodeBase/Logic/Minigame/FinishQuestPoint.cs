@@ -11,6 +11,15 @@ namespace CodeBase.Logic.Minigame
     {
         public QuestStaticData QuestStaticData;
 
+        public ParticleSystem ParticleSystem;
+
+        public void Start()
+        {
+            base.OnStartClient();
+            ParticleSystem.transform.parent = null;
+        }
+        
+
         private void OnTriggerEnter(Collider other)
         {
             if (IsClientInitialized)
@@ -20,8 +29,11 @@ namespace CodeBase.Logic.Minigame
                     NetworkObject player = other.GetComponent<NetworkObject>();
                     //ShowWindowClientRpc(player.Owner);
                     //MinigameUISinglton.Instance.ShowQuestDialog
-                    //(QuestStaticData);
+                    //(_currentQuestStaticData);
                     MinigameManagerSinglton.Instance.FinishMinigame(QuestStaticData, MinigameUISinglton.Instance.TimeLeft);
+                    
+                    ParticleSystem.Play();
+                    MinigameUISinglton.Instance.PlayFinishAnimation();
                 }
             }
         }

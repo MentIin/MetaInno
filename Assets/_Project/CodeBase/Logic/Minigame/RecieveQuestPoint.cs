@@ -4,13 +4,16 @@ using CodeBase.UI.Services.Windows;
 using FishNet.Connection;
 using FishNet.Object;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace CodeBase.Logic.Minigame
 {
     [RequireComponent(typeof(SphereCollider))]
     public class ReceiveQuestPoint : NetworkBehaviour
     {
-        public QuestStaticData QuestStaticData;
+        public QuestStaticData[] Quests;
+        private QuestStaticData _currentQuestStaticData;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -22,8 +25,9 @@ namespace CodeBase.Logic.Minigame
                     //ShowWindowClientRpc(player.Owner);
                     if (player.IsOwner)
                     {
-                        
-                        MinigameUISinglton.Instance.ShowQuestDialog(QuestStaticData);
+                        _currentQuestStaticData = Quests[Random.Range(0, Quests.Length)];
+                          
+                        MinigameUISinglton.Instance.ShowQuestDialog(_currentQuestStaticData);
                     }
                 }
             }
@@ -32,7 +36,7 @@ namespace CodeBase.Logic.Minigame
         [TargetRpc]
         private void ShowWindowClientRpc(NetworkConnection target)
         {
-            MinigameUISinglton.Instance.ShowQuestDialog(QuestStaticData);
+            MinigameUISinglton.Instance.ShowQuestDialog(_currentQuestStaticData);
             MinigameManagerSinglton.Instance.LocalOwner = target;
         }
     }

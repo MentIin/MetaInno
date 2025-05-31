@@ -149,7 +149,7 @@ public class RoverCharacter : CharacterBase
                              _externalForceController.ExternalForce * Time.fixedDeltaTime;
 
         HandleBounce(finalMoveVector);
-        _controller.Move(finalMoveVector);
+        if (finalMoveVector.magnitude > Time.fixedDeltaTime / 2f) _controller.Move(finalMoveVector);
     }
 
     private void HandleBounce(Vector3 moveVector)

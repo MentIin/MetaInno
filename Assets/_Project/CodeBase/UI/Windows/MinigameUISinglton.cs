@@ -4,6 +4,7 @@ using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.StaticData;
 using CodeBase.Logic.Minigame;
 using CodeBase.UI.Elements;
+using DG.Tweening;
 using FishNet.Connection;
 using TMPro;
 using UnityEngine;
@@ -14,7 +15,8 @@ namespace CodeBase.UI.Services.Windows
 {
     public class MinigameUISinglton : MonoBehaviour
     {
-        [SerializeField] private Animator _questDialogAnimator;
+        [FormerlySerializedAs("_questDialogAnimator")] [SerializeField] private Animator _animator;
+        
         
         [SerializeField] private TextMeshProUGUI _questTitleText;
         [SerializeField] private TextMeshProUGUI _timeForQuestText;
@@ -23,7 +25,9 @@ namespace CodeBase.UI.Services.Windows
         [SerializeField] private GameObject _timerContainer;
 
         [SerializeField] private AcceptQuestButton _acceptQuestButton;
-        
+
+        [Space(10)]
+        [SerializeField] private RectTransform _finishPanel;
         private QuestStaticData _currentQuestStaticData;
         
         private static MinigameUISinglton _instance;
@@ -68,7 +72,7 @@ namespace CodeBase.UI.Services.Windows
 
         public void ShowQuestDialog(QuestStaticData questStaticData)
         {
-            _questDialogAnimator.SetBool("active", true);
+            _animator.SetBool("active", true);
             _questTitleText.text = questStaticData.Title;
             //QuestDescriptionText.text = questStaticData.Description;
             _currentQuestStaticData = questStaticData;
@@ -80,7 +84,7 @@ namespace CodeBase.UI.Services.Windows
         
         public void CloseWindow()
         {
-            _questDialogAnimator.SetBool("active", false);
+            _animator.SetBool("active", false);
         }
         
         
@@ -118,6 +122,15 @@ namespace CodeBase.UI.Services.Windows
             _timerContainer.SetActive(false);
             StopAllCoroutines();
         }
-        
+
+        public void PlayFinishAnimation()
+        {
+            DOTween.Sequence().Append(_finishPanel.DOScale(Vector3.one, 1f).SetEase(Ease.OutElastic)).
+                Append(_finishPanel.DOScale(Vector3.one, 1f))
+                .Append(_finishPanel.DOScale(Vector3.one * 0.01f, .3f))
+                .Append(_finishPanel.DOScale(Vector3.one * 0f, .1f));
+
+
+        }
     }
 }

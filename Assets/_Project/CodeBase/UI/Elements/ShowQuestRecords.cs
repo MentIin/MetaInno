@@ -39,16 +39,16 @@ namespace CodeBase.UI.Elements
 
         private void UpdateText()
         {
-            string txt = "";
+            string txt = "Лучшее время:\n";
             foreach (var data in QuestStaticData)
             {
                 if (!_records.ContainsKey(data.Id))
                 {
-                    txt = txt + data.Destination + ":" + " " + "-" + "\n";
+                    txt = txt + " " + data.Destination + ":" + " " + "-" + "\n";
                 }
                 else
                 {
-                    txt = txt + data.Destination + ":" + " " + Mathf.Round(_records[data.Id]) + " c." + "\n";
+                    txt = txt + " " + data.Destination + ":" + " " + Mathf.Round(_records[data.Id]) + " c." + "\n";
                 }
             }
 
