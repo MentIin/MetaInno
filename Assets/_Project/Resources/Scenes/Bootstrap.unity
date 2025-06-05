@@ -1022,23 +1022,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsNested>k__BackingField: 0
-  WasActiveDuringEdit: 1
-  WasActiveDuringEdit_Set: 1
-  <ComponentIndex>k__BackingField: 0
-  <PredictedSpawn>k__BackingField: {fileID: 0}
-  <PredictedOwner>k__BackingField: {fileID: 0}
-  NetworkBehaviours: []
-  InitializedParentNetworkBehaviour: {fileID: 0}
-  InitializedNestedNetworkObjects: []
-  RuntimeParentNetworkBehaviour: {fileID: 0}
-  RuntimeChildNetworkBehaviours: []
-  _isNetworked: 1
-  _isSpawnable: 1
-  _isGlobal: 0
-  _initializeOrder: -6
-  _preventDespawnOnDisconnect: 0
-  _defaultDespawnType: 0
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -1062,6 +1045,23 @@ MonoBehaviour:
     Rotation: {x: 0, y: 0, z: 0, w: 0}
     Scale: {x: 0, y: 0, z: 0}
     IsValid: 0
+  <IsNested>k__BackingField: 0
+  WasActiveDuringEdit: 1
+  WasActiveDuringEdit_Set: 1
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  <PredictedOwner>k__BackingField: {fileID: 0}
+  NetworkBehaviours: []
+  InitializedParentNetworkBehaviour: {fileID: 0}
+  InitializedNestedNetworkObjects: []
+  RuntimeParentNetworkBehaviour: {fileID: 0}
+  RuntimeChildNetworkBehaviours: []
+  _isNetworked: 1
+  _isSpawnable: 1
+  _isGlobal: 0
+  _initializeOrder: -6
+  _preventDespawnOnDisconnect: 0
+  _defaultDespawnType: 0
 --- !u!114 &936068049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2100,23 +2100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsNested>k__BackingField: 0
-  WasActiveDuringEdit: 1
-  WasActiveDuringEdit_Set: 1
-  <ComponentIndex>k__BackingField: 0
-  <PredictedSpawn>k__BackingField: {fileID: 0}
-  <PredictedOwner>k__BackingField: {fileID: 0}
-  NetworkBehaviours: []
-  InitializedParentNetworkBehaviour: {fileID: 0}
-  InitializedNestedNetworkObjects: []
-  RuntimeParentNetworkBehaviour: {fileID: 0}
-  RuntimeChildNetworkBehaviours: []
-  _isNetworked: 1
-  _isSpawnable: 1
-  _isGlobal: 0
-  _initializeOrder: 0
-  _preventDespawnOnDisconnect: 0
-  _defaultDespawnType: 0
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -2140,6 +2123,23 @@ MonoBehaviour:
     Rotation: {x: 0, y: 0, z: 0, w: 0}
     Scale: {x: 0, y: 0, z: 0}
     IsValid: 0
+  <IsNested>k__BackingField: 0
+  WasActiveDuringEdit: 1
+  WasActiveDuringEdit_Set: 1
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  <PredictedOwner>k__BackingField: {fileID: 0}
+  NetworkBehaviours: []
+  InitializedParentNetworkBehaviour: {fileID: 0}
+  InitializedNestedNetworkObjects: []
+  RuntimeParentNetworkBehaviour: {fileID: 0}
+  RuntimeChildNetworkBehaviours: []
+  _isNetworked: 1
+  _isSpawnable: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _preventDespawnOnDisconnect: 0
+  _defaultDespawnType: 0
 --- !u!114 &1966695975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2410,6 +2410,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6358d2d624281e548a86d9c3ae51b2fd, type: 3}
+--- !u!1001 &4607535060421635643
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 314469284038855327, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
+      propertyPath: 'm_Materials.Array.data[6]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ffce2a7e1519d465684f3f97da456fa9, type: 2}
+    - target: {fileID: 6267361623550070270, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
+      propertyPath: m_Name
+      value: University
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751446268468156228, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 58.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751446268468156228, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0000069174152
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751446268468156228, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 120.42432
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751446268468156228, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751446268468156228, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751446268468156228, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751446268468156228, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751446268468156228, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751446268468156228, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751446268468156228, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b2fb4147940e09607a28a8346e35bd2f, type: 3}
 --- !u!1001 &5757619458516191310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3999,7 +4060,9 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3094312552496281725, guid: fa9062e497b47ca4bb48eab01fc8f527, type: 3}
+    - {fileID: 5080193294398210698, guid: fa9062e497b47ca4bb48eab01fc8f527, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa9062e497b47ca4bb48eab01fc8f527, type: 3}
@@ -4328,3 +4391,4 @@ SceneRoots:
   - {fileID: 1966695977}
   - {fileID: 2493481771961790998}
   - {fileID: 1858573566}
+  - {fileID: 4607535060421635643}
