@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
-using FishNet;
-using FishNet.Connection;
-using FishNet.Managing.Scened;
-// Для доступа к InstanceFinder.ServerManager
 
-// Для управления сценами
+using FishNet.Connection;
 
 
 namespace CodeBase.Infrastructure.Services.MiniGameService
 {
+    // server class
     public class MiniGameService : IService
     {
         private readonly Dictionary<int, MiniGame> _activeMiniGames = new Dictionary<int, MiniGame>();
@@ -18,7 +15,6 @@ namespace CodeBase.Infrastructure.Services.MiniGameService
         {
             int instanceId = _nextInstanceId++;
 
-            // 1. Создаем объект игры и регистрируем его
             var newGame = new MiniGame(instanceId, gameType, players);
             _activeMiniGames.Add(instanceId, newGame);
         
@@ -27,7 +23,7 @@ namespace CodeBase.Infrastructure.Services.MiniGameService
             return newGame;
         }
         
-        public void EndMiniGame(int instanceId, string hubSceneName = "HubWorld") // Укажите имя вашей главной сцены
+        public void EndMiniGame(int instanceId) // Укажите имя вашей главной сцены
         {
             if (!_activeMiniGames.TryGetValue(instanceId, out var gameToEnd))
             {
@@ -35,7 +31,7 @@ namespace CodeBase.Infrastructure.Services.MiniGameService
                 return;
             }
 
-            UnityEngine.Debug.Log($"[MiniGameService] Ending mini-game {instanceId}. Returning players to {hubSceneName}.");
+            UnityEngine.Debug.Log($"[MiniGameService] Ending mini-game {instanceId}");
         
             // 2. Удаляем игру из списка активных
             _activeMiniGames.Remove(instanceId);

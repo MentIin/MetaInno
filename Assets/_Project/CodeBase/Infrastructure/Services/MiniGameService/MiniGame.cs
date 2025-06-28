@@ -29,7 +29,7 @@ namespace CodeBase.Infrastructure.Services.MiniGameService
             InstanceId = instanceId;
             GameType = gameType;
             Players = initialPlayers;
-            State = MiniGameState.Lobby; // Начинаем с лобби
+            State = MiniGameState.Lobby;
         }
     }
 }
