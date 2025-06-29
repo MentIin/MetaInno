@@ -11,6 +11,5 @@ public class SetClientAdressPlayflow : NetworkBehaviour
     private void Start()
     {
         lobbyHelloWorld.DoCreateLobbyOnClick();
-        bayouTransport.SetClientAddress(lobbyHelloWorld.);
     }
 }

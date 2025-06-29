@@ -84,7 +84,7 @@ namespace PlayFlow
                     {
                         errorDetails += $", Response Body: {request.downloadHandler.text}";
                     }
-                    Debug.LogError($"API Request Failed for {method} {fullUrl}: {errorDetails}");
+                    Debug.Log($"API Request Failed for {method} {fullUrl}: {errorDetails}");
                     throw new Exception($"API Error ({request.responseCode}) for {method} {fullUrl}: {request.error}. Details: {request.downloadHandler?.text}");
                 }
             }
