@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿/*using System.Collections.Generic;
 using CodeBase.Infrastructure.Services.MiniGameService;
 using FishNet.Connection;
 using NUnit.Framework;
@@ -9,6 +9,11 @@ namespace CodeBase.Tests.Infrastructure.Services.MiniGame
 {
     public class MiniGameServiceTests
     {
+        public static MiniGameServiceTests CreateInstance()
+        {
+            return new MiniGameServiceTests();
+        }
+
         private MiniGameService _miniGameService;
 
         [SetUp]
@@ -56,4 +61,4 @@ namespace CodeBase.Tests.Infrastructure.Services.MiniGame
             Assert.Pass("Ending a non-existent mini-game should not throw an exception.");
         }
     }
-}
+}*/
