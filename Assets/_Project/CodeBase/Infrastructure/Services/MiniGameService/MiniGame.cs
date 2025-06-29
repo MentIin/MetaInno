@@ -14,7 +14,9 @@ namespace CodeBase.Infrastructure.Services.MiniGameService
     {
         Race,
         Shooter,
-        Puzzle
+        Puzzle,
+        AnotherGame,
+        DefaultGame
     }
 
     public class MiniGame
