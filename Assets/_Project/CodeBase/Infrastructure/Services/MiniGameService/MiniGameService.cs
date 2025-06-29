@@ -12,13 +12,14 @@ namespace CodeBase.Infrastructure.Services.MiniGameService
     {
         private readonly Dictionary<int, MiniGame> _activeMiniGames = new Dictionary<int, MiniGame>();
         private int _nextInstanceId = 1;
+
         public MiniGame CreateMiniGame(MiniGameType gameType, List<NetworkConnection> players)
         {
             int instanceId = _nextInstanceId++;
 
             var newGame = new MiniGame(instanceId, gameType, players);
             _activeMiniGames.Add(instanceId, newGame);
-        
+
             Debug.Log($"[MiniGameService] Created mini-game {gameType} with ID {instanceId} for {players.Count} players.");
 
             return newGame;
@@ -32,6 +33,7 @@ namespace CodeBase.Infrastructure.Services.MiniGameService
             }
 
             Debug.Log($"[MiniGameService] Ending mini-game {instanceId}");
+
             _activeMiniGames.Remove(instanceId);
         }
     }
