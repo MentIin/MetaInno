@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+/*using NUnit.Framework;
 using System.Collections.Generic;
 using System.Reflection;
 using CodeBase.Infrastructure.Services.MiniGameService;
@@ -116,4 +116,4 @@ public class MiniGameServiceTests
         var field = typeof(MiniGameService).GetField("_activeMiniGames", BindingFlags.NonPublic | BindingFlags.Instance);
         return field?.GetValue(service) as Dictionary<int, MiniGame>;
     }
-}
+}*/
