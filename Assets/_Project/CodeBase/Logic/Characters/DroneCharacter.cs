@@ -11,8 +11,8 @@ public class DroneCharacter : CharacterBase
     private float _gravity = -24f;
     private float _flyingForce = 12f;
     
-    private float _visualLeanAmount = 2f;
-    [SerializeField] private float _visualLeanSpeed = 12f;
+    [SerializeField]private float _visualLeanAmount = -14f;
+    [SerializeField] private float _visualLeanSpeed = 6f;
 
 
     private float _verticalVelocity;
@@ -48,10 +48,11 @@ public class DroneCharacter : CharacterBase
         
         Vector3 direction = new Vector3(_inputAxis.x, 0f, _inputAxis.y);
         Vector3 desiredHorizontalMovement = direction * _speed;
-        
+
         if (_inputAxis.sqrMagnitude != 0)
         {
-            _controller.transform.localRotation = Quaternion.LookRotation(direction);
+            Quaternion desiredRotation = Quaternion.LookRotation(direction);
+            _controller.transform.localRotation = Quaternion.Slerp(_controller.transform.localRotation, desiredRotation, Time.deltaTime * 7f);
         }
         
         
@@ -72,15 +73,20 @@ public class DroneCharacter : CharacterBase
         Vector3 upVelocity = Vector3.up * _verticalVelocity;
         
         _horizontalVelocity = Vector3.Lerp(_horizontalVelocity, desiredHorizontalMovement, _acceleration * Time.fixedDeltaTime);
+
+
+        Vector3 burger = new Vector3(
+            -direction.z,  // Pitch (forward/backward)
+            0, // Yaw (we typically don't want this for leaning)
+            direction.x  // Roll (left/right)
+        );
+        Vector3 targetEuler = _visuals.transform.InverseTransformDirection(burger);
+        targetEuler *= _visualLeanAmount;
+
         
 
-        Vector3 targetEuler = _visuals.eulerAngles;
-        float amount = (_horizontalVelocity.magnitude / _speed) * _visualLeanAmount;
-        targetEuler.z = -_horizontalVelocity.x * _speed;
-        targetEuler.x = _horizontalVelocity.z * _speed;
-
         Quaternion targetRotation = Quaternion.Euler(targetEuler);
-        //_visuals.rotation = Quaternion.Slerp(_visuals.rotation, targetRotation, _visualLeanSpeed * Time.fixedDeltaTime);
+        _visuals.localRotation = Quaternion.Slerp(_visuals.localRotation, targetRotation, _visualLeanSpeed * Time.fixedDeltaTime);
 
 
         Vector3 moveVector = (_horizontalVelocity + upVelocity) * Time.fixedDeltaTime +
