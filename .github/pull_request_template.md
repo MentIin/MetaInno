@@ -1,11 +1,3 @@
----
-name: General Pull Request
-about: Template for general code changes, bug fixes, or new features.
-title: "[PR] Concise description of changes"
-labels: []
-assignees: []
----
-
 ## Description
 
 Please include a brief, high-level description of the changes made in this Pull Request.
@@ -14,7 +6,7 @@ Please include a brief, high-level description of the changes made in this Pull 
 
 ## Linked Issue (REQUIRED)
 
-Please link to the issue(s) that this pull request addresses using keywords like `Closes #123`, `Fixes #456`, or `Resolves #789`.
+Please link to the issue(s) that this pull request addresses in the Development section in right sidebar.
 
 ---
 
@@ -39,7 +31,7 @@ Please describe the tests that you ran to verify your changes. Provide instructi
 -   [ ] Integration tests
 -   [ ] End-to-End tests
 -   [ ] Manual testing (provide steps)
-
+-   [ ] Doesn't require testing (adds models or sprites)
 ---
 
 ## Checklist:
