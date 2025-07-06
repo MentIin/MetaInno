@@ -16,7 +16,7 @@ public class RoverCharacter : CharacterBase
     private float _yVelocity=0f;
 
     private float _currentMoveSpeed = 0f;
-    private float _moveSpeed = 11f;
+    private float _moveSpeed = 14f;
 
     private bool _tryingDrift;
     private bool _drift;

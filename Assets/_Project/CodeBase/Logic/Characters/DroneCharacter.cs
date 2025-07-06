@@ -6,7 +6,7 @@ public class DroneCharacter : CharacterBase
     [SerializeField] private LayerMask _bounceMask;
     
     
-    private float _speed = 5f;
+    private float _speed = 10f;
     private float _acceleration = 10f;
     private float _gravity = -24f;
     private float _flyingForce = 12f;

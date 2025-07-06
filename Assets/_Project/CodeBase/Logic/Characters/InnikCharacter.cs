@@ -17,7 +17,7 @@ public class InnikCharacter : CharacterBase
     
     private float _jumpBuffer = 0.0f;
     private float _cayoutTime = 0.0f;
-    private float _speed=4;
+    private float _speed=7.5f;
 
     private HandsController _handsController;
     
