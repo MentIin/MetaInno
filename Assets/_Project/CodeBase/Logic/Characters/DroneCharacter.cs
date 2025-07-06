@@ -4,8 +4,7 @@ using UnityEngine;
 public class DroneCharacter : CharacterBase
 {
     [SerializeField] private LayerMask _bounceMask;
-    
-    
+
     private float _speed = 10f;
     private float _acceleration = 10f;
     private float _gravity = -24f;
@@ -18,22 +17,21 @@ public class DroneCharacter : CharacterBase
     private float _verticalVelocity;
     private Vector3 _horizontalVelocity;
     private bool _tryingToFly = false;
-    
+
     private float _reload=0f;
 
-    
-    
-    
+
+
     private RaycastHit[] hits = new RaycastHit[4];
-    
+
     public override void ActionStart()
     {
         if (_reload > 0) return;
-        
+
         _reload = 0.3f;
         if (_verticalVelocity < 0) 
             _verticalVelocity = 0;
-        
+
         _verticalVelocity += 12f;
     }
 
@@ -45,7 +43,7 @@ public class DroneCharacter : CharacterBase
     public override void Move(Vector2 _inputAxis)
     {
         _reload -= Time.fixedDeltaTime;
-        
+
         Vector3 direction = new Vector3(_inputAxis.x, 0f, _inputAxis.y);
         Vector3 desiredHorizontalMovement = direction * _speed;
 
@@ -54,9 +52,8 @@ public class DroneCharacter : CharacterBase
             Quaternion desiredRotation = Quaternion.LookRotation(direction);
             _controller.transform.localRotation = Quaternion.Slerp(_controller.transform.localRotation, desiredRotation, Time.deltaTime * 7f);
         }
-        
-        
-        
+
+
         if (_controller.isGrounded)
         {
             _verticalVelocity = Mathf.Clamp(_verticalVelocity, 0f, _verticalVelocity);
@@ -71,7 +68,7 @@ public class DroneCharacter : CharacterBase
         //    _verticalVelocity += _flyingForce * Time.fixedDeltaTime;
 
         Vector3 upVelocity = Vector3.up * _verticalVelocity;
-        
+
         _horizontalVelocity = Vector3.Lerp(_horizontalVelocity, desiredHorizontalMovement, _acceleration * Time.fixedDeltaTime);
 
 
@@ -83,7 +80,7 @@ public class DroneCharacter : CharacterBase
         Vector3 targetEuler = _visuals.transform.InverseTransformDirection(burger);
         targetEuler *= _visualLeanAmount;
 
-        
+
 
         Quaternion targetRotation = Quaternion.Euler(targetEuler);
         _visuals.localRotation = Quaternion.Slerp(_visuals.localRotation, targetRotation, _visualLeanSpeed * Time.fixedDeltaTime);
@@ -99,23 +96,22 @@ public class DroneCharacter : CharacterBase
     private void HandleBounce(Vector3 moveVector)
     {
         if (moveVector.sqrMagnitude == 0) return;
-        
+
         if (_controller.detectCollisions)
         {
-            
+
             int c = Physics.SphereCastNonAlloc(_controller.center + _controller.transform.position, _controller.radius * 0.8f,
                 moveVector.normalized, hits, .5f, _bounceMask);
             for (int i = 0; i < c; i++)
             {
                 if (hits[i].collider == null) continue;
                 if (hits[i].transform == _controller.transform) continue;
-                
+
 
                 float force = _horizontalVelocity.magnitude;
 
                 if (hits[i].transform.gameObject.CompareTag("Player"))
                 {
-                    
                     Debug.Log("BounceRPC player" + hits[i].transform.gameObject.GetComponent<ExternalForceController>().ExternalForce);
                     if (hits[i].transform.gameObject.GetComponent<PlayerController>().CurrentCharacter is
                             InnikCharacter ||
