@@ -12,7 +12,7 @@ public class InnikCharacter : CharacterBase
     [SerializeField] private Transform _hand2;
 
     private float gravity = -15f;
-    private float _yVelocity= 0f;
+    private float _yVelocity = 0f;
 
     private float _jumpBuffer = 0.0f;
     private float _cayoutTime = 0.0f;

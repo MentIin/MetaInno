@@ -120,7 +120,7 @@ public class RoverCharacter : CharacterBase
 
         Vector3 currentRotationVector = _controller.transform.forward;
 
-        _currentMoveSpeed = Mathf.Clamp((_currentMoveSpeed + inputAxis.y*Time.fixedDeltaTime * 7), -_moveSpeed, _moveSpeed);
+        _currentMoveSpeed = Mathf.Clamp((_currentMoveSpeed + inputAxis.y * Time.fixedDeltaTime * 7), -_moveSpeed, _moveSpeed);
 
         Vector3 direction = currentRotationVector.normalized * Time.fixedDeltaTime * (_currentMoveSpeed + _driftBoost);
         direction += Vector3.up * _yVelocity * Time.fixedDeltaTime;
