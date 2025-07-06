@@ -5,13 +5,19 @@
 
 ## Architecture
 ### Static View
-[Document static architecture using UML Component diagram. Discuss coupling, cohesion, and maintainability.]
+https://drive.google.com/file/d/11-HidMRqp7Yt-djxet07YwwtNSirKlox/view?usp=sharing
+Only two services (self-programmed) are currently used. The team has focused on improving the map and polishing the player movement.
 
 ### Dynamic View
 [Document dynamic architecture using UML Sequence diagram for a non-trivial request. Include performance metrics.]
 
 ### Deployment View
-[Document deployment architecture with diagrams. Explain deployment choices.]
+The diagram for this process will be unnecessary.
+We follow these steps:
+1. We build the game inside the editor
+2. Compress the resulted folder into a zip archive
+3. Upload the zip to PlayFlow to launch the server
+4. Upload the zip to Itch io to make the game available for clients
 
 ## Development
 ### Kanban Board
@@ -87,19 +93,19 @@ Documented quality characteristics from ISO 25010:
 ### Automated Tests
 #### Tools Used:
 - [Testing framework 1] for unit tests
-- [Testing framework 2] for integration tests
 
-#### Test Locations:
+#### Test https://github.com/MentIin/MetaInno/actionsLocations:
 - Unit tests: [path]
-- Integration tests: [path]
+- Integration tests: we don't integrate third-party services/libraries
 
 ### User Acceptance Tests
 [Link to user-acceptance-tests.md]
 
 ## Build and Deployment
 ### Continuous Integration
-[Link to CI workflow file]  
+CI tool: https://github.com/MentIin/MetaInno/blob/main/.github/workflows/super-linter.yml
 Tools:
-- [Static analysis tool 1] - [purpose]
-- [Testing tool 1] - [purpose]
-[Link to workflow runs]
+- Super Linter - lints the C# code
+- Uniy Cloud Build - builds the project when commiting in `main`
+
+Workflow runs: https://github.com/MentIin/MetaInno/actions
