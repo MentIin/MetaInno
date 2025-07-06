@@ -5,35 +5,34 @@ using UnityEngine;
 
 public class InnikCharacter : CharacterBase
 {
-    
     [SerializeField] private LayerMask _bounceMask;
     [SerializeField] private LayerMask _grabbableMask;
-    
+
     [SerializeField] private Transform _hand1;
     [SerializeField] private Transform _hand2;
-    
-    private float gravity=-15f;
-    private float _yVelocity=0f;
-    
+
+    private float gravity = -15f;
+    private float _yVelocity = 0f;
+
     private float _jumpBuffer = 0.0f;
     private float _cayoutTime = 0.0f;
-    private float _speed=4;
+    private float _speed = 7.5f;
 
     private HandsController _handsController;
-    
+
     private RaycastHit[] hits = new RaycastHit[4];
 
 
     public override void Initialize()
     {
         _handsController = new HandsController(_hand1, _hand2, _grabbableMask, transform);
-        
+
     }
 
     public override void ActionStart()
     {
         _jumpBuffer = 0.3f;
-        
+
     }
 
     public override void ActionStop()
@@ -68,8 +67,8 @@ public class InnikCharacter : CharacterBase
 
         Vector3 direction = Vector3.forward * _inputAxis.y + Vector3.right * _inputAxis.x;
 
-        Vector3 moveVector = direction * Time.fixedDeltaTime * _speed + 
-                             Vector3.up * _yVelocity * Time.fixedDeltaTime + 
+        Vector3 moveVector = direction * Time.fixedDeltaTime * _speed +
+                             Vector3.up * _yVelocity * Time.fixedDeltaTime +
                              _externalForceController.ExternalForce * Time.fixedDeltaTime;
         _controller.Move(moveVector);
 
@@ -77,9 +76,9 @@ public class InnikCharacter : CharacterBase
         {
             _controller.transform.rotation = Quaternion.LookRotation(direction);
         }
-        
-        
-        
+
+
+
         if (_controller.isGrounded)
         {
             _yVelocity = 0f;
@@ -95,24 +94,24 @@ public class InnikCharacter : CharacterBase
         {
             HandleBounce(moveVector);
         }
-        
+
     }
     private void HandleBounce(Vector3 moveVector)
     {
-        
+
         int c = Physics.SphereCastNonAlloc(_controller.center + _controller.transform.position, _controller.radius * 1f,
             moveVector.normalized, hits, .5f, _bounceMask);
         for (int i = 0; i < c; i++)
         {
             if (hits[i].collider == null) continue;
             if (hits[i].transform == _controller.transform) continue;
-            
+
 
             float force = 2f;
 
             if (hits[i].transform.gameObject.CompareTag("Player"))
             {
-                
+
                 Debug.Log("BounceRPC player" + hits[i].transform.gameObject.GetComponent<ExternalForceController>().ExternalForce);
                 if (hits[i].transform.gameObject.GetComponent<PlayerController>().CurrentCharacter is
                         InnikCharacter)
