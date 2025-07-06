@@ -1,48 +1,105 @@
+# Metapolis
+
+## Usage
+[Explain how to use your MVP v2. Provide access instructions, authentication credentials if needed, etc.]
+
+## Architecture
+### Static View
+[Document static architecture using UML Component diagram. Discuss coupling, cohesion, and maintainability.]
+
+### Dynamic View
+[Document dynamic architecture using UML Sequence diagram for a non-trivial request. Include performance metrics.]
+
+### Deployment View
+[Document deployment architecture with diagrams. Explain deployment choices.]
+
 ## Development
-### Kanban board
+### Kanban Board
 Link: https://github.com/users/MentIin/projects/2/views/11
-#### Entry criteria for columns:
-- **To do** - issue (task) will be resolved during this sprint. It is the Sprint Backlog
-- **In progress** - issue is currently being worked on. The issue is here if a developer is currently working on it.
-- **Review (Testing)** - issue is completed and is being tested for bugs (if it works as expected)
-- **Review (QA)** - issue was tested successfully and is being testing for quality (if they are balanced)
-- **Done** - issue is fully completed/resolved and tested
-### Git workflow
-This project uses **GitFlow**.
-**GitFlow** is a structured workflow using two primary branches - `main` (production) and `development` (integration) - alongside feature branches (for new work). Features branch off `development`, and merge back when done. When a the `development` branch mathes the release requirements, it is merged into `main`. Branch names should follow kebab-case. Old branches use PascalCase.
-#### Issue templates
-**Earlier templates:** no issue templates were used. Issues didn't have labels, most suitable people were assigned.
-##### User story
-Given ..., when ..., then ...
-##### Bug report
-Current behaviour:
-Expected beahaviour:
-Reproduction steps:
-##### Technical task
-Subtasks: ...
 
-#### Pull Request
-We use PRs only for merging. Commiting to feature branches doesn't require a PR.
-##### Template
-**Earlier templates:** deafault GitHub PR request was used ("Merge `branch1` into `branch2`").
-Feature ... completed
-The PR should contain all closed issues in its merge commit.
-##### Merging PRs
-#### Issue details
-##### Labels
-- **bug** - something isn't working, a bug that needs to be fixed
-- **documentation** - improvements or additions to documentation
-- **enhancement** - new feature or request
-- **help wanted** - extra attention is needed, assign another team member
-- **invalid** - this doesn't seem right, balancing issues
+#### Entry Criteria for Columns:
+- **To Do** - Issue is part of Sprint Backlog and will be resolved this sprint
+- **In Progress** - Developer is actively working on the issue
+- **Review (Testing)** - Code is complete and being tested for functionality
+- **Review (QA)** - Functionality confirmed and being evaluated for quality
+- **Done** - Issue is fully completed and meets all quality standards
 
-##### Assignees
-People are assigned to issues at the start of the Sprint (at a meeting). If they want, they can assign themselves to other issues themselves.
-#### Commits
-Commits should start with an action (verb in present simple) and a subject of this action. Example: Add rover model, Fix unit test, Add inertia to player controller.
-#### Code reviews
-The code should be reviewed in the process of closing the PR. If something is wrong the comment should be added to the PR, telling the assignee about the problem.
-### Secrets Managements
-The project doesn't have any passwords or API keys.
+### Git Workflow
+This project uses **GitFlow** with two primary branches:
+- `main` (production)
+- `development` (integration)
 
+#### Branching Strategy:
+- Feature branches branch off `development`
+- Branch names follow kebab-case (new) or PascalCase (legacy)
+- Hotfix branches branch off `main`
 
+#### Issue Management:
+##### Templates:
+- **User Story**:  
+  Given [context], when [action], then [outcome]
+- **Bug Report**:  
+  Current behavior: [description]  
+  Expected behavior: [description]  
+  Reproduction steps: [steps]
+- **Technical Task**:  
+  Subtasks: [checklist or links]
+
+##### Labels:
+- **bug** - Something isn't working
+- **documentation** - Documentation improvements
+- **enhancement** - New feature request
+- **help wanted** - Requires additional attention
+- **invalid** - Issue needs reevaluation
+
+##### Assignees:
+- Assigned during sprint planning
+- Self-assignment allowed for additional work
+
+#### Pull Requests:
+- Required for all merges
+- Must reference related issue
+- Template includes:
+  - Description of changes
+  - List of closed issues
+  - Testing performed
+
+#### Code Reviews:
+- Mandatory before merge
+- Conducted via PR comments
+- Must address all feedback before merging
+
+#### Commit Messages:
+- Start with action verb in present tense
+- Example: "Add user authentication", "Fix navigation bug"
+
+### Secrets Management
+No sensitive credentials or API keys are currently stored in the project.
+
+## Quality Assurance
+### Quality Attribute Scenarios
+[Link to quality-attribute-scenarios.md]  
+Documented quality characteristics from ISO 25010:
+1. [Characteristic 1]
+2. [Characteristic 2]
+3. [Characteristic 3]
+
+### Automated Tests
+#### Tools Used:
+- [Testing framework 1] for unit tests
+- [Testing framework 2] for integration tests
+
+#### Test Locations:
+- Unit tests: [path]
+- Integration tests: [path]
+
+### User Acceptance Tests
+[Link to user-acceptance-tests.md]
+
+## Build and Deployment
+### Continuous Integration
+[Link to CI workflow file]  
+Tools:
+- [Static analysis tool 1] - [purpose]
+- [Testing tool 1] - [purpose]
+[Link to workflow runs]
