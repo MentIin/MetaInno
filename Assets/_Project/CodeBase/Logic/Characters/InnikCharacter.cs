@@ -11,12 +11,12 @@ public class InnikCharacter : CharacterBase
     [SerializeField] private Transform _hand1;
     [SerializeField] private Transform _hand2;
 
-    private float gravity=-15f;
-    private float _yVelocity=0f;
+    private float gravity = -15f;
+    private float _yVelocity= 0f;
 
     private float _jumpBuffer = 0.0f;
     private float _cayoutTime = 0.0f;
-    private float _speed=7.5f;
+    private float _speed = 7.5f;
 
     private HandsController _handsController;
 
@@ -67,8 +67,8 @@ public class InnikCharacter : CharacterBase
 
         Vector3 direction = Vector3.forward * _inputAxis.y + Vector3.right * _inputAxis.x;
 
-        Vector3 moveVector = direction * Time.fixedDeltaTime * _speed + 
-                             Vector3.up * _yVelocity * Time.fixedDeltaTime + 
+        Vector3 moveVector = direction * Time.fixedDeltaTime * _speed +
+                             Vector3.up * _yVelocity * Time.fixedDeltaTime +
                              _externalForceController.ExternalForce * Time.fixedDeltaTime;
         _controller.Move(moveVector);
 

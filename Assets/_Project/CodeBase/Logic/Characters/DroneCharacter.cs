@@ -9,8 +9,8 @@ public class DroneCharacter : CharacterBase
     private float _acceleration = 10f;
     private float _gravity = -24f;
     private float _flyingForce = 12f;
-    
-    [SerializeField]private float _visualLeanAmount = -14f;
+
+    [SerializeField] private float _visualLeanAmount = -14f;
     [SerializeField] private float _visualLeanSpeed = 6f;
 
 
@@ -18,7 +18,7 @@ public class DroneCharacter : CharacterBase
     private Vector3 _horizontalVelocity;
     private bool _tryingToFly = false;
 
-    private float _reload=0f;
+    private float _reload = 0f;
 
 
 
@@ -29,7 +29,7 @@ public class DroneCharacter : CharacterBase
         if (_reload > 0) return;
 
         _reload = 0.3f;
-        if (_verticalVelocity < 0) 
+        if (_verticalVelocity < 0)
             _verticalVelocity = 0;
 
         _verticalVelocity += 12f;
