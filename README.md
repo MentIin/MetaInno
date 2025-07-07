@@ -87,11 +87,12 @@ No sensitive credentials or API keys are currently stored in the project.
 
 ## Quality Assurance
 ### Quality Attribute Scenarios
-[Link to quality-attribute-scenarios.md]  
+[Link to quality-attribute-scenarios.md](https://github.com/MentIin/MetaInno/blob/read-me-enhance/docs/quality-assurance/quality-attribute-scenarios.md)
+
 Documented quality characteristics from ISO 25010:
-1. [Characteristic 1]
-2. [Characteristic 2]
-3. [Characteristic 3]
+1. Reliability (Availability)
+2. Performance Efficiency (Time Behaviour)
+3. Security (Resistance)
 
 ### Automated Tests
 #### Tools Used:
