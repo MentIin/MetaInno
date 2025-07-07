@@ -1539,6 +1539,7 @@ GameObject:
   - component: {fileID: 6202074664125517796}
   - component: {fileID: 8122636713827463770}
   - component: {fileID: 1763033529563241304}
+  - component: {fileID: 3883500701253460803}
   m_Layer: 6
   m_Name: BasicPlayer
   m_TagString: Player
@@ -1745,6 +1746,19 @@ MonoBehaviour:
   _networkTransform: {fileID: 349979480273480244}
   _playerController: {fileID: 4703985027393698982}
   _characterController: {fileID: 8965050845624091993}
+--- !u!114 &3883500701253460803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047539034845683087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef60eca6c36bd6580b8d246f45ccd140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionParticles: {fileID: 113576, guid: 471088445f741e64c82f447ba7849c30, type: 3}
 --- !u!1 &4657746788558244440
 GameObject:
   m_ObjectHideFlags: 0
