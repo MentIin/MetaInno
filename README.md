@@ -1,7 +1,7 @@
 # Metapolis
 
 ## Usage
-[Explain how to use your MVP v2. Provide access instructions, authentication credentials if needed, etc.]
+To access Metapolis, visit the Itch.io page (https://innopians.itch.io/metapolis   password: inno), launch the browser-based game, and navigate using WASD (interact with Space/E). For issues, contact @DirectX_11. There is a possibility that the server is off or malfunctioning (since we use free VM), contact us if so.
 
 ## Architecture
 ### Static View
