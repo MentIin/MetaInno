@@ -1,15 +1,15 @@
 # Metapolis
 
 ## Usage
-[Explain how to use your MVP v2. Provide access instructions, authentication credentials if needed, etc.]
+To access Metapolis, visit the Itch.io page (https://innopians.itch.io/metapolis   password: inno), launch the browser-based game, and navigate using WASD (interact with Space/E). For issues, contact @DirectX_11. There is a possibility that the server is off or malfunctioning (since we use free VM), contact us if so.
 
 ## Architecture
 ### Static View
-https://drive.google.com/file/d/11-HidMRqp7Yt-djxet07YwwtNSirKlox/view?usp=sharing
-Only two services (self-programmed) are currently used. The team has focused on improving the map and polishing the player movement.
+![alt text](https://github.com/MentIin/MetaInno/blob/read-me-enhance/.github/static_view.png)
+The team has focused on improving the map and polishing the player movement.
 
 ### Dynamic View
-[Document dynamic architecture using UML Sequence diagram for a non-trivial request. Include performance metrics.]
+![alt text](https://github.com/MentIin/MetaInno/blob/read-me-enhance/.github/dynamic_view.png)
 
 ### Deployment View
 The diagram for this process will be unnecessary.
@@ -18,6 +18,8 @@ We follow these steps:
 2. Compress the resulted folder into a zip archive
 3. Upload the zip to PlayFlow to launch the server
 4. Upload the zip to Itch io to make the game available for clients
+
+We introduced CD for our project, but its currently less effective than current approach.
 
 ## Development
 ### Kanban Board
@@ -42,6 +44,7 @@ This project uses **GitFlow** with two primary branches:
 
 #### Issue Management:
 ##### Templates:
+Full templates can be found in .github folder.
 - **User Story**:  
   Given [context], when [action], then [outcome]
 - **Bug Report**:  
@@ -84,22 +87,23 @@ No sensitive credentials or API keys are currently stored in the project.
 
 ## Quality Assurance
 ### Quality Attribute Scenarios
-[Link to quality-attribute-scenarios.md]  
+[Link to quality-attribute-scenarios.md](https://github.com/MentIin/MetaInno/blob/read-me-enhance/docs/quality-assurance/quality-attribute-scenarios.md)
+
 Documented quality characteristics from ISO 25010:
-1. [Characteristic 1]
-2. [Characteristic 2]
-3. [Characteristic 3]
+1. Reliability (Availability)
+2. Performance Efficiency (Time Behaviour)
+3. Security (Resistance)
 
 ### Automated Tests
 #### Tools Used:
-- [Testing framework 1] for unit tests
+- **Unity Testing Framework** for unit tests
 
-#### Test https://github.com/MentIin/MetaInno/actionsLocations:
-- Unit tests: [path]
+#### Test Locations:
+- Unit tests: https://github.com/MentIin/MetaInno/tree/development/Assets/_Project/CodeBase/Tests
 - Integration tests: we don't integrate third-party services/libraries
 
 ### User Acceptance Tests
-[Link to user-acceptance-tests.md]
+There aren't strict user acceptance tests defined since our customer relies on the creativity part of this project. The customer said that the main goal is to make the game fun and fun doesn't have a concrete definition - it is achieved through creative thinking and testing.
 
 ## Build and Deployment
 ### Continuous Integration
