@@ -16,11 +16,13 @@ public class DestructionController : MonoBehaviour
         var destructible = hit.gameObject.GetComponent<SimpleDestructible>();
 
         if (destructible == null) return;
-        if (_cc.velocity.magnitude < _desiredSpeed) return;
+
+        var velocity = new Vector3(_cc.velocity.x, 0f, _cc.velocity.z);
+        if (velocity.magnitude < _desiredSpeed) return;
 
         var particle = Instantiate(_explosionParticles);
         particle.transform.position = destructible.transform.position;
         Destroy(particle, 1.2f);
-        destructible.Destroy(_cc.velocity);
+        destructible.Destroy(velocity);
     }
 }
