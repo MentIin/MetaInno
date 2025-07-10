@@ -4,6 +4,7 @@ public class DestructionController : MonoBehaviour
 {
     CharacterController _cc;
     [SerializeField] GameObject _explosionParticles;
+    [SerializeField] float _desiredSpeed = 9f;
 
     void Start()
     {
@@ -15,7 +16,7 @@ public class DestructionController : MonoBehaviour
         var destructible = hit.gameObject.GetComponent<SimpleDestructible>();
 
         if (destructible == null) return;
-        if (_cc.velocity.magnitude < 6f) return;
+        if (_cc.velocity.magnitude < _desiredSpeed) return;
 
         var particle = Instantiate(_explosionParticles);
         particle.transform.position = destructible.transform.position;
