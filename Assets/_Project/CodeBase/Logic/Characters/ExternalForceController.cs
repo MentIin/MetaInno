@@ -88,6 +88,7 @@ namespace CodeBase.Logic.Characters
         {
             ExternalForce = force;
         }
+        
     }
     
     internal class ExternalForce
