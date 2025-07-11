@@ -158,7 +158,7 @@ public class RoverCharacter : CharacterBase
         Vector3 finalMoveVector = direction * mod + _driftVelocity * Time.fixedDeltaTime +
                              _externalForceController.ExternalForce * Time.fixedDeltaTime;
 
-        HandleBounce(finalMoveVector);
+        //HandleBounce(finalMoveVector);
         if (finalMoveVector.magnitude > Time.fixedDeltaTime / 2f) _controller.Move(finalMoveVector);
     }
 
