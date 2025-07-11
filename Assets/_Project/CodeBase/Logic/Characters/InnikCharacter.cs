@@ -32,6 +32,8 @@ public class InnikCharacter : CharacterBase
     public override void ActionStart()
     {
         _jumpBuffer = 0.3f;
+        if (_controller.isGrounded)
+            _cayoutTime = 0f;
 
     }
 
@@ -134,6 +136,7 @@ public class InnikCharacter : CharacterBase
             {
                 _yVelocity = 11f;
                 _jumpBuffer = 0f;
+                _cayoutTime = 0f;
             }
         }
     }
