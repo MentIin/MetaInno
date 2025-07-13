@@ -28,8 +28,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/MentIin/MetaInno">
+    <img src="https://github.com/MentIin/MetaInno/blob/read-me-enhance/.github/rover.png" alt="Logo" width="160" height="160">
   </a>
 
   <h3 align="center">Metapolis</h3>
@@ -41,7 +41,6 @@
     <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
     &middot;
     <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    &middot;
   </p>
 </div>
 
@@ -77,10 +76,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## Project Description
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Metapolis is a web version of Innopolis where people can host or visit events, complete challenges and races and generally relax and have fun.
+Metapolis is a web version of Innopolis where people can host or visit events, complete challenges and races, and generally relax and have fun.
 
 Our project aims to reach these goals:
 - Fast web loading - enter the metapolis right from your browser, from phone or computer
@@ -185,7 +181,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: https://github.com/MentIin/MetaInno/blob/read-me-enhance/.github/metapolis_icon.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
