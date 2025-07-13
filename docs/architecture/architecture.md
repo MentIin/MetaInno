@@ -1,10 +1,11 @@
 # Architecture
 ## Static View
-![alt text](https://github.com/MentIin/MetaInno/blob/read-me-enhance/.github/static_view.png)
+![alt text](/docs/architecture/static-view.png)
+
 The team has focused on improving the map and polishing the player movement.
 
 ## Dynamic View
-![alt text](https://github.com/MentIin/MetaInno/blob/read-me-enhance/.github/dynamic_view.png)
+![alt text](/docs/architecture/dynamic-view.png)
 
 ## Deployment View
 The diagram for this process will be unnecessary.
