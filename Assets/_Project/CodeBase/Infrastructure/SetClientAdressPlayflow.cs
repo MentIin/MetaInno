@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class SetClientAdressPlayflow : NetworkBehaviour
 {
-    public Bayou bayouTransport;
-    public LobbyHelloWorld lobbyHelloWorld;
+    //public Bayou bayouTransport;
+    //public LobbyHelloWorld lobbyHelloWorld;
 
     private void Start()
     {
-        lobbyHelloWorld.DoCreateLobbyOnClick();
+        //lobbyHelloWorld.DoCreateLobbyOnClick();
     }
 }

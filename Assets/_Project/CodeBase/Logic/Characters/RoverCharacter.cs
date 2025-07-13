@@ -8,34 +8,34 @@ using Debugger = System.Diagnostics.Debugger;
 public class RoverCharacter : CharacterBase
 {
     [SerializeField] private RoverDriftVisual _roverDriftVisual;
-    
+
     [Tooltip("Which layer the rover can bounce off (walls, etc)")]
     [SerializeField] private LayerMask _bounceMask;
-    
-    private float gravity=-12f;
-    private float _yVelocity=0f;
+
+    private float gravity = -12f;
+    private float _yVelocity = 0f;
 
     private float _currentMoveSpeed = 0f;
-    private float _moveSpeed = 11f;
+    private float _moveSpeed = 14f;
 
     private bool _tryingDrift;
     private bool _drift;
-    
+
     private Vector3 _driftVelocity;
     private float _rotationSpeed = 60;
-    
+
     private Vector2 driftAxis;
-    
-    private float _readyDriftBoost=0f;
-    private float _driftBoost=0f;
+
+    private float _readyDriftBoost = 0f;
+    private float _driftBoost = 0f;
     private float _minimumBoost = 3f;
     public bool IsDrifting => _drift;
     public Vector2 DriftAxis => driftAxis;
-    
+
     public bool BoostReady => _readyDriftBoost > _minimumBoost;
     public bool BoostActive => _driftBoost > 0;
-    
-    
+
+
     private RaycastHit[] hits = new RaycastHit[4];
 
 
@@ -66,11 +66,12 @@ public class RoverCharacter : CharacterBase
             {
                 inputAxis = driftAxis;
             }
-        }else
+        }
+        else
         {
             driftAxis = inputAxis;
         }
-        
+
         if (inputAxis.y < 0)
         {
             inputAxis.x = -inputAxis.x;
@@ -79,14 +80,14 @@ public class RoverCharacter : CharacterBase
                 inputAxis.x = 0;
             }
         }
-        
+
         ReduceCurrentSpeed(inputAxis);
         UpdateGravity();
 
         if (_tryingDrift && !_drift && inputAxis.x != 0 && inputAxis.y > 0)
         {
             _drift = true;
-            driftAxis = inputAxis; 
+            driftAxis = inputAxis;
         }
         else if ((!_tryingDrift && _drift))
         {
@@ -101,7 +102,7 @@ public class RoverCharacter : CharacterBase
 
         if (_drift)
         {
-            _readyDriftBoost += Time.fixedDeltaTime*2;
+            _readyDriftBoost += Time.fixedDeltaTime * 2;
             _driftVelocity = -_controller.transform.right * Mathf.Sign(inputAxis.x) * 2;
         }
         else
@@ -114,56 +115,57 @@ public class RoverCharacter : CharacterBase
                 _driftBoost = 0;
             }
         }
-        
-        
+
+
 
         Vector3 currentRotationVector = _controller.transform.forward;
-        
-        _currentMoveSpeed = Mathf.Clamp((_currentMoveSpeed + inputAxis.y*Time.fixedDeltaTime * 7) ,-_moveSpeed, _moveSpeed);
-        
+
+        _currentMoveSpeed = Mathf.Clamp((_currentMoveSpeed + inputAxis.y * Time.fixedDeltaTime * 7), -_moveSpeed, _moveSpeed);
+
         Vector3 direction = currentRotationVector.normalized * Time.fixedDeltaTime * (_currentMoveSpeed + _driftBoost);
         direction += Vector3.up * _yVelocity * Time.fixedDeltaTime;
-        
-        
+
+
         float rotationFactor = inputAxis.x;
         if (_drift) rotationFactor += 0.4f * Mathf.Sign(inputAxis.x);
-        _controller.transform.Rotate(0f,  rotationFactor* _rotationSpeed * Time.fixedDeltaTime, 0f);
+        _controller.transform.Rotate(0f, rotationFactor * _rotationSpeed * Time.fixedDeltaTime, 0f);
 
         float mod = 1f;
         if (_drift)
         {
             mod = 0.7f;
         }
-        
-        
+
+
         _driftVelocity *= 0.9f;
-        
-        
-        
+
+
+
         SendDriftDataToServer(BoostReady, BoostActive, _controller.isGrounded, _drift);
         _roverDriftVisual.SetParticlesActivity(BoostReady, BoostActive, _controller.isGrounded, _drift);
 
-        
+
 
         Vector3 finalMoveVector = direction * mod + _driftVelocity * Time.fixedDeltaTime +
                              _externalForceController.ExternalForce * Time.fixedDeltaTime;
 
-        HandleBounce(finalMoveVector);
+        //HandleBounce(finalMoveVector);
         if (finalMoveVector.magnitude > Time.fixedDeltaTime / 2f) _controller.Move(finalMoveVector);
     }
 
     private void HandleBounce(Vector3 moveVector)
     {
-        if (!_drift && _driftBoost + _currentMoveSpeed < _moveSpeed ) return;
-        
-        
+        if (!_drift && _driftBoost + _currentMoveSpeed < _moveSpeed)
+            return;
+
+
         int c = Physics.SphereCastNonAlloc(_controller.center + _controller.transform.position, _controller.radius * 0.8f,
             moveVector.normalized, hits, .8f, _bounceMask);
         for (int i = 0; i < c; i++)
         {
             if (hits[i].collider == null) continue;
             if (hits[i].transform == _controller.transform) continue;
-            
+
 
             float force = Mathf.Max(_minimumBoost / 2f, _driftBoost + _currentMoveSpeed);
 
@@ -187,19 +189,20 @@ public class RoverCharacter : CharacterBase
             _externalForceController.BounceLocal(hits[i].normal * 2f, _driftBoost + _moveSpeed);
 
 
-                
+
         }
     }
 
     [ObserversRpc]
     private void SendDriftDataToClient(bool ready, bool boost, bool grounded, bool drift)
     {
-       _roverDriftVisual.SetParticlesActivity(ready, boost, grounded, drift);
+        _roverDriftVisual.SetParticlesActivity(ready, boost, grounded, drift);
     }
+
     [ServerRpc]
     private void SendDriftDataToServer(bool ready, bool boost, bool grounded, bool drift)
     {
-       SendDriftDataToClient(ready, boost, grounded, drift);
+        SendDriftDataToClient(ready, boost, grounded, drift);
     }
 
     private void UpdateGravity()
@@ -221,9 +224,9 @@ public class RoverCharacter : CharacterBase
         }
         else
         {
-            _currentMoveSpeed += Time.fixedDeltaTime* desealerationSpeed;
+            _currentMoveSpeed += Time.fixedDeltaTime * desealerationSpeed;
         }
     }
-    
-    
+
+
 }

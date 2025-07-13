@@ -1,6 +1,7 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Collections.Generic;
 using CodeBase.Infrastructure.Services.MiniGameService;
 
 
@@ -28,6 +29,7 @@ public class MiniGameServiceTests
     {
         // Arrange
         var gameType = MiniGameType.DefaultGame;
+
 
         // Act
         var createdGame = _miniGameService.CreateMiniGame(gameType, _players);
