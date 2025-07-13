@@ -107,7 +107,7 @@ Here is our current progress:
 - [ ] MVPv4 - Final polishing
 
 ## Usage
-To access Metapolis, visit the Itch.io page (https://innopians.itch.io/metapolis   password: inno), launch the browser-based game, and navigate using WASD (interact with Space/E). For issues, contact @DirectX_11. There is a possibility that the server is off or malfunctioning (since we use free VM), contact us if so.
+To access Metapolis, visit the [Itch.io page](https://innopians.itch.io/metapolis) (password: inno), launch the browser-based game, and navigate using WASD (interact with Space/E). For issues, contact @DirectX_11. There is a possibility that the server is off or malfunctioning (since we use free VM), contact us if so.
 
 ## Installation/Deployment
 1. Clone the latest version of repository
@@ -123,17 +123,17 @@ To access Metapolis, visit the Itch.io page (https://innopians.itch.io/metapolis
 
 <!-- DOCUMENTATION -->
 ## Documentation
-- [Development (CONTRIBUTING.md)](example.com)
-- [Quality characteristics and quality attribute scenarios](example.com)
+- [Development (CONTRIBUTING.md)](CONTRIBUTING.md)
+- [Quality characteristics and quality attribute scenarios](docs/quality-attributes/quality-attribute-scenarios.md)
 - Quality assurance
-  - [Automated tests](example.com)
-  - [User Acceptance Tests](example.com)
-- [Continuous Integration](example.com)
+  - [Automated tests](docs/quality-assurance/automated-tests.md)
+  - [User Acceptance Tests](docs/quality-assurance/user-acceptance-tests.md)
+- [Continuous Integration](docs/automation/continuous-integration.md)
 - Architecture
-  - [Static view](buh.com)
-  - [Dynamic view](buh.com)
-  - [Deployment view](buh.com)
-  - [Tech Stack](buh.com)
+  - [Static view](docs/architecture/static-view.png)
+  - [Dynamic view](docs/architecture/dynamic-view.png)
+  - [Deployment view](docs/architecture/deployment-view.png)
+  - [Tech Stack](docs/architecture/architecture.md)
 
 
 <!-- ROADMAP -->
