@@ -133,7 +133,7 @@ To access Metapolis, visit the [Itch.io page](https://innopians.itch.io/metapoli
 <a id="license"></a>
 ## License
 
-Distributed under the Unlicense License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
