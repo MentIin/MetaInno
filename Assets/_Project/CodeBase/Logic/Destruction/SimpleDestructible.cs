@@ -5,6 +5,11 @@ public class SimpleDestructible : MonoBehaviour
 {
     public void Destroy(Vector3 velocity)
     {
+        // Flatten the velocity
+        velocity = new Vector3(velocity.x, 0f, velocity.z);
+
+        velocity = Vector3.ClampMagnitude(velocity, 16f);
+
         GetComponent<Collider>().enabled = false;
 
         // Calculate end position
