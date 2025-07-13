@@ -108,7 +108,7 @@ Here is our current progress:
 
 <a id="usage"></a>
 ## Usage
-To access Metapolis, visit the [Itch.io page](https://innopians.itch.io/metapolis) (password: inno), launch the browser-based game, and navigate using WASD (interact with Space/E). For issues, contact @DirectX_11. There is a possibility that the server is off or malfunctioning (since we use free VM), contact us if so.
+To access Metapolis, visit the [Itch.io page](https://innopians.itch.io/metapolis) (password: inno), launch the browser-based game, and navigate using WASD (interact with Space/E, use R to change the form). For issues, contact @DirectX_11 in Telegram. There is a possibility that the server is off or malfunctioning (since we use free VM), contact us if so.
 
 ## Installation/Deployment
 1. Clone the latest version of repository
