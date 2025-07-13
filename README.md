@@ -38,7 +38,7 @@
     A virtual version of the city of Innopolis.
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="#usage">View Demo</a>
     &middot;
     <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
   </p>
@@ -106,6 +106,7 @@ Here is our current progress:
 - [x] MVPv3 - Destruction, Map filling
 - [ ] MVPv4 - Final polishing
 
+<a id="usage"></a>
 ## Usage
 To access Metapolis, visit the [Itch.io page](https://innopians.itch.io/metapolis) (password: inno), launch the browser-based game, and navigate using WASD (interact with Space/E). For issues, contact @DirectX_11. There is a possibility that the server is off or malfunctioning (since we use free VM), contact us if so.
 
