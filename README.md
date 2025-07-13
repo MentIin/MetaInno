@@ -141,9 +141,9 @@ Distributed under the Unlicense License. See `LICENSE.txt` for more information.
 <a id="contact"></a>
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Egor Malkov - [@DirectX_11](https://t.me/DirectX_11) - isako.workmail@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/MentIin/MetaInno](https://github.com/MentIin/MetaInno)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
