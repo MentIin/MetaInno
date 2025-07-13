@@ -31,7 +31,7 @@ All notable changes to this project will be documented in this file.
 
 - Fixed fatal PlayFlow errors
 - Fixed Physics syncronizaton issues
-- Optimized Phyzics to use less bandswidth
+- Optimized Physics to use less bandswidth
 
 ## [MVPv1] - 2025-29-05
 
@@ -42,7 +42,7 @@ All notable changes to this project will be documented in this file.
 - Only Up styled parkour course
 - Basic Unit tests
 - Minigame service
-- Added Physics
+- Added basic Physics
 
 ## [MVPv0/Pre-Alpha] - Before tracking
 
