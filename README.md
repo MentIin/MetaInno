@@ -65,9 +65,9 @@ Our project aims to reach these goals:
 This project was commisioned by Vlad Kozikov and the Centre of Game Development of Innopolis University. 
 
 We use these tools:
-* [![Unity][Unity6]][Unity-url]
-* [![FishNet][FishNet]][FishNet-url]
-* [![PlayFlow][PlayFlow]][PlayFlow-url]
+* [Unity Engine](https://unity.com/)
+* [FishNet](https://github.com/FirstGearGames/FishNet)
+* [PlayFlow](https://www.playflowcloud.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
