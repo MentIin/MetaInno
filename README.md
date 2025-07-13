@@ -40,7 +40,7 @@
     <br />
     <a href="#usage">View Demo</a>
     &middot;
-    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="/CONTRIBUTING.md">CONTRIBUTING.md</a>
   </p>
 </div>
 
