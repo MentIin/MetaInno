@@ -30,6 +30,8 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Fixed fatal PlayFlow errors
+- Fixed Physics syncronizaton issues
+- Optimized Phyzics to use less bandswidth
 
 ## [0.1.0] - 2025-29-05
 
@@ -40,6 +42,7 @@ All notable changes to this project will be documented in this file.
 - Only Up styled parkour course
 - Basic Unit tests
 - Minigame service
+- Added Physics
 
 ## [0.0.1] - Before tracking
 
