@@ -18,7 +18,7 @@
   <h3 align="center">Metapolis</h3>
 
   <p align="center">
-    A virtual version of the city of Innopolis.
+    Meta version of Innopolis
     <br />
     <br />
     <a href="#usage">View Demo</a>
