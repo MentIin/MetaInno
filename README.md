@@ -29,7 +29,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/MentIin/MetaInno">
-    <img src="https://github.com/MentIin/MetaInno/blob/read-me-enhance/.github/rover.png" alt="Logo" width="160" height="160">
+    <img src="/.github/rover.png" alt="Logo" width="160" height="160">
   </a>
 
   <h3 align="center">Metapolis</h3>
@@ -50,31 +50,21 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
+    <li><a href="#pdesc">Project Description</a></li>
+    <li><a href="#pcontext">Project Context</a></li>
+    <li><a href="#proadmap">Project Roadmap</a></li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#instdeploy">Installation/Deployment</a></li>
+    <li><a href="#docs">Documentation</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
 
 
 <!-- ABOUT THE PROJECT -->
+<a id="pdesc"></a>
 ## Project Description
 Metapolis is a web version of Innopolis where people can host or visit events, complete challenges and races, and generally relax and have fun.
 
@@ -86,7 +76,7 @@ Our project aims to reach these goals:
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
+<a id="pcontext"></a>
 ## Project Context
 
 This project was commisioned by Vlad Kozikov and the Centre of Game Development of Innopolis University. 
@@ -98,6 +88,7 @@ We use these tools:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<a id="proadmap"></a>
 ## Project Roadmap
 Here is our current progress:
 - [x] MVPv0 - Basic player movement, map prototype
@@ -110,6 +101,7 @@ Here is our current progress:
 ## Usage
 To access Metapolis, visit the [Itch.io page](https://innopians.itch.io/metapolis) (password: inno), launch the browser-based game, and navigate using WASD (interact with Space/E, use R to change the form). For issues, contact @DirectX_11 in Telegram. There is a possibility that the server is off or malfunctioning (since we use free VM), contact us if so.
 
+<a id="instdeploy"></a>
 ## Installation/Deployment
 1. Clone the latest version of repository
 2. Install/Open Unity 6000.15.f1
@@ -123,36 +115,22 @@ To access Metapolis, visit the [Itch.io page](https://innopians.itch.io/metapoli
 
 
 <!-- DOCUMENTATION -->
+<a id="docs"></a>
 ## Documentation
-- [Development (CONTRIBUTING.md)](CONTRIBUTING.md)
-- [Quality characteristics and quality attribute scenarios](docs/quality-attributes/quality-attribute-scenarios.md)
+- [Development (CONTRIBUTING.md)](/CONTRIBUTING.md)
+- [Quality characteristics and quality attribute scenarios](/docs/quality-attributes/quality-attribute-scenarios.md)
 - Quality assurance
-  - [Automated tests](docs/quality-assurance/automated-tests.md)
-  - [User Acceptance Tests](docs/quality-assurance/user-acceptance-tests.md)
-- [Continuous Integration](docs/automation/continuous-integration.md)
-- Architecture
-  - [Static view](docs/architecture/static-view.png)
-  - [Dynamic view](docs/architecture/dynamic-view.png)
-  - [Deployment view](docs/architecture/deployment-view.png)
-  - [Tech Stack](docs/architecture/architecture.md)
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+  - [Automated tests](/docs/quality-assurance/automated-tests.md)
+  - [User Acceptance Tests](/docs/quality-assurance/user-acceptance-tests.md)
+- [Continuous Integration](/docs/automation/continuous-integration.md)
+- [Architecture](/docs/architecture/architecture.md)
+  - [Static view](/docs/architecture/static-view.png)
+  - [Dynamic view](/docs/architecture/dynamic-view.png)
+  - [Deployment view](/docs/architecture/architecture.md)
+  - [Tech Stack](/docs/architecture/architecture.md)
 
 <!-- LICENSE -->
+<a id="license"></a>
 ## License
 
 Distributed under the Unlicense License. See `LICENSE.txt` for more information.
@@ -160,6 +138,7 @@ Distributed under the Unlicense License. See `LICENSE.txt` for more information.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
+<a id="contact"></a>
 ## Contact
 
 Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
