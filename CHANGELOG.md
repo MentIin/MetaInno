@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.3.0] - 2025-13-07
+## [MVPv3/MVPv2.5] - 2025-13-07
 
 ### Added
 
@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 
 - All the forms move faster
 
-## [0.2.0] - 2025-06-07
+## [MVPv2] - 2025-06-07
 
 ### Added
 
@@ -33,7 +33,7 @@ All notable changes to this project will be documented in this file.
 - Fixed Physics syncronizaton issues
 - Optimized Phyzics to use less bandswidth
 
-## [0.1.0] - 2025-29-05
+## [MVPv1] - 2025-29-05
 
 ### Added
 
@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file.
 - Minigame service
 - Added Physics
 
-## [0.0.1] - Before tracking
+## [MVPv0/Pre-Alpha] - Before tracking
 
 ### Added
 
