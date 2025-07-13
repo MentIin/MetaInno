@@ -21,7 +21,7 @@
     Meta version of Innopolis
     <br />
     <br />
-    <a href="#usage">View Demo</a>
+    <a href="/docs/demo/report.md">View Demo Video</a>
     &middot;
     <a href="/CONTRIBUTING.md">CONTRIBUTING.md</a>
   </p>
