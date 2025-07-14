@@ -1080,6 +1080,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< Updated upstream
     - target: {fileID: 926728751391133359, guid: 9c555afb3d8359c41bb219c32d77dcae, type: 3}
       propertyPath: m_Type
       value: 0
@@ -1108,6 +1109,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 925
       objectReference: {fileID: 0}
+=======
+>>>>>>> Stashed changes
     - target: {fileID: 2171088085202075539, guid: 9c555afb3d8359c41bb219c32d77dcae, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2583,6 +2586,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< Updated upstream
     - target: {fileID: 64070980742201945, guid: fa9062e497b47ca4bb48eab01fc8f527, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4999999
@@ -3815,10 +3819,13 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+=======
+>>>>>>> Stashed changes
     - target: {fileID: 6977919998196984437, guid: fa9062e497b47ca4bb48eab01fc8f527, type: 3}
       propertyPath: m_Name
       value: World
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
     - target: {fileID: 7203050443096416123, guid: fa9062e497b47ca4bb48eab01fc8f527, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4999999
@@ -4107,6 +4114,8 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+=======
+>>>>>>> Stashed changes
     - target: {fileID: 9066506267391703781, guid: fa9062e497b47ca4bb48eab01fc8f527, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4147,6 +4156,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
     - target: {fileID: 9115624253345879130, guid: fa9062e497b47ca4bb48eab01fc8f527, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4999999
@@ -4163,10 +4173,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+=======
+>>>>>>> Stashed changes
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 3094312552496281725, guid: fa9062e497b47ca4bb48eab01fc8f527, type: 3}
-    - {fileID: 5080193294398210698, guid: fa9062e497b47ca4bb48eab01fc8f527, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa9062e497b47ca4bb48eab01fc8f527, type: 3}
