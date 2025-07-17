@@ -4,88 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6ce7996-e61f-4348-8bb0-801c0527b5f6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Documentation.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Documentation/Documentation.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Documentation/Documentation.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/PlayFlowAPI.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/PlayFlowAPI.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/PlayFlowBuilder.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/PlayFlowBuilder.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/PlayFlowCloudDeploy.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/PlayFlowCloudDeploy.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/PlayFlowConfig.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/PlayFlowConfig.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/PlayFlowEditorWindow.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/PlayFlowEditorWindow.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/Styles.uss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/Styles.uss.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/playflow.uxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Editor/playflow.uxml.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/LICENSE.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Lib.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Lib/ICSharpCode.SharpZipLib.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Lib/ICSharpCode.SharpZipLib.dll.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Lib/ICSharpCode.SharpZipLib.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Lib/ICSharpCode.SharpZipLib.xml.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Lib/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Lib/LICENSE.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/PlayFlow Multiplayer/Lobby/LobbyClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFlowCloud/PlayFlow Multiplayer/Lobby/LobbyClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/README.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/cloud-upload-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/cloud-upload-icon.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/copy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/copy.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/documentation-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/documentation-icon.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/green-check-mark.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/green-check-mark.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/green-circle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/green-circle.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/icon-social.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/icon-social.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/information-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/information-icon.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/key-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/key-icon.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/lightning-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/lightning-icon.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/price-tag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/price-tag.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/red-x-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/red-x-icon.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/restart.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/restart.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/rocket.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/rocket.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/server.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/server.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/stop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/stop.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/sync.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/sync.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/warning.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/warning.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/yellow-circle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/PlayFlowIcons/yellow-circle.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/playflow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Resources/playflow.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Scripts.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Scripts/PlayFlowBackend.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Scripts/PlayFlowBackend.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Scripts/PlayFlowManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Scripts/PlayFlowManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Scripts/PlayFlowMatchMaker.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFlowCloud/Scripts/PlayFlowMatchMaker.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/CodeBase/Infrastructure/SetClientAdressPlayflow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/CodeBase/Infrastructure/SetClientAdressPlayflow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/CodeBase/Tests/Infrastructure/Services/MiniGame/MiniGameTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/CodeBase/Tests/Infrastructure/Services/MiniGame/MiniGameTest.cs" afterDir="false" />
-    </list>
+    <list default="true" id="b6ce7996-e61f-4348-8bb0-801c0527b5f6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,37 +13,37 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/_Project/CodeBase/Infrastructure/SetClientAdressPlayflow.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 1
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2zKUeXIctzQiCaJiP2nwp5Zav1M" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Демьян\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Демьян\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\Демьян\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Демьян\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Демьян\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Демьян\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$USER_HOME$/Desktop/WebglBuild/WindowsBuild\MetaInno.exe" />
