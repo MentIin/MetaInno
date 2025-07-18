@@ -223,15 +223,15 @@ public class PlayerController : NetworkBehaviour
         
         
         int index = 0;
-        foreach (var VARIABLE in _characters)
+        foreach (var character in _characters)
         {
             if (index == _currentIndexInList)
             {
-                VARIABLE.OnCharacterEquipped();
+                character.OnCharacterEquipped();
             }
             else
             {
-                VARIABLE.OnCharacterUnequipped();
+                character.OnCharacterUnequipped();
             }
             
             index++;

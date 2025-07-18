@@ -38,6 +38,13 @@ public class RoverCharacter : CharacterBase
 
     private RaycastHit[] hits = new RaycastHit[4];
 
+    public override void OnCharacterEquipped()
+    {
+        base.OnCharacterEquipped();
+        _currentMoveSpeed = new Vector3(_controller.velocity.x, 0f, _controller.velocity.z).magnitude;
+        _yVelocity = _controller.velocity.y;
+    }
+
 
     public override void ActionStart()
     {
@@ -84,7 +91,7 @@ public class RoverCharacter : CharacterBase
         ReduceCurrentSpeed(inputAxis);
         UpdateGravity();
 
-        if (_tryingDrift && !_drift && inputAxis.x != 0 && inputAxis.y > 0)
+        if (_tryingDrift && !_drift && inputAxis.x != 0 && inputAxis.y > 0 && _controller.isGrounded)
         {
             StartDrift(inputAxis);
         }

@@ -28,7 +28,6 @@ public abstract class CharacterBase : NetworkBehaviour
     public abstract void ActionStart();
     public abstract void ActionStop();
     
-    
     public virtual void OnCharacterEquipped()
     {
         gameObject.SetActive(true);
