@@ -42,6 +42,7 @@ public class InnikCharacter : CharacterBase
         base.OnCharacterEquipped();
         _horizontalMovement = new Vector3(_controller.velocity.x, 0f, _controller.velocity.z) * Time.fixedDeltaTime;
         _yVelocity = _controller.velocity.y;
+        _hopCount = 0;
     }
 
     public override void ActionStart()
@@ -91,7 +92,6 @@ public class InnikCharacter : CharacterBase
         Vector3 bounceMovement = _externalForceController.ExternalForce * Time.fixedDeltaTime;
         _horizontalMovement = Vector3.Lerp(_horizontalMovement, horizontalMovement, Time.fixedDeltaTime * 8f);
         _controller.Move(_horizontalMovement + verticalMovement);
-        Debug.Log(_currentSpeed);
 
         if (_inputAxis.sqrMagnitude != 0)
         {
