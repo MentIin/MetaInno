@@ -38,6 +38,8 @@
     <li><a href="#proadmap">Project Roadmap</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#instdeploy">Installation/Deployment</a></li>
+    <li><a href="#GDD">Game Design Document</a></li>
+    <li><a href="#demo">Demo</a></li>
     <li><a href="#docs">Documentation</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -78,7 +80,7 @@ Here is our current progress:
 - [x] MVPv1 - Player forms, Technopark location
 - [x] MVPv2 - Delivery minigame, University location
 - [x] MVPv3 - Destruction, Map filling
-- [ ] MVPv4 - Final polishing
+- [x] MVPv4 - Final polishing
 
 <a id="usage"></a>
 ## Usage
@@ -95,7 +97,16 @@ To access Metapolis, visit the [Itch.io page](https://innopians.itch.io/metapoli
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<a id="GDD"></a>
+## Game Design Document (for customer)
+Game Design Document is an important part of development of any game - it contains the full game description as well as provides information about the design choices.
+- [Russian version](https://docs.google.com/document/d/1JcIPK7PO5hE0ePu6G6Gl57ThQsqjH1Jq/edit?usp=sharing&ouid=110465876030379304927&rtpof=true&sd=true)
+- [English version](https://docs.google.com/document/d/13Q629iePFJ05BqZm9VWOuH6KD9X8xbmO/edit?usp=sharing&ouid=110465876030379304927&rtpof=true&sd=true)
 
+<a id="demo"></a>
+## Demo (for customer)
+Demo contains the showcase video with screenshots and provides information on current progress on the game. The Demo Google drive folder contains the video with the demo, as well as screenshots of gameplay.
+- [Demo Folder](https://drive.google.com/drive/folders/10iAdE-8knQ3e935QxmArJ4T94UrPd0_u?usp=sharing)
 
 <!-- DOCUMENTATION -->
 <a id="docs"></a>
