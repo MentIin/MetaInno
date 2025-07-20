@@ -4,14 +4,18 @@ using UnityEngine;
 public class DroneCharacter : CharacterBase
 {
     [SerializeField] private LayerMask _bounceMask;
+    [SerializeField] private LayerMask _groundMask;
 
     private float _speed = 10f;
-    private float _acceleration = 10f;
+    private float _acceleration = 8f;
     private float _gravity = -24f;
     private float _flyingForce = 12f;
+    private float _maxHeight = 12f;
 
     [SerializeField] private float _visualLeanAmount = -14f;
     [SerializeField] private float _visualLeanSpeed = 6f;
+    
+    [SerializeField] private Animator _animator;
 
 
     private float _verticalVelocity;
@@ -24,9 +28,20 @@ public class DroneCharacter : CharacterBase
 
     private RaycastHit[] hits = new RaycastHit[4];
 
+    public override void OnCharacterEquipped()
+    {
+        base.OnCharacterEquipped();
+        _horizontalVelocity = new Vector3(_controller.velocity.x, 0f, _controller.velocity.z);
+        
+        if (_controller.isGrounded)
+            _verticalVelocity = 10f;
+        else
+            _verticalVelocity = _controller.velocity.y;
+    }
+
     public override void ActionStart()
     {
-        if (_reload > 0) return;
+        if (_reload > 0 || !HasGround()) return;
 
         _reload = 0.3f;
         if (_verticalVelocity < 0)
@@ -42,6 +57,7 @@ public class DroneCharacter : CharacterBase
 
     public override void Move(Vector2 _inputAxis)
     {
+        Debug.Log(HasGround());
         _reload -= Time.fixedDeltaTime;
 
         Vector3 direction = new Vector3(_inputAxis.x, 0f, _inputAxis.y);
@@ -56,7 +72,6 @@ public class DroneCharacter : CharacterBase
 
         if (_controller.isGrounded)
         {
-            _verticalVelocity = Mathf.Clamp(_verticalVelocity, 0f, _verticalVelocity);
             desiredHorizontalMovement = Vector3.zero;
         }
         else
@@ -70,7 +85,7 @@ public class DroneCharacter : CharacterBase
         Vector3 upVelocity = Vector3.up * _verticalVelocity;
 
         _horizontalVelocity = Vector3.Lerp(_horizontalVelocity, desiredHorizontalMovement, _acceleration * Time.fixedDeltaTime);
-
+        
 
         Vector3 burger = new Vector3(
             -direction.z,  // Pitch (forward/backward)
@@ -83,12 +98,17 @@ public class DroneCharacter : CharacterBase
 
 
         Quaternion targetRotation = Quaternion.Euler(targetEuler);
-        _visuals.localRotation = Quaternion.Slerp(_visuals.localRotation, targetRotation, _visualLeanSpeed * Time.fixedDeltaTime);
+        if (_controller.isGrounded)
+            _visuals.localRotation = Quaternion.Slerp(_visuals.localRotation, Quaternion.identity, _visualLeanSpeed * 2 * Time.fixedDeltaTime);
+        else
+            _visuals.localRotation = Quaternion.Slerp(_visuals.localRotation, targetRotation, _visualLeanSpeed * Time.fixedDeltaTime);
 
 
         Vector3 moveVector = (_horizontalVelocity + upVelocity) * Time.fixedDeltaTime +
                              _externalForceController.ExternalForce * Time.fixedDeltaTime;
         _controller.Move(moveVector);
+        
+        _animator.SetBool("flying", _controller.isGrounded);
 
         HandleBounce(moveVector);
     }
@@ -139,5 +159,10 @@ public class DroneCharacter : CharacterBase
     public override void SecondaryActionStop()
     {
         Debug.LogWarning("not implemented");
+    }
+
+    private bool HasGround()
+    {
+        return Physics.Raycast(_controller.transform.position, Vector3.down, out RaycastHit hit, _maxHeight, _groundMask);
     }
 }
