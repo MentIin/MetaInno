@@ -14,6 +14,8 @@ public class DroneCharacter : CharacterBase
 
     [SerializeField] private float _visualLeanAmount = -14f;
     [SerializeField] private float _visualLeanSpeed = 6f;
+    
+    [SerializeField] private Animator _animator;
 
 
     private float _verticalVelocity;
@@ -105,6 +107,8 @@ public class DroneCharacter : CharacterBase
         Vector3 moveVector = (_horizontalVelocity + upVelocity) * Time.fixedDeltaTime +
                              _externalForceController.ExternalForce * Time.fixedDeltaTime;
         _controller.Move(moveVector);
+        
+        _animator.SetBool("flying", _controller.isGrounded);
 
         HandleBounce(moveVector);
     }

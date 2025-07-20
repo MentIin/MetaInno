@@ -1,6 +1,7 @@
 using System;
 using CodeBase.Logic.Characters;
 using CodeBase.Logic.Characters.Hands;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class InnikCharacter : CharacterBase
@@ -27,6 +28,7 @@ public class InnikCharacter : CharacterBase
     private bool _previouslyGrounded = false;
 
     private HandsController _handsController;
+    [SerializeField] private Animator _animator;
 
     private RaycastHit[] hits = new RaycastHit[4];
 
@@ -34,7 +36,6 @@ public class InnikCharacter : CharacterBase
     public override void Initialize()
     {
         _handsController = new HandsController(_hand1, _hand2, _grabbableMask, transform);
-
     }
 
     public override void OnCharacterEquipped()
@@ -74,6 +75,9 @@ public class InnikCharacter : CharacterBase
     private void FixedUpdate()
     {
         if (IsOwner) _handsController.Tick();
+        
+        _animator.SetFloat("speed", _horizontalMovement.magnitude);
+        _animator.SetBool("grounded", _controller.isGrounded);
     }
 
 
@@ -95,7 +99,8 @@ public class InnikCharacter : CharacterBase
 
         if (_inputAxis.sqrMagnitude != 0)
         {
-            _controller.transform.rotation = Quaternion.LookRotation(direction);
+            var desiredRotation = Quaternion.LookRotation(direction);
+            _controller.transform.rotation = Quaternion.Slerp(_controller.transform.rotation, desiredRotation, Time.fixedDeltaTime * 10f);
         }
 
 
