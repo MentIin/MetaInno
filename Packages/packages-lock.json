@@ -7,6 +7,15 @@
       "dependencies": {},
       "hash": "06067cd4c83e372310d6f79d1c625f6870ff7a2a"
     },
+    "com.playflow.multiplayer-unity-sdk": {
+      "version": "https://github.com/PlayFlowCloud/PlayFlow-Multiplayer-Unity-SDK.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+      },
+      "hash": "ba3c43425892fe50e43e0cfd7a9078cfbab5fc3b"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

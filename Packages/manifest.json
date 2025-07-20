@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+    "com.playflow.multiplayer-unity-sdk": "https://github.com/PlayFlowCloud/PlayFlow-Multiplayer-Unity-SDK.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.adaptiveperformance": "5.1.4",
     "com.unity.addressables": "2.2.2",
