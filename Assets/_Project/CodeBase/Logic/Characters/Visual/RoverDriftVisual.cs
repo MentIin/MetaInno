@@ -13,8 +13,10 @@ namespace CodeBase.Logic.Characters.Visual
 
         
 
-        public void SetParticlesActivity(bool boostReady, bool boostActive, bool grounded, bool drifting)
+        public void SetParticlesActivity(bool boostReady, bool boostActive, bool grounded, bool drifting,
+            float driftBoost)
         {
+            
             if (drifting)
             {
                 transform.localRotation = Quaternion.Slerp(transform.localRotation,
@@ -31,7 +33,25 @@ namespace CodeBase.Logic.Characters.Visual
             HandleTrails(grounded, drifting);
             if (boostReady)
             {
+                Debug.Log(driftBoost);
                 if (!BoostReadyParticles.isPlaying) BoostReadyParticles.Play();
+                if (driftBoost > 10f)
+                {
+                    //set color
+                    var main = BoostReadyParticles.main;
+                    main.startColor = Color.magenta;
+                }else if (driftBoost > 5f)
+                {
+                    //set color
+                    var main = BoostReadyParticles.main;
+                    main.startColor = Color.yellow;
+                }
+                else
+                {
+                    //set color
+                    var main = BoostReadyParticles.main;
+                    main.startColor = Color.blue;
+                }
             }else
             {
                 BoostReadyParticles.Stop();

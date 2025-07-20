@@ -1,4 +1,4 @@
-/*using NUnit.Framework;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Collections.Generic;
@@ -30,7 +30,6 @@ public class MiniGameServiceTests
         // Arrange
         var gameType = MiniGameType.DefaultGame;
 
-        private MiniGameService _miniGameService;
 
         // Act
         var createdGame = _miniGameService.CreateMiniGame(gameType, _players);
@@ -119,4 +118,4 @@ public class MiniGameServiceTests
         var field = typeof(MiniGameService).GetField("_activeMiniGames", BindingFlags.NonPublic | BindingFlags.Instance);
         return field?.GetValue(service) as Dictionary<int, MiniGame>;
     }
-}*/
+}
