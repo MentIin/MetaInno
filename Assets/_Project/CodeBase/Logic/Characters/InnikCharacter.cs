@@ -1,6 +1,7 @@
 using System;
 using CodeBase.Logic.Characters;
 using CodeBase.Logic.Characters.Hands;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class InnikCharacter : CharacterBase
@@ -17,8 +18,17 @@ public class InnikCharacter : CharacterBase
     private float _jumpBuffer = 0.0f;
     private float _cayoutTime = 0.0f;
     private float _speed = 7.5f;
+    private float _jumpHeight = 3f;
+    private float _currentSpeed = 7.5f;
+    private Vector3 _horizontalMovement = Vector3.zero;
+    private float _hopSpeed = 14.5f;
+    private int _hopsToMaxSpeed = 5;
+    private int _hopCount = 0;
+    private float _hopBuffer = 0;
+    private bool _previouslyGrounded = false;
 
     private HandsController _handsController;
+    [SerializeField] private Animator _animator;
 
     private RaycastHit[] hits = new RaycastHit[4];
 
@@ -26,7 +36,14 @@ public class InnikCharacter : CharacterBase
     public override void Initialize()
     {
         _handsController = new HandsController(_hand1, _hand2, _grabbableMask, transform);
+    }
 
+    public override void OnCharacterEquipped()
+    {
+        base.OnCharacterEquipped();
+        _horizontalMovement = new Vector3(_controller.velocity.x, 0f, _controller.velocity.z) * Time.fixedDeltaTime;
+        _yVelocity = _controller.velocity.y;
+        _hopCount = 0;
     }
 
     public override void ActionStart()
@@ -58,6 +75,9 @@ public class InnikCharacter : CharacterBase
     private void FixedUpdate()
     {
         if (IsOwner) _handsController.Tick();
+        
+        _animator.SetFloat("speed", _horizontalMovement.magnitude);
+        _animator.SetBool("grounded", _controller.isGrounded);
     }
 
 
@@ -68,22 +88,26 @@ public class InnikCharacter : CharacterBase
 
 
         Vector3 direction = Vector3.forward * _inputAxis.y + Vector3.right * _inputAxis.x;
-
-        Vector3 moveVector = direction * Time.fixedDeltaTime * _speed +
-                             Vector3.up * _yVelocity * Time.fixedDeltaTime +
-                             _externalForceController.ExternalForce * Time.fixedDeltaTime;
-        _controller.Move(moveVector);
+        float speedAdditionPerHop = (_hopSpeed - _speed) / _hopsToMaxSpeed;
+        float speedAddition = Mathf.Clamp(_hopCount, 0, _hopsToMaxSpeed) * speedAdditionPerHop;
+        _currentSpeed = _speed + speedAddition;
+        Vector3 horizontalMovement = direction * (Time.fixedDeltaTime * _currentSpeed);
+        Vector3 verticalMovement = Vector3.up * (_yVelocity * Time.fixedDeltaTime);
+        Vector3 bounceMovement = _externalForceController.ExternalForce * Time.fixedDeltaTime;
+        _horizontalMovement = Vector3.Lerp(_horizontalMovement, horizontalMovement, Time.fixedDeltaTime * 8f);
+        _controller.Move(_horizontalMovement + verticalMovement);
 
         if (_inputAxis.sqrMagnitude != 0)
         {
-            _controller.transform.rotation = Quaternion.LookRotation(direction);
+            var desiredRotation = Quaternion.LookRotation(direction);
+            _controller.transform.rotation = Quaternion.Slerp(_controller.transform.rotation, desiredRotation, Time.fixedDeltaTime * 10f);
         }
 
 
 
         if (_controller.isGrounded)
         {
-            _yVelocity = 0f;
+            _yVelocity = -0.02f; // If reset to zero, will cause true/false flickering
             _cayoutTime = 0.3f;
         }
         else
@@ -94,9 +118,13 @@ public class InnikCharacter : CharacterBase
 
         if (_inputAxis.sqrMagnitude != 0)
         {
-            HandleBounce(moveVector);
+            HandleBounce(horizontalMovement);
         }
 
+        if (!_previouslyGrounded && _controller.isGrounded)
+            _hopBuffer = 0.1f;
+            
+        _previouslyGrounded = _controller.isGrounded;
     }
     private void HandleBounce(Vector3 moveVector)
     {
@@ -130,13 +158,22 @@ public class InnikCharacter : CharacterBase
     {
         _jumpBuffer -= Time.fixedDeltaTime;
         _cayoutTime -= Time.fixedDeltaTime;
+        
+        if (_controller.isGrounded)
+            _hopBuffer -= Time.fixedDeltaTime;
+        if (_hopBuffer <= 0)
+            _hopCount = 0;
+
         if (_jumpBuffer > 0)
         {
             if (_cayoutTime > 0)
             {
-                _yVelocity = 11f;
+                _yVelocity = Mathf.Sqrt(2 * -gravity * _jumpHeight);
                 _jumpBuffer = 0f;
                 _cayoutTime = 0f;
+
+                if (_hopBuffer > 0)
+                    _hopCount++;
             }
         }
     }
