@@ -38,6 +38,13 @@ public class RoverCharacter : CharacterBase
 
     private RaycastHit[] hits = new RaycastHit[4];
 
+    public override void OnCharacterEquipped()
+    {
+        base.OnCharacterEquipped();
+        _currentMoveSpeed = new Vector3(_controller.velocity.x, 0f, _controller.velocity.z).magnitude;
+        _yVelocity = _controller.velocity.y;
+    }
+
 
     public override void ActionStart()
     {
@@ -84,10 +91,9 @@ public class RoverCharacter : CharacterBase
         ReduceCurrentSpeed(inputAxis);
         UpdateGravity();
 
-        if (_tryingDrift && !_drift && inputAxis.x != 0 && inputAxis.y > 0)
+        if (_tryingDrift && !_drift && inputAxis.x != 0 && inputAxis.y > 0 && _controller.isGrounded)
         {
-            _drift = true;
-            driftAxis = inputAxis;
+            StartDrift(inputAxis);
         }
         else if ((!_tryingDrift && _drift))
         {
@@ -98,6 +104,13 @@ public class RoverCharacter : CharacterBase
             }
 
             _driftBoost += _readyDriftBoost;
+            
+            // rotate to the direction of camera
+            Vector3 cameraForward = Camera.main.transform.forward;
+            cameraForward.y = 0; // Ignore vertical component
+            cameraForward.Normalize();
+            _controller.transform.rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+            
         }
 
         if (_drift)
@@ -126,10 +139,13 @@ public class RoverCharacter : CharacterBase
         direction += Vector3.up * _yVelocity * Time.fixedDeltaTime;
 
 
+        
         float rotationFactor = inputAxis.x;
         if (_drift) rotationFactor += 0.4f * Mathf.Sign(inputAxis.x);
         _controller.transform.Rotate(0f, rotationFactor * _rotationSpeed * Time.fixedDeltaTime, 0f);
 
+        
+        
         float mod = 1f;
         if (_drift)
         {
@@ -141,8 +157,8 @@ public class RoverCharacter : CharacterBase
 
 
 
-        SendDriftDataToServer(BoostReady, BoostActive, _controller.isGrounded, _drift);
-        _roverDriftVisual.SetParticlesActivity(BoostReady, BoostActive, _controller.isGrounded, _drift);
+        SendDriftDataToServer(BoostReady, BoostActive, _controller.isGrounded, _drift, _readyDriftBoost);
+        _roverDriftVisual.SetParticlesActivity(BoostReady, BoostActive, _controller.isGrounded, _drift, _readyDriftBoost);
 
 
 
@@ -151,6 +167,13 @@ public class RoverCharacter : CharacterBase
 
         //HandleBounce(finalMoveVector);
         if (finalMoveVector.magnitude > Time.fixedDeltaTime / 2f) _controller.Move(finalMoveVector);
+    }
+
+    private void StartDrift(Vector2 inputAxis)
+    {
+        _externalForceController.BounceLocal(Vector3.up, 2f);
+        _drift = true;
+        driftAxis = inputAxis;
     }
 
     private void HandleBounce(Vector3 moveVector)
@@ -194,15 +217,15 @@ public class RoverCharacter : CharacterBase
     }
 
     [ObserversRpc]
-    private void SendDriftDataToClient(bool ready, bool boost, bool grounded, bool drift)
+    private void SendDriftDataToClient(bool ready, bool boost, bool grounded, bool drift, float driftBoost)
     {
-        _roverDriftVisual.SetParticlesActivity(ready, boost, grounded, drift);
+        _roverDriftVisual.SetParticlesActivity(ready, boost, grounded, drift, driftBoost);
     }
 
     [ServerRpc]
-    private void SendDriftDataToServer(bool ready, bool boost, bool grounded, bool drift)
+    private void SendDriftDataToServer(bool ready, bool boost, bool grounded, bool drift, float driftBoost)
     {
-        SendDriftDataToClient(ready, boost, grounded, drift);
+        SendDriftDataToClient(ready, boost, grounded, drift, driftBoost);
     }
 
     private void UpdateGravity()
